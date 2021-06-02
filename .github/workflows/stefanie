@@ -1,0 +1,21 @@
+name: Deploy stuff from stefanie
+on:
+  push:
+    branches: [ stefanie ]
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.4
+    - name: SFTP uploader
+      uses: wangyucode/sftp-upload-action@v1.1
+      with:
+        host: ssh.strato.de
+        port: 22
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        localDir: /
+        remoteDir: /stefanie
