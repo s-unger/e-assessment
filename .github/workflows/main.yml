@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: git-ftp push
-      uses: hrsetyono/git-sftp-action@v4.0.1
+    - name: git-sftp-action
+      uses: hrsetyono/git-sftp-action@4.0.1
       with:
         url: "sftp://ssh.strato.de/main"
         user: ${{ secrets.USER }}
