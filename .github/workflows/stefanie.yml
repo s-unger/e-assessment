@@ -1,7 +1,7 @@
 name: Deploy stuff from stefanie
 on:
   push:
-    branches: [ stefanie ]
+    branches: [ dev-stefanie ]
   workflow_dispatch:
 jobs:
   deploy:
