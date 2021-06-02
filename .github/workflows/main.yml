@@ -14,4 +14,4 @@ jobs:
       uses: Atyn/simple-sftp-action@0.0.2
       with:
         url: sftp://${{ secrets.USER }}:${{ secrets.PASSWORD }}@ssh.strato.de:22/main
-        local-directory: /
+        localdir: /
