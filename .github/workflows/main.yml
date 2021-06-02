@@ -1,0 +1,18 @@
+name: Deploy stuff from main
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: git-ftp push
+      uses: hrsetyono/git-sftp-action@v4
+      with:
+        url: "sftp://ssh.strato.de/main"
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        options: "--auto-init -b main"
