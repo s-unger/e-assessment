@@ -10,12 +10,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2.3.4
-    - name: Upload Files
-      uses: wangyucode/sftp-upload-action@v1.1
+    - name: Simple SFTP
+      uses: Atyn/simple-sftp-action@0.0.2
       with:
-        host: 'ssh.strato.de'
-        port: 22
-        username: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
-        localDir: './'
-        remoteDir: './main'
+        url: sftp://${{ secrets.USER }}:${{ secrets.PASSWORD }}@ssh.strato.de:22/main
+        local-directory: /
