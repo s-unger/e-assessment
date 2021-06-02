@@ -1,7 +1,7 @@
 name: Deploy stuff from sophia
 on:
   push:
-    branches: [ sophia ]
+    branches: [ dev-sophia ]
   workflow_dispatch:
 jobs:
   deploy:
