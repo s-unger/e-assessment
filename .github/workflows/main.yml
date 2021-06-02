@@ -12,7 +12,7 @@ jobs:
     - name: git-sftp-action
       uses: hrsetyono/git-sftp-action@4.0.1
       with:
-        url: "sftp://ssh.strato.de/main"
+        url: "sftp://ssh.strato.de:22/main"
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASSWORD }}
         options: "--auto-init -b main"
