@@ -1,7 +1,7 @@
 name: Deploy stuff from yoanna
 on:
   push:
-    branches: [ yoanna ]
+    branches: [ dev-yoanna ]
   workflow_dispatch:
 jobs:
   deploy:
