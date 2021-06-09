@@ -16,4 +16,4 @@ jobs:
         server: e-assessment.bplaced.net 
         username: ${{ secrets.USER }}
         password: ${{ secrets.PASSWORD }}
-        server-dir: "./www/sebastian"
+        server-dir: "./www/sebastian/"
