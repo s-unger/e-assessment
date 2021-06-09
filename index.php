@@ -5,8 +5,6 @@
 </head>
 <body>
 <h1>Werde zum Mathetiger!</h1>
-<p>Werde mit uns zum Mathetiger. Das hier ist die Startseite mit statischem und...</p>
-<?php echo "...dynamischem Content"; ?>
 <p>
     Frage 1: Numerical <br>
     <?php
