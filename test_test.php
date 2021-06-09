@@ -44,6 +44,13 @@
         </div>
 
         <div class="q-group">
+           <p>Erste Frage: </p>
+           <?php
+           session_start();
+           include ('questionGenerator.php');
+           echo $question = generate_numerical_1();
+           echo '<p> $question </p>';
+           ?>
            <p class="question"> Question 2</p>
            <input type="radio" name="ans2" value="1">
            <input type="radio" name="ans2" value="2">
