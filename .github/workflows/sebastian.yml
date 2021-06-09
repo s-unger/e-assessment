@@ -15,6 +15,6 @@ jobs:
       with:
         server: e-assessment.bplaced.net 
         username: e-assessment_ftp
-        password: ${{ secrets.PASSWORD }}
+        password: nSgHRbL8b4eajGxd
         server-dir: "./www/sebastian/"
         log-level: verbose
