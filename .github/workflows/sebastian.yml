@@ -17,3 +17,4 @@ jobs:
         username: ${{ secrets.USER }}
         password: ${{ secrets.PASSWORD }}
         server-dir: "./www/sebastian/"
+        log-level: verbose
