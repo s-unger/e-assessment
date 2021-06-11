@@ -3,6 +3,11 @@
 <?php
 session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+//redirect to homepage if already logged in
+if (isset($_SESSION['userid'])) {
+    header("Location: home.php");
+}
+$errorMessage = "";
 if (isset($_GET['login'])) {
     $username = $_POST['username'];
     $passwort = $_POST['passwort'];
@@ -14,42 +19,40 @@ if (isset($_GET['login'])) {
     //Überprüfung des Passworts
     if ($user !== false && password_verify($passwort, $user['passwort'])) {
         $_SESSION['userid'] = $user['id'];
-        header("Location: ../index.php");
+        header("Location: home.php");
     } else {
         $errorMessage = "Username oder Passwort war ungültig.<br>";
     }
 
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
 
-<?php
-if (isset($errorMessage)) {
-    echo $errorMessage;
-}
-?>
+include "../index.php"; ?>
+<style>
+    <?php include '../style.css'; ?>
+</style>
 
-<form action="?login=1" method="post">
-    <h1>Login</h1>
-    Username:<br>
-    <input type="username" size="40" maxlength="250" name="username"><br><br>
 
-    Dein Passwort:<br>
-    <input type="password" size="40" maxlength="250" name="passwort"><br>
+<script>
+    // don't show login/logout button while logging in
+    document.getElementById("login").classList.add('disabled');
+</script>
+<div class="content">
+    <form action="?login=1" method="post">
+        <h1>Login</h1>
+        Username:<br>
+        <input type="username" size="40" maxlength="250" name="username"><br><br>
 
-    <br>
-    <input type="submit" value="Einloggen">
+        Dein Passwort:<br>
+        <input type="password" size="40" maxlength="250" name="passwort"><br>
 
-</form>
-<form action="register.php" method="post">
-    <p>Wenn du noch keinen Account hast, registriere dich hier:
-        <input type="submit" value="Register">
-    </p>
-</form>
-</body>
-</html>
+        <br>
+        <span style="color: #D4842c"><?php echo $errorMessage ?></span><br>
+        <input type="submit" value="Einloggen">
+
+    </form>
+    <form action="register.php" method="post">
+        <p>Wenn du noch keinen Account hast, registriere dich hier:
+            <input type="submit" value="Register">
+        </p>
+    </form>
+</div>

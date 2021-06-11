@@ -1,13 +1,24 @@
 <?php
 session_start();
+$login = "";
+$loginSrc = "";
+$url = "";
 $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 if (!isset($_SESSION['userid'])) {
-    die('<p>Du bist ausgeloggt</p><p>Bitte zuerst <a href="src/login.php">einloggen</a></p>');
+    $login = "Login";
+    $loginSrc = "src/login";
 } else {
     $userid = $_SESSION['userid'];
     $statement = $pdo->prepare("SELECT username FROM users WHERE id = :userid");
     $result = $statement->execute(array('userid' => $userid));
     $user = $statement->fetch();
+    $login = "Logout";
+    $url .= $_SERVER['REQUEST_URI'];
+    if (strpos($url, 'src')) {
+        $loginSrc = "logout";
+    } else {
+        $loginSrc = "src/logout";
+    }
 }
 
 ?>
@@ -17,37 +28,28 @@ if (!isset($_SESSION['userid'])) {
 
     <head>
         <title>Mathe-Tiger</title>
+        <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-        <script>
-
-            function login() {
-                $('#content').load('src/login.php');
-            }
-
-            function register() {
-                $('#content').load('src/register.php');
-            }
-        </script>
-
     </head>
     <body>
-    <h1>Werde zum Mathetiger!</h1>
-    <p>Werde mit uns zum Mathetiger. Das hier ist die Startseite mit statischem und...</p>
-    <?php echo "...dynamischem Content"; ?>
-
-
-    <div id="content">
-
-
-        <br>
-        <div><?php echo 'Gerade eingeloggt ist: ' . $user["username"] ?></div>
-        <br>
-        <form action="src/logout.php" method="post">
-            <input type="submit" value="logout">
-        </form>
+    <div class="headerWrapper">
+        <div class="header">
+            <h1 style="flex: 1;">Werde zum Mathetiger!</h1>
+            <div class="icons">
+                <!--            source: https://www.pngwing.com/de/free-png-vegxa/download-->
+                <img src="../images/numbers.png"/>
+                <!--            source: https://www.pngwing.com/de/free-png-blxte/download-->
+                <img src="../images/tiger.png"/>
+            </div>
+        </div>
     </div>
-
-
+    <div class="nav-wrapper">
+        <ul>
+            <li><span><?php echo $user["username"] ?></span></li>
+            <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
+            </li>
+        </ul>
+    </div>
     </body>
     </html>
 
