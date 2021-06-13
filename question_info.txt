@@ -1,0 +1,38 @@
+Infos zu den generierten Items
+
+True False 1
+"Das Ergebnis einer x Aufgabe heißt y";
+- Pedagogic purpose: Algebra Terminologie üben
+- Type: True or False
+- Variable Element: Opertoren, Ergebnis-Begriffe
+- Domain: Algebra
+- Psychometric properties:
+	Bloom: Remembering (1)
+	Beide Antwortmöglichkeiten gleich wahrscheinlich
+
+Multiple Choice 1
+"x - y"
+- Pedagogic purpose: Subtraktion im Zahlenraum 1 - 100 üben
+- Type: Rechenaufgabe, multiple choice mit 4 Antwortmöglichkeiten
+- Variable Element: Minuend, Subtrahend, Distractors
+- Domain: Algebra
+- Psychometric properties:
+	Bloom: Understanding (2)
+
+Numerical 1
+"Der Tiger Yuki hat x Streifen am Kopf und y Streifen am Körper. Wie viele Streifen hat er insgesamt?"
+- Pedagogic purpose: Addition im Zahlenraum 1 - 100 üben
+- Type: Textaufgabe, numerisch mit freier Zahleneingabe
+- Variable Element: Summanden
+- Domain: Algebra
+- Psychometric properties:
+	Bloom: Applying (3)
+
+Matching 1
+"Welche Terme haben das selbe Ergebnis?";
+- Pedagogic purpose: Multiplikation im Zahlenraum 1 - 100 üben
+- Type: Matching von jeweils Termen von insgesamt 6 Termen, Drag and Drop?
+- Variable Element: Alle Terme
+- Domain: Algebra
+- Psychometric properties:
+	Bloom: Analyzing (4)
