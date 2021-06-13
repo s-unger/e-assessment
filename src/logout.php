@@ -4,10 +4,6 @@
 session_start();
 session_destroy();
 
+header("Location: ../index.php");
 
-$is_page_refreshed = (isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0' || $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
-
-if ($is_page_refreshed) {
-    header("Location: ../index.php");
-}
 ?>
