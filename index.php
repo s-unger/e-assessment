@@ -46,11 +46,14 @@
     $question_4 = generate_matching_1();
     echo $_SESSION['question_matching_1'] . "<br>";
     echo "Options column 1 (fixed order): <br>" . $_SESSION['options_matching_1'][0][0] . "<br>" . $_SESSION['options_matching_1'][0][1] . "<br>" . $_SESSION['options_matching_1'][0][2] . "<br>";
-    echo "Options column 2 (user needs to rearrange these to match column 1: <br>" . $_SESSION['options_matching_1'][1][0] . "<br>". $_SESSION['options_matching_1'][1][1] . "<br>". $_SESSION['options_matching_1'][1][2] . "<br>";
+    echo "Options column 2 (user needs to rearrange these to match column 1): <br>" . $_SESSION['options_matching_1'][1][0] . "<br>". $_SESSION['options_matching_1'][1][1] . "<br>". $_SESSION['options_matching_1'][1][2] . "<br>";
 
     echo "Solution 4 (column 2 in the correct order): <br>" . $_SESSION['solution_matching_1'][0] . "<br>". $_SESSION['solution_matching_1'][1] . "<br>". $_SESSION['solution_matching_1'][2] . "<br>"; ?>
     <br>
 
+    <?php
+    generate_matching_2();
+    ?>
 
 
 
