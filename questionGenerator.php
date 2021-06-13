@@ -1,6 +1,7 @@
 <?php
 const number_space = 100;
 
+
 /**
  * NUMERICAL
  * @return String question
@@ -137,18 +138,33 @@ function generate_matching_1()
 function generate_matching_2()
 {
     $question = "Welche Terme haben das selbe Ergebnis?";
-    $terms1 = array();
-    $terms2 = array();
-    while (count($terms1) < 3){
-        $x = mt_rand(30, 100);
-        if (count(primefactor($x)) > 2) {
+    $terms1 = array(); // fixed
+    $terms2 = array(); // to be rearranged by user
+    // while (count($terms1) < 3){ //TODO removed for testing
+        $x = mt_rand(8, 100);
+        if (count(primefactor($x)) > 2) {   // Result number found with min. 3 prime factors
             $factors = primefactor($x);
-            $splitters = unique_random_numbers(1, count($factors)-2, 2);
-            $factors_term_1 = array_slice($factors, 0, $splitters[0]);
-            $terms1[] = $x;
+            $splitters = unique_random_numbers(1, count($factors)-2, 2);    // 2 unique values used to split the prime factors array in two places for each term
+            $primes1_term1 = array_slice($factors, 0, $splitters[0]);   // get primefactors for first factor for term 1
+            $factor1_term1 = array_sum($primes1_term1);
+            $primes2_term1 = array_slice($factors, $splitters[0]);   // get primefactors for second factor for term 1
+            $factor2_term1 = array_sum($primes2_term1);
+            $term1 = "$factor1_term1 x $factor2_term1";
+
+            $terms1[] = $term1;
+
+            $primes1_term2 = array_slice($factors, 0, $splitters[1]);   // get primefactors for first factor for term 1
+            $factor1_term2 = array_sum($primes1_term2);
+            $primes2_term2 = array_slice($factors, $splitters[1]);   // get primefactors for second factor for term 1
+            $factor2_term2 = array_sum($primes2_term2);
+            $term2 = "$factor1_term2 x $factor2_term2";
+
+            $terms2[] = $term2;
+
+            echo $term1;
 
         }
-    }
+    //}
 }
 
 function unique_random_numbers($min, $max, $amount){
