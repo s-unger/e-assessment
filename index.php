@@ -35,12 +35,8 @@ if (!isset($_SESSION['userid'])) {
     <div class="headerWrapper">
         <div class="header">
             <h1 style="flex: 1;">Werde zum Mathetiger!</h1>
-            <div class="icons">
-                <!--            source: https://www.pngwing.com/de/free-png-vegxa/download-->
-                <img src="../images/numbers.png"/>
-                <!--            source: https://www.pngwing.com/de/free-png-blxte/download-->
-                <img src="../images/tiger.png"/>
-            </div>
+            <!--            source: https://www.pngwing.com/de/free-png-blxte/download & https://www.pngwing.com/de/free-png-vegxa/download-->
+            <img src="../images/tiger.png"/>
         </div>
     </div>
     <div class="nav-wrapper">
