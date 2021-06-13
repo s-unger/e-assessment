@@ -1,7 +1,8 @@
-<!--base from https://www.php-einfach.de/experte/php-codebeispiele/loginscript/-->
-
 <?php
 session_start();
+
+//base from https://www.php-einfach.de/experte/php-codebeispiele/loginscript/
+
 $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 //redirect to homepage if already logged in
 if (isset($_SESSION['userid'])) {

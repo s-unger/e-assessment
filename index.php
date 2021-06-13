@@ -41,7 +41,9 @@ if (!isset($_SESSION['userid'])) {
     </div>
     <div class="nav-wrapper">
         <ul>
-            <li><span><?php echo $user["username"] ?></span></li>
+            <li><span><?php if (isset($user)) {
+                        echo $user["username"];
+                    } ?></span></li>
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
             </li>
         </ul>
