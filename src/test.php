@@ -8,7 +8,7 @@ include('questionGenerator.php'); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php
-    /*$q1 = $_POST['ans1']; TODO test evaluation
+    /*$q1 = $_POST['ans1']; TODO test evaluation (previous version)
     $q2 = $_POST['ans2'];
     $q3 = $_POST['ans3'][0];
     $correct = 0;
