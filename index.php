@@ -22,7 +22,7 @@
     Frage 2: Multiple Choice<br>
     <?php
     // call generate_multiplechoice_1() to generate the first multiple choice question.
-    $question_2 = generate_multiplechoice_1();
+    generate_multiplechoice_1();
     echo $_SESSION['question_multiplechoice_1'] . "<br>";
     echo "option 1: " . $_SESSION['options_multiplechoice_1'][0] . "<br>";
     echo "option 2: " . $_SESSION['options_multiplechoice_1'][1] . "<br>";
@@ -54,10 +54,6 @@
     <?php
     generate_matching_2();
     ?>
-
-
-
-
 
 
 </p>

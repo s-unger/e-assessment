@@ -92,7 +92,6 @@ function swap_digits($n){
     if ($n < 10 || $n > 99 || $n%10 == 0 || (int)($n/10) == $n%10) return null;
     $first = (int)($n/10);
     $second = $n%10;
-    //echo $second*10+$first;
     return $second*10+$first;
 }
 
