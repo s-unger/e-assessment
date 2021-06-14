@@ -38,6 +38,8 @@ include('questionGenerator.php'); ?>
     ?>
 </head>
 <body>
+<h1>Mache den Test</h1>
+<p>Finde hier heraus, wie gut du in Mathe bist. Immer wieder im Schuljahr werden Tests hier benotet.</p>
 <form action="test.php" method="post">
     <div class="q-group">
         <p class="question"> Aufgabe 1</p>
