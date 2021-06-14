@@ -38,7 +38,7 @@ include('questionGenerator.php'); ?>
     ?>
 </head>
 <body>
-<form action="index.php" method="post">
+<form action="test.php" method="post">
     <div class="q-group">
         <p class="question"> Aufgabe 1</p>
         <?php
