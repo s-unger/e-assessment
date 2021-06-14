@@ -48,6 +48,8 @@ if (!isset($_SESSION['userid'])) {
             </li>
         </ul>
     </div>
+    <div>
+    <a id="test" href="src/test.php">Mach den Test!</a> </div>
     </body>
     </html>
 
