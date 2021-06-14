@@ -143,8 +143,8 @@ function generate_matching_2()
         $x = mt_rand(8, 100);
         if (count(primefactor($x)) > 2) {   // Result number found with min. 3 prime factors
             $factors = primefactor($x);
-            $splitters = unique_random_numbers(1, count($factors)-2, 2);    // 2 unique values used to split the prime factors array in two places for each term
-            $primes1_term1 = array_slice($factors, 0, $splitters[0]);   // get primefactors for first factor for term 1
+            $splitters = unique_random_numbers(1, count($factors)-1, 2);    // 2 unique values used to split the prime factors array in two places for each term
+            $primes1_term1 = array_slice($factors, 0, $splitters[0]);   // get primefactors for first factor for term 1 //array_slice slices splitter amount off the end of the array
             $factor1_term1 = array_sum($primes1_term1);
             $primes2_term1 = array_slice($factors, $splitters[0]);   // get primefactors for second factor for term 1
             $factor2_term1 = array_sum($primes2_term1);
@@ -162,7 +162,7 @@ function generate_matching_2()
 
             echo $term1;
 
-        }
+        } else echo "<3 factors";
     //}
 }
 
@@ -171,6 +171,7 @@ function unique_random_numbers($min, $max, $amount){
     $n = range($min,$max);
     shuffle($n);
     for ($i=0; $i< $amount; $i++) {
+        print_r($n);
         $random_numbers[] = $n[$i];
     }
     return $random_numbers;
