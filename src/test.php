@@ -87,7 +87,7 @@ include('questionGenerator.php'); ?>
         <br>
     </div>
 
-    <input type="submit">
+    <input type="submit" value="Test abgeben">
 </form>
 </body>
 </html>
