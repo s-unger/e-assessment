@@ -25,7 +25,7 @@ function generate_multiplechoice_1(){
     // Keep solution in double digits to allow for swapping of digits
     $x = mt_rand(11, number_space);
     $y = mt_rand(1, ($x - 10));
-    $question = "$x - $y";
+    $question = "$x - $y =";
     $solution = $x - $y;
     $_SESSION['question_multiplechoice_1'] = $question;
     $_SESSION['solution_multiplechoice_1'] = $solution;
@@ -110,7 +110,7 @@ function generate_truefalse_1(){
         do {$rand_term = mt_rand(0,3);} while ($rand_term == $rand_operator);
         $y = $terms[$rand_term];
     }
-    $question = "Das Ergebnis einer $x Aufgabe heißt $y";
+    $question = "Das Ergebnis einer $x Aufgabe heißt $y.";
     $_SESSION['question_truefalse_1'] = $question;
     $_SESSION['solution_truefalse_1'] = $solution;
     return $question;
