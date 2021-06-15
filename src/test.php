@@ -54,12 +54,30 @@ include "../index.php"; ?>
     });
 </script>
 <?php
-$q1 = $_POST['ans1'];
-$q2 = $_POST['ans2'];
-$q3 = $_POST['ans3'];
-$q41 = $_POST['ans4-1'];
-$q42 = $_POST['ans4-2'];
-$q43 = $_POST['ans4-3'];
+$q1 = "";
+$q2 = "";
+$q3 = "";
+$q41 = "";
+$q42 = "";
+$q43 = "";
+if (isset($_POST['ans1'])) {
+    $q1 = $_POST['ans1'];
+}
+if (isset($_POST['ans2'])) {
+    $q2 = $_POST['ans2'];
+}
+if (isset($_POST['ans3'])) {
+    $q3 = $_POST['ans3'];
+}
+if (isset($_POST['ans4-1'])) {
+    $q41 = $_POST['ans4-1'];
+}
+if (isset($_POST['ans4-2'])) {
+    $q42 = $_POST['ans4-2'];
+}
+if (isset($_POST['ans4-3'])) {
+    $q43 = $_POST['ans4-3'];
+}
 $correct = 0;
 
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "") {
