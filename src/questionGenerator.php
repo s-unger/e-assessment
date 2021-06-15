@@ -1,9 +1,8 @@
 <?php
 const number_space = 100;
 
-
 /**
- * NUMERICAL
+ * generates NUMERICAL item
  * @return String question
  */
 function generate_numerical_1(){
@@ -18,7 +17,7 @@ function generate_numerical_1(){
 }
 
 /**
- * MULTIPLE CHOICE
+ * generates MULTIPLE CHOICE item
  * @return array with question string and options array with 4 options
  */
 function generate_multiplechoice_1(){
@@ -84,7 +83,7 @@ function filter_distractors($dis){
 }
 
 /**
- * Swaps digits for a two digit number. Used to create distractors
+ * Swaps digits for a two digit number. Used to create distractors.
  * @param $n int the original number
  * @return int|null the number with swapped digits or null if the number is not 2 digits or if the two digits are the same
  */
@@ -96,7 +95,7 @@ function swap_digits($n){
 }
 
 /**
- * TRUE FALSE
+ * generates TRUE FALSE item
  * @return string question
  */
 function generate_truefalse_1(){
@@ -118,13 +117,32 @@ function generate_truefalse_1(){
 }
 
 /**
- * MATCHING (MOCK)
+ * generates MATCHING item
  */
 function generate_matching_1()
 {
     $question = "Welche Terme haben das selbe Ergebnis?";
-    $options = array(array("2 x 8", "15 x 7", "6 x 7"), array("2 x 21", "35 x 3", "6 x 5",));
-    $solution = array(" 6 x 5", "35 x 3", "2 x 21");
+    $terms1 = array(); // fix
+    $terms2 = array(); // to be rearranged by user
+    $result_numbers = array();
+    while (count($terms1) < 3){
+        $x = mt_rand(8, 100);
+        if (count(primefactor($x)) > 2 && !in_array($x, $result_numbers)) {   // Result number found with min. 3 prime factors, and hasn't been used yet
+            $primefactors = primefactor($x);
+            //shuffle($primefactors);
+            $splitters = unique_random_numbers(1, count($primefactors)-1, 2);    // 2 unique values used to split the prime factors array in two places for each term
+            $term1 = generate_matching_1_term($primefactors, $splitters[0]);
+            $term2 = generate_matching_1_term($primefactors, $splitters[1]);
+            if ($term1 != $term2){
+                $terms1[] = $term1;
+                $terms2[] = $term2;
+                $result_numbers[] = $x;
+            }
+        }
+    }
+    $solution = $terms2;
+    shuffle($terms2);
+    $options = array($terms1, $terms2);
 
     $_SESSION['question_matching_1'] = $question;
     $_SESSION['options_matching_1'] = $options;
@@ -132,51 +150,43 @@ function generate_matching_1()
 }
 
 /**
- *
+ * Generates a term (such as "3 x 5") for a matching item
+ * @param $primefactors array containing the prime factors of the result number
+ * @param $splitter int where the primefactor array will be split to generate the two factors for the term
+ * @return string the term
  */
-function generate_matching_2()
-{
-    $question = "Welche Terme haben das selbe Ergebnis?";
-    $terms1 = array(); // fixed
-    $terms2 = array(); // to be rearranged by user
-    // while (count($terms1) < 3){ //TODO removed for testing
-        $x = mt_rand(8, 100);
-        if (count(primefactor($x)) > 2) {   // Result number found with min. 3 prime factors
-            $factors = primefactor($x);
-            $splitters = unique_random_numbers(1, count($factors)-1, 2);    // 2 unique values used to split the prime factors array in two places for each term
-            $primes1_term1 = array_slice($factors, 0, $splitters[0]);   // get primefactors for first factor for term 1 //array_slice slices splitter amount off the end of the array
-            $factor1_term1 = array_sum($primes1_term1);
-            $primes2_term1 = array_slice($factors, $splitters[0]);   // get primefactors for second factor for term 1
-            $factor2_term1 = array_sum($primes2_term1);
-            $term1 = "$factor1_term1 x $factor2_term1";
-
-            $terms1[] = $term1;
-
-            $primes1_term2 = array_slice($factors, 0, $splitters[1]);   // get primefactors for first factor for term 1
-            $factor1_term2 = array_sum($primes1_term2);
-            $primes2_term2 = array_slice($factors, $splitters[1]);   // get primefactors for second factor for term 1
-            $factor2_term2 = array_sum($primes2_term2);
-            $term2 = "$factor1_term2 x $factor2_term2";
-
-            $terms2[] = $term2;
-
-            echo $term1;
-
-        } else echo "<3 factors";
-    //}
+function generate_matching_1_term($primefactors, $splitter){
+    $primes1 = array_slice($primefactors, 0, $splitter);   // get primefactors for first factor for term
+    $factor1 = array_product($primes1);
+    $primes2 = array_slice($primefactors, $splitter);   // get primefactors for second factor for term
+    $factor2 = array_product($primes2);
+    if (mt_rand(0,1) == 0){
+        return "$factor1 x $factor2";
+    } else return "$factor2 x $factor1";
 }
 
+/**
+ * Generates unique random numbers.
+ * @param $min int the minimum the numbers should have
+ * @param $max int the maximum the numbers should have
+ * @param $amount int the number of random numbers to be returned
+ * @return array containing the unique random numbers
+ */
 function unique_random_numbers($min, $max, $amount){
     $random_numbers = array();
     $n = range($min,$max);
     shuffle($n);
     for ($i=0; $i< $amount; $i++) {
-        print_r($n);
         $random_numbers[] = $n[$i];
     }
     return $random_numbers;
 }
 
+/**
+ * Factorizes a number into its prime numbers
+ * @param $num the number to be factorized
+ * @return array|int[] the prime numbers
+ */
 function primefactor($num) {
     $sqrt = sqrt($num);
     for ($i = 2; $i <= $sqrt; $i++) {
