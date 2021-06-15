@@ -46,6 +46,8 @@ if (!isset($_SESSION['userid'])) {
                     } ?></span></li>
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
             </li>
+            <li style="float: left;"><a id="test" href="src/test.php">Mach den Test!</a>
+            </li>
         </ul>
     </div>
     </body>
