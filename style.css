@@ -61,3 +61,40 @@ img {
     margin-left: 10%;
     margin-top: 5%;
 }
+
+.dropContainer, .container, .dropBase {
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drag {
+    width: 80px;
+    text-align: center;
+    border: 1px solid #aaaaaa;
+    padding: 5px;
+    background-color: #fef3ea;
+}
+
+.dropBase {
+    width: 370px;
+    justify-content: space-evenly;
+    background-color: #f9c596;
+}
+
+.matching {
+    display: flex;
+    margin-top: 2%;
+}
+
+.matchingRight {
+    margin-left: 3%;
+}
+
+.feedback {
+    color: red;
+}
