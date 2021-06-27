@@ -1,4 +1,5 @@
 <?php session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 $feedback1 = "";
 $feedback2 = "";
 $feedback3 = "";
@@ -84,29 +85,45 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
     if ($q1 == $_SESSION['solution_truefalse_1'] ? 'true' : 'false') {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 1));
         $correct++;
         $feedback1 = "richtig!";
     } else {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 0));
         $feedback1 = "leider falsch!";
     }
 
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 1));
         $correct++;
         $feedback2 = "richtig!";
     } else {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 0));
         $feedback2 = "leider falsch!";
     }
 
     if ($q3 == $_SESSION['solution_numerical_1']) {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 1));
         $correct++;
         $feedback3 = "richtig!";
     } else {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 0));
         $feedback3 = "leider falsch!";
     }
     if ($q41 == $_SESSION['solution_matching_1'][0] && $q42 == $_SESSION['solution_matching_1'][1] && $q43 == $_SESSION['solution_matching_1'][2]) {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => 1));
         $correct++;
         $feedback4 = "richtig!";
     } else {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => 0));
         $feedback4 = "leider falsch!";
     }
     $feedbackTotal = "Deine erreichte Punktzahl: " . $correct;
