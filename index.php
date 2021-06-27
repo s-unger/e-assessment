@@ -3,6 +3,7 @@ session_start();
 $login = "";
 $loginSrc = "";
 $url = "";
+$newQuestions = true;
 $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 if (!isset($_SESSION['userid'])) {
     $login = "Login";
@@ -41,15 +42,12 @@ if (!isset($_SESSION['userid'])) {
     </div>
     <div class="nav-wrapper">
         <ul>
-            <li><span><?php if (isset($user)) {
+            <li><a href="home.php"><?php if (isset($user)) {
                         echo $user["username"];
-                    } ?></span></li>
+                    } ?></a></li>
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
-            </li>
-            <li style="float: left;"><a id="test" href="src/test.php">Mach den Test!</a>
             </li>
         </ul>
     </div>
     </body>
     </html>
-
