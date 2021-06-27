@@ -1,0 +1,100 @@
+body {
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    margin-left: 1%;
+    width: 200px;
+}
+
+.headerWrapper {
+    background-color: #D4842c;
+}
+
+.header {
+    border-top: 10px solid #f9c596;
+    border-radius: 3px;
+    padding: 40px 0 40px 10px;
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+}
+
+.nav-wrapper {
+    height: 76px;
+    width: 85%;
+    margin: -35px auto;
+    border-radius: 10px;
+    background: #f9c596;
+}
+
+.nav-wrapper ul {
+    list-style: none;
+    padding: 0 0 0 15px;
+    margin: 0;
+    height: 76px;
+    position: relative;
+}
+
+.nav-wrapper ul li {
+    display: block;
+    float: left;
+    padding: 7px 0px;
+}
+
+.nav-wrapper ul li a, .nav-wrapper ul li a:visited, .nav-wrapper ul li span {
+    padding: 23px 20px;
+    float: left;
+    text-decoration: none;
+    color: black;
+}
+
+.disabled {
+    display: none;
+}
+
+.content {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.dropContainer, .container, .dropBase {
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drag {
+    width: 80px;
+    text-align: center;
+    border: 1px solid #aaaaaa;
+    padding: 5px;
+    background-color: #fef3ea;
+}
+
+.dropBase {
+    width: 370px;
+    justify-content: space-evenly;
+    background-color: #f9c596;
+}
+
+.matching {
+    display: flex;
+    margin-top: 2%;
+}
+
+.matchingRight {
+    margin-left: 3%;
+}
+
+.feedback {
+    color: red;
+}
