@@ -1,33 +1,54 @@
-<DOCTYPE html>
-<html>
-<head>
-<title>Mathe-Tiger</title>
-</head>
-<body>
-<h1>Werde zum Mathetiger!</h1>
-<p>Werde mit uns zum Mathetiger. Das hier ist die Startseite mit statischem und...</p>
-<?php echo "...dynamischem Content"; ?>
-<p>
-    Frage 1: Numerical <br>
-    <?php
-    session_start();
-    include('questionGenerator.php');
-    // call generate_numerical_1() to generate the first numerical question. Returns the question as a string.
-    // !Please call each generate function only once per Session (i.e. don't ask the same question twice per test).
-    echo generate_numerical_1() . "<br>";
-    // call $_SESSION['solution_numerical_1'] to get the correct solution.
-    echo "Solution 1 from session: " . $_SESSION['solution_numerical_1'] . "<br>"; ?>
+<?php
+session_start();
+$login = "";
+$loginSrc = "";
+$url = "";
+$newQuestions = true;
+$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+if (!isset($_SESSION['userid'])) {
+    $login = "Login";
+    $loginSrc = "src/login";
+} else {
+    $userid = $_SESSION['userid'];
+    $statement = $pdo->prepare("SELECT username FROM users WHERE id = :userid");
+    $result = $statement->execute(array('userid' => $userid));
+    $user = $statement->fetch();
+    $login = "Logout";
+    $url .= $_SERVER['REQUEST_URI'];
+    if (strpos($url, 'src')) {
+        $loginSrc = "logout";
+    } else {
+        $loginSrc = "src/logout";
+    }
+}
 
-    Frage 2: Multiple Choice<br>
-    <?php
-    // call generate_multiplechoice_1() to generate the first multiple choice question.
-    // Returns an array with the question string and distractors array
-    $question_2 = generate_multiplechoice_1();
-    echo $question_2[0] . "<br>";
-    echo "distractor 1: " . $question_2[1][0] . "<br>";
-    echo "distractor 2: " . $question_2[1][1] . "<br>";
-    // call $_SESSION['solution_multiplechoice_1'] to get the correct solution.
-    echo "Solution 2 from session: " . $_SESSION['solution_multiplechoice_1'] . "<br>"; ?>
-</p>
-</body>
-</html>
+?>
+
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Mathe-Tiger</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    </head>
+    <body>
+    <div class="headerWrapper">
+        <div class="header">
+            <h1 style="flex: 1;">Werde zum Mathetiger!</h1>
+            <!--            source: https://www.pngwing.com/de/free-png-blxte/download & https://www.pngwing.com/de/free-png-vegxa/download-->
+            <img src="/images/tiger.png"/>
+        </div>
+    </div>
+    <div class="nav-wrapper">
+        <ul>
+            <li><a href="home.php"><?php if (isset($user)) {
+                        echo $user["username"];
+                    } ?></a></li>
+            <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
+            </li>
+        </ul>
+    </div>
+    </body>
+    </html>
+
