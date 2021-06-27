@@ -3,6 +3,7 @@ $feedback1 = "";
 $feedback2 = "";
 $feedback3 = "";
 $feedback4 = "";
+$feedback7 = "";
 $feedbackTotal = "";
 include('questionGenerator.php');
 include "../index.php"; ?>
@@ -60,6 +61,7 @@ $q3 = "";
 $q41 = "";
 $q42 = "";
 $q43 = "";
+$q7 = "";
 if (isset($_POST['ans1'])) {
     $q1 = $_POST['ans1'];
 }
@@ -78,9 +80,13 @@ if (isset($_POST['ans4-2'])) {
 if (isset($_POST['ans4-3'])) {
     $q43 = $_POST['ans4-3'];
 }
+if (isset($_POST['ans7'])) {
+    $q7 = $_POST['ans7'];
+}
+
 $correct = 0;
 
-if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "") {
+if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q7 == "") {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
     if ($q1 == $_SESSION['solution_truefalse_1'] ? 'true' : 'false') {
@@ -109,6 +115,14 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     } else {
         $feedback4 = "leider falsch!";
     }
+
+    if($q7 == $_SESSION['solution_short_text_1']) {
+        $correct++;
+        $feedback7="richtig!";
+    } else {
+        $feedback7 = "leider falsch!";
+    }
+
     $feedbackTotal = "Deine erreichte Punktzahl: " . $correct;
 }
 ?>
@@ -227,6 +241,21 @@ function check()
                 </div>
 
             </div>
+
+
+        <div>
+            <p> Aufgabe 7:</p>
+            <?php
+            if ($_SESSION['newQuestions'] == true) {
+                generate_short_text();
+            }
+            echo $_SESSION['question_short_text_1'] . "<br>";
+            ?>
+            <input type="text" name="ans7">
+
+            <br>
+            <span class="feedback"><?php echo $feedback7 ?></span>
+        </div>
 
             <br>
             <span class="feedback"><?php echo $feedback4 ?></span>
