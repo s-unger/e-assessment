@@ -1,30 +1,68 @@
 <?php
 const number_space = 100;
+const actors = [["Der Mathetiger", "er"], ["Das Mathezebra", "es"], ["Die Mathekatze", "sie"]];
+const actors2 = ["Das Musiknilpferd", "Der Deutschaffe", "Die Kunstmaus"];
 
 /**
  * generates NUMERICAL item
- * @return String question
+ * Topic: Addition
+ * Saves to session:    String question
+ *                      int solution
  */
 function generate_numerical_1(){
     $x = mt_rand(1, number_space - 1);
     $y = mt_rand(1, (number_space - $x));
-    $question = 'Der Tiger Yuki hat ' . $x . ' Streifen am Kopf und ' . $y .
-        ' Streifen am Körper. Wie viele Streifen hat er insgesamt?';
+    $actor = mt_rand(0,count(actors)-1);
+    $question = actors[$actor][0] . " hat $x Streifen am Kopf und $y Streifen am Körper. Wie viele Streifen hat " . actors[$actor][1] . " insgesamt?";
     $solution = $x + $y;
     $_SESSION['question_numerical_1'] = $question;
     $_SESSION['solution_numerical_1'] = $solution;
-    return $question;
+}
+
+/**
+ * generates NUMERICAL item 2
+ * Topic: Subtraction with decimal carry
+ * Saves to session:    String question
+ *                      int solution
+ *                      int misc_carry, wrong answer from common misconception (digit carry)
+ *                      int misc_operator, wrong answer from common misconception (wrong operator chosen form text)
+ */
+function generate_numerical_2(){
+    // Generate subtraction with decimal carry, with x in [21, 98], y in [12, 89], solution in [9, 79].
+    // Keep minuend in double digit to keep the digit carry misconception realistic, i.e. smaller than the original subtrahend.
+    do {
+        $x = mt_rand(21, number_space);
+        $y = mt_rand(10, ($x - 1));
+    } while ($x%10 >= $y%10 || $x%10 == 0);
+    //echo "x modulo 10 " . $x%10;
+    //echo "y modulo 10 " . $y%10;
+    $actor1 = actors[mt_rand(0,count(actors)-1)][0];
+    $actor2 = actors2[mt_rand(0,count(actors)-1)];
+    $question = "$actor1 hat $x Bücher zuhause. $actor2 leiht sich $y Bücher aus. Wie viele Bücher hat " . lcfirst($actor1) . " noch zuhause?";
+    $solution = $x - $y;
+    $misc_carry = $solution + 10;
+    $misc_operator = $x + $y;
+
+    $_SESSION['question_numerical_2'] = $question;
+    $_SESSION['solution_numerical_2'] = $solution;
+    $_SESSION['misc_carry_numerical_2'] = $misc_carry;
+    $_SESSION['misc_operator_numerical_2'] = $misc_operator;
 }
 
 /**
  * generates MULTIPLE CHOICE item
- * @return array with question string and options array with 4 options
+ * Topic: Subtraction without decimal carry
+ * Saves to session:    String question
+ *                      int solution
+ *                      array with 4 options
  */
 function generate_multiplechoice_1(){
     // Generate subtraction with x in [11, 100], y in [1, 90], solution in [10, 99].
     // Keep solution in double digits to allow for swapping of digits
-    $x = mt_rand(11, number_space);
-    $y = mt_rand(1, ($x - 10));
+    do {
+        $x = mt_rand(11, number_space);
+        $y = mt_rand(1, ($x - 10));
+    } while ($x%10 < $y%10 );   // get subtraction without decimal carry
     $question = "$x - $y";
     $solution = $x - $y;
     $_SESSION['question_multiplechoice_1'] = $question;
@@ -36,7 +74,6 @@ function generate_multiplechoice_1(){
     $options[] = $solution;
     shuffle($options);
     $_SESSION['options_multiplechoice_1'] = $options;
-    return array($question, $options);
 }
 
 /**
@@ -85,7 +122,7 @@ function filter_distractors($dis){
 /**
  * Swaps digits for a two digit number. Used to create distractors.
  * @param $n int the original number
- * @return int|null the number with swapped digits or null if the number is not 2 digits or if the two digits are the same
+ * @return int|null the number with swapped digits or null if the number is not 2 digits, the two digits are the same or the second digit is zero
  */
 function swap_digits($n){
     if ($n < 10 || $n > 99 || $n%10 == 0 || (int)($n/10) == $n%10) return null;
@@ -96,7 +133,8 @@ function swap_digits($n){
 
 /**
  * generates TRUE FALSE item
- * @return string question
+ * Saves to session:    String question
+ *                      bool solution
  */
 function generate_truefalse_1(){
     $operators = ["Plus", "Minus", "Mal", "Geteilt"];
@@ -113,7 +151,6 @@ function generate_truefalse_1(){
     $question = "Das Ergebnis einer $x Aufgabe heißt $y";
     $_SESSION['question_truefalse_1'] = $question;
     $_SESSION['solution_truefalse_1'] = $solution;
-    return $question;
 }
 
 /**
@@ -184,7 +221,7 @@ function unique_random_numbers($min, $max, $amount){
 
 /**
  * Factorizes a number into its prime numbers
- * @param $num the number to be factorized
+ * @param $num int the number to be factorized
  * @return array|int[] the prime numbers
  */
 function primefactor($num) {
@@ -196,5 +233,3 @@ function primefactor($num) {
     }
     return array($num);
 }
-
-//TODO remove return values if Session values preferred
