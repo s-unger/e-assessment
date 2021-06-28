@@ -77,7 +77,7 @@ if ($showFormular) {
     ?>
     <div class="content">
 
-        <form action="?register=1" method="post">
+        <form class="form" action="?register=1" method="post">
             <span style="color: #D4842c"><?php echo $errorMessage ?></span>
             <h1>Register</h1>
             <p class="u-title">

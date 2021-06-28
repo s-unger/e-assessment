@@ -38,7 +38,7 @@ include "../index.php"; ?>
     document.getElementById("login").classList.add('disabled');
 </script>
 <div class="content">
-    <form action="?login=1" method="post">
+    <form class="form" action="?login=1" method="post">
         <h1>Login</h1>
         <p class="u-title">
         Username:
