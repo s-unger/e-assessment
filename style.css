@@ -148,6 +148,14 @@ img {
     border: 1px solid #f9c596;
 }
 
+.form {
+    border: 4px solid #f9c596;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    background: #ffefdb;
+}
+
 .reg {
     margin-top: 20px;
 }
