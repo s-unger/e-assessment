@@ -80,27 +80,32 @@ if ($showFormular) {
         <form action="?register=1" method="post">
             <span style="color: #D4842c"><?php echo $errorMessage ?></span>
             <h1>Register</h1>
-            Username:<br>
-            <input type="username" size="40" maxlength="250" name="username"><br><br>
-
-            Dein Passwort:<br>
-            <input type="password" size="40" maxlength="250" name="passwort"><br><br>
-
-            Passwort wiederholen:<br>
-            <input type="password" size="40" maxlength="250" name="passwort2"><br><br>
+            <p class="u-title">
+            Username:
+            </p>
+            <input class="reg-input" type="username" size="40" maxlength="250" name="username" placeholder="Username">
+            <p class="p-title">
+            Dein Passwort:
+            </p>
+            <input class="reg-input" type="password" size="40" maxlength="250" name="passwort" placeholder="Passwort">
+            <p class="pw-title">
+            Passwort wiederholen:
+            </p>
+            <input class="reg-input" type="password" size="40" maxlength="250" name="passwort2" placeholder="Passwort wiederholen" >
 
             <span style="color: #D4842c"><?php echo $feedbackUserName ?></span>
             <span style="color: #D4842c"><?php echo $feedbackPW ?></span>
             <span style="color: #D4842c"><?php echo $feedbackPWSame ?></span>
             <br>
-            <input type="submit" value="Registrieren">
+
+            <input class="btn abgeben reg" type="submit" value="Registrieren">
 
 
         </form>
-        <br>
+        
         <form action="login.php" method="post">
 
-            <input type="submit" value="zurück zum Login">
+            <input class="btn" type="submit" value="zurück zum Login">
 
         </form>
 
