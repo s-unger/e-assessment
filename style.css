@@ -98,3 +98,7 @@ img {
 .feedback {
     color: red;
 }
+
+.headline {
+    margin: 0 50px 0 50px;
+}

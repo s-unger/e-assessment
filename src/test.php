@@ -84,46 +84,46 @@ $correct = 0;
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "") {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
-    if ($q1 == $_SESSION['solution_truefalse_1'] ? 'true' : 'false') {
+    if (($q1 == "true") == ($_SESSION['solution_truefalse_1'] == "true")) {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 1));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 1));
         $correct++;
         $feedback1 = "richtig!";
     } else {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 0));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 0));
         $feedback1 = "leider falsch!";
     }
 
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 1));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 1));
         $correct++;
         $feedback2 = "richtig!";
     } else {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 0));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 0));
         $feedback2 = "leider falsch!";
     }
 
     if ($q3 == $_SESSION['solution_numerical_1']) {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 1));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 1));
         $correct++;
         $feedback3 = "richtig!";
     } else {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 0));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 0));
         $feedback3 = "leider falsch!";
     }
     if ($q41 == $_SESSION['solution_matching_1'][0] && $q42 == $_SESSION['solution_matching_1'][1] && $q43 == $_SESSION['solution_matching_1'][2]) {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => 1));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 1));
         $correct++;
         $feedback4 = "richtig!";
     } else {
         $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => 0));
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 0));
         $feedback4 = "leider falsch!";
     }
     $feedbackTotal = "Deine erreichte Punktzahl: " . $correct;
