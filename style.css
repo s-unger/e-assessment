@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap');
+
 body {
     background: #ffffff;
     margin: 0 auto;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 img {
@@ -66,7 +68,7 @@ img {
     width: 150px;
     height: 40px;
     padding: 10px;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #D4842c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +77,7 @@ img {
 .drag {
     width: 80px;
     text-align: center;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #fd8f00;
     padding: 5px;
     background-color: #fef3ea;
 }
@@ -83,7 +85,7 @@ img {
 .dropBase {
     width: 370px;
     justify-content: space-evenly;
-    background-color: #f9c596;
+    background-color: #D4842c;
 }
 
 .matching {
@@ -96,5 +98,45 @@ img {
 }
 
 .feedback {
-    color: red;
+    color: #f0571b;
+}
+
+.question {
+    background: rgba(255,210,160,1);
+    padding: 20px;
+    /* border: 3px solid white; */
+    border-radius: 20px;
+    box-shadow: 4px 5px 4px 1px #e2d9d9;
+    margin: 10px;
+    font-weight: 500;
+}
+
+.q-title {
+    font-weight: 400;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.q1 {
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.btn {
+    border: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.abgeben {
+    background-color: rgb(47, 168, 47);
+
+}
+
+.neuer-test {
+    background-color: #D4842c;
 }
