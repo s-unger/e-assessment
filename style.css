@@ -123,6 +123,7 @@ img {
 }
 
 .btn {
+    background-color: #D4842c;
     border: none;
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -139,4 +140,14 @@ img {
 
 .neuer-test {
     background-color: #D4842c;
+}
+
+.reg-input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #f9c596;
+}
+
+.reg {
+    margin-top: 20px;
 }
