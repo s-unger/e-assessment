@@ -202,7 +202,7 @@ function check()
             echo $_SESSION['question_numerical_1'] . "<br>";
             ?>
             </p>
-            <input type="number" name="ans3">
+            <input class="input-ans" type="number" name="ans3">
 
             <br>
             <span class="feedback"><?php echo $feedback3 ?></span>
@@ -261,7 +261,7 @@ function check()
             echo $_SESSION['question_short_text_1'] . "<br>";
             ?>
             </p>
-            <input type="text" name="ans7">
+            <input class="input-ans" type="text" name="ans7">
 
             <br>
             <span class="feedback"><?php echo $feedback7 ?></span>
