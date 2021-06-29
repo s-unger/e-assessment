@@ -38,22 +38,26 @@ include "../index.php"; ?>
     document.getElementById("login").classList.add('disabled');
 </script>
 <div class="content">
-    <form action="?login=1" method="post">
+    <form class="form" action="?login=1" method="post">
         <h1>Login</h1>
-        Username:<br>
-        <input type="username" size="40" maxlength="250" name="username"><br><br>
+        <p class="u-title">
+        Username:
+        </p>
+        <input class="reg-input" type="username" size="40" maxlength="250" name="username" placeholder="Username">
 
-        Dein Passwort:<br>
-        <input type="password" size="40" maxlength="250" name="passwort"><br>
+        <p class="title">
+            Dein Passwort:
+        </p>
+        <input class="reg-input" type="password" size="40" maxlength="250" name="passwort" placeholder="Passwort"><br>
 
         <br>
         <span style="color: #D4842c"><?php echo $errorMessage ?></span><br>
-        <input type="submit" value="Einloggen">
+        <input class="btn abgeben"type="submit" value="Einloggen">
 
     </form>
     <form action="register.php" method="post">
-        <p>Wenn du noch keinen Account hast, registriere dich hier:
-            <input type="submit" value="Register">
+        <p>Wenn du noch keinen Account hast, registriere dich hier:     
+            <input class="btn" type="submit" value="Register">
         </p>
     </form>
 </div>
