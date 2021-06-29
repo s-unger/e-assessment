@@ -3,6 +3,7 @@ $feedback1 = "";
 $feedback2 = "";
 $feedback3 = "";
 $feedback4 = "";
+$feedback7 = "";
 $feedbackTotal = "";
 include('questionGenerator.php');
 include "../index.php"; ?>
@@ -60,6 +61,7 @@ $q3 = "";
 $q41 = "";
 $q42 = "";
 $q43 = "";
+$q7 = "";
 if (isset($_POST['ans1'])) {
     $q1 = $_POST['ans1'];
 }
@@ -78,9 +80,13 @@ if (isset($_POST['ans4-2'])) {
 if (isset($_POST['ans4-3'])) {
     $q43 = $_POST['ans4-3'];
 }
+if (isset($_POST['ans7'])) {
+    $q7 = $_POST['ans7'];
+}
+
 $correct = 0;
 
-if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "") {
+if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q7 == "") {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
     if ($q1 == $_SESSION['solution_truefalse_1'] ? 'true' : 'false') {
@@ -109,6 +115,14 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     } else {
         $feedback4 = "leider falsch!";
     }
+
+    if($q7 == $_SESSION['solution_short_text_1']) {
+        $correct++;
+        $feedback7="richtig!";
+    } else {
+        $feedback7 = "leider falsch!";
+    }
+
     $feedbackTotal = "Deine erreichte Punktzahl: " . $correct;
 }
 ?>
@@ -139,14 +153,15 @@ function check()
         <span class="feedback"><?php echo $feedbackTotal ?></span>
         <br>
 
-        <div>
-            <p> Aufgabe 1:</p>
-            <?php
+        <div class="question">
+            <p class="q-title"> Aufgabe 1:</p>
+            <p class="q1"> <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_truefalse_1();
             }
             echo $_SESSION['question_truefalse_1'] . "<br>";
             ?>
+            </p>
             <input type="radio" name="ans1" value="true"><label>Richtig</label>
             <input type="radio" name="ans1" value="false"><label>Falsch</label>
 
@@ -154,8 +169,9 @@ function check()
             <span class="feedback"><?php echo $feedback1 ?></span>
         </div>
 
-        <div>
-            <p> Aufgabe 2:</p>
+        <div class="question">
+            <p class="q-title"> Aufgabe 2:</p>
+            <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_multiplechoice_1();
@@ -166,6 +182,7 @@ function check()
             $opt3 = $_SESSION['options_multiplechoice_1'][2];
             $opt4 = $_SESSION['options_multiplechoice_1'][3];
             ?>
+            </p>
             <input type="radio" name="ans2" value="<?= $opt1 ?>"><label><?= $opt1 ?></label>
             <input type="radio" name="ans2" value="<?= $opt2 ?>"><label><?= $opt2 ?></label>
             <input type="radio" name="ans2" value="<?= $opt3 ?>"><label><?= $opt3 ?></label>
@@ -175,28 +192,32 @@ function check()
             <span class="feedback"><?php echo $feedback2 ?></span>
         </div>
 
-        <div>
-            <p> Aufgabe 3:</p>
+        <div class="question">
+            <p class="q-title"> Aufgabe 3:</p>
+            <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_numerical_1();
             }
             echo $_SESSION['question_numerical_1'] . "<br>";
             ?>
-            <input type="number" name="ans3">
+            </p>
+            <input class="input-ans" type="number" name="ans3">
 
             <br>
             <span class="feedback"><?php echo $feedback3 ?></span>
         </div>
 
 
-        <div>
-            <p> Aufgabe 4:</p>
+        <div class="question">
+            <p class="q-title"> Aufgabe 4:</p>
+            <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_matching_1();
             }
             echo $_SESSION['question_matching_1'] . "<br>"; ?>
+            </p>
 
             <div class="dropBase">
                 <input type="text" class="drag" id="drag1" draggable="true"
@@ -227,15 +248,29 @@ function check()
                 </div>
 
             </div>
-
             <br>
             <span class="feedback"><?php echo $feedback4 ?></span>
         </div>
+        <div class="question">
+            <p class="q-title"> Aufgabe 7:</p>
+            <p class="q1">
+            <?php
+            if ($_SESSION['newQuestions'] == true) {
+                generate_short_text();
+            }
+            echo $_SESSION['question_short_text_1'] . "<br>";
+            ?>
+            </p>
+            <input class="input-ans" type="text" name="ans7">
+
+            <br>
+            <span class="feedback"><?php echo $feedback7 ?></span>
+        </div>
         <br>
-        <input type="submit" name="check" value="Test abgeben">
+        <input class="btn abgeben" type="submit" name="check" value="Test abgeben">
 
     </form>
     <form action="test.php" method="post">
-        <input type="submit" name="newTest" value="Neuer Test">
+        <input class="btn neuer-test" type="submit" name="newTest" value="Neuer Test">
     </form>
 </div>
