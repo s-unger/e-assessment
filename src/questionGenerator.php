@@ -224,6 +224,26 @@ function generate_truefalse_1(){
 }
 
 /**
+ * generates Short Text item
+ * @return string question
+ */
+
+function generate_short_text() {
+    $operators =  ["Plus", "Minus", "Mal", "Geteilt"]; 
+    $terms =  ["Summe", "Differenz", "Produkt", "Quotient"];
+
+    $rand_operator = mt_rand(0, 3); 
+    $x = $operators[$rand_operator];
+    $y = $terms[$rand_operator];
+
+    $question = "Das Ergebnis einer $x Aufgabe heißt ...";
+    $solution = $y;
+    $_SESSION['question_short_text_1'] = $question;
+    $_SESSION['solution_short_text_1'] = $solution;
+    return $question;
+}
+
+/**
  * generates MATCHING item
  * Topic: Multiplication
  * Saves to session:    String question
