@@ -23,7 +23,7 @@ function generate_numerical_1(){
 
 /**
  * generates NUMERICAL item 2 (text problem)
- * Topic: Subtraction with decimal carry
+ * Topic: Subtraction without digit carry
  * Saves to session:    String question
  *                      int solution
  *                      int misc_carry1, wrong answer from common misconception (digit carry, +10)
@@ -128,6 +128,7 @@ function generate_distractors_1($x, $y){
  * Prototype multiple choice question with relevant distractors (common misconceptions) but prone to testwiseness
  * Saves to session:    String question
  *                      int solution
+ *                      array options: 3 options made of tuples: int answer option and String feedback to be given if option is chosen
  */
 function generate_multiplechoice_2(){
     do {
@@ -168,7 +169,7 @@ function generate_distractors_2($x, $y)
     //$distractor_4 = $solution - 9;          //Digit carry is applied to the wrong digit (Ones digit)
     $feedback_1 = "Fast richtig!";
     $feedback_2 = "Lies noch einmal genau den Aufgabentext! Die Streifen werden <b>zusammengezählt</b>";
-    $feedback_3 = "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein <b>Übertrag</b> in die Zehnerstelle statt.";
+    $feedback_3 = "Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein <b>Übertrag</b> in die Zehnerstelle statt.";
 
     $distractors = array(array($distractor_1, $feedback_1), array($distractor_2, $feedback_2), array($distractor_3, $feedback_3));
     return $distractors;
