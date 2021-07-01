@@ -7,7 +7,7 @@ $feedback5 = "";
 $feedback6 = "";
 $feedback7 = "";
 $feedbackTotal = "";
-$pointsTotal = 10;
+$pointsTotal = 11;
 include('questionGenerator.php');
 include "../index.php"; ?>
 <style>
@@ -169,14 +169,14 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
         }
     }
 
-if($q7 == $_SESSION['solution_short_text_1']) {
+    if($q7 == $_SESSION['solution_short_text_1']) {
         $correct++;
-        $feedback7="richtig!";
+        $feedback7="Richtig!";
     } else {
-        $feedback7 = "leider falsch!";
+        $feedback7 = "Leider falsch!";
     }
 
-    $feedbackTotal = "Deine erreichte Punktzahl:  $correct von $pointsTotal";
+    $feedbackTotal = "Deine erreichte Punktzahl: $correct von $pointsTotal";
     if ($correct == $pointsTotal-3 || $correct == $pointsTotal-4) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
     else if ($correct == $pointsTotal-1 || $correct == $pointsTotal-2) $feedbackTotal .= "<br>Sehr gute Leistung. Weiter so!";
     else if ($correct == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
@@ -310,23 +310,26 @@ function check()
             <span class="feedback"><?php echo $feedback4 ?></span>
         </div>
 
-        <div>
-            <p> Aufgabe 5 (2P)</p>
+        <div class="question">
+            <p class="q-title"> Aufgabe 5 (2P)</p>
+            <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_numerical_2();
             }
             echo $_SESSION['question_numerical_2'] . "<br>";
             ?>
+            </p>
             <input type="number" name="ans5">
 
             <br>
             <span class="feedback"><?php echo $feedback5 ?></span>
         </div>
 
-        <div>
-            <p> Aufgabe 6 (2P)</p>
-            <?php
+        <div class="question">
+            <p class="q-title">  Aufgabe 6 (2P)</p>
+            <p class="q1">
+                <?php
             if ($_SESSION['newQuestions'] == true) {
                 generate_multiplechoice_2();
             }
@@ -336,6 +339,7 @@ function check()
             $opt3_2 = $_SESSION['options_multiplechoice_2'][2][0];
             $opt4_2 = $_SESSION['options_multiplechoice_2'][3][0];
             ?>
+            </p>
             <input type="radio" name="ans6" value="<?= $opt1_2 ?>"><label><?= $opt1_2 ?></label>
             <input type="radio" name="ans6" value="<?= $opt2_2 ?>"><label><?= $opt2_2 ?></label>
             <input type="radio" name="ans6" value="<?= $opt3_2 ?>"><label><?= $opt3_2 ?></label>
@@ -346,7 +350,7 @@ function check()
         </div>
 
         <div class="question">
-            <p class="q-title"> Aufgabe 7:</p>
+            <p class="q-title"> Aufgabe 7 (1P)</p>
             <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
