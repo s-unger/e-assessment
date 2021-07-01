@@ -159,7 +159,7 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     }else {
         $feedback6 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_2'] . ".";
         for ($i = 0; $i < 4; $i++) {
-            if ($q6 == $_SESSION['options_multiplechoice_2'][$i][0]) $feedback6 .= "br" . $_SESSION['options_multiplechoice_2'][$i][1];
+            if ($q6 == $_SESSION['options_multiplechoice_2'][$i][0]) $feedback6 .= "<br>" . $_SESSION['options_multiplechoice_2'][$i][1];
         }
     }
 
