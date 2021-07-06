@@ -15,14 +15,14 @@ $feedbackPWSame = "";
 $errorMessage = "";
 
 include "../index.php"; ?>
-<style>
-    <?php include '../style.css'; ?>
-</style>
+    <style>
+        <?php include '../style.css'; ?>
+    </style>
 
-<script>
-    // don't show login/logout button while registering
-    document.getElementById("login").classList.add('disabled');
-</script>
+    <script>
+        // don't show login/logout button while registering
+        document.getElementById("login").classList.add('disabled');
+    </script>
 <?php
 $showFormular = true; //Variable ob das Registrierungsformular angezeigt werden soll
 
