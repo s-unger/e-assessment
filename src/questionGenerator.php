@@ -227,6 +227,22 @@ function generate_truefalse_1(){
  * generates Short Text item
  * @return string question
  */
+function generate_text_to_term() {
+
+    $x = mt_rand(0, 50);
+    $y = mt_rand(0, 100);
+
+    $question = "Ziehe $x von $y ab";
+    $solution = "$y - $x";
+    $_SESSION['question_text_to_term'] = $question;
+    $_SESSION['solution_text_to_term'] = $solution;
+    return $question;
+}
+
+/**
+ * generates Short Text item
+ * @return string question
+ */
 
 function generate_short_text() {
     $operators =  ["Plus", "Minus", "Mal", "Geteilt"]; 
