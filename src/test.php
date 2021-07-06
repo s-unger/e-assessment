@@ -8,7 +8,7 @@ $feedback6 = "";
 $feedback7 = "";
 $feedback8 = "";
 $feedbackTotal = "";
-$pointsTotal = 11;
+$pointsTotal = 12;
 include('questionGenerator.php');
 include "../index.php"; ?>
 <style>
@@ -103,7 +103,7 @@ if (isset($_POST['ans8'])) {
 $correct = 0;
 
 
-if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "") {
+if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "" || $q8 == "" ) {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
     ($q1) ? $truefalseGerman = "Wahr" : $truefalse = "Falsch";
@@ -379,7 +379,7 @@ function check()
         </div>
 
         <div class="question">
-            <p class="q-title"> Aufgabe 8:</p>
+            <p class="q-title"> Aufgabe 8 (1P)</p>
             <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
