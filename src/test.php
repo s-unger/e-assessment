@@ -55,6 +55,18 @@ include "../index.php"; ?>
     });
 </script>
 <?php
+
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//if(isset($_POST["check"])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['check'])) {
+
+
+    $statement = $pdo->prepare("UPDATE users SET amount_of_tests = amount_of_tests+1 WHERE id = :id ");
+    //$statement->bindParam('i', $_SESSION['userId']);
+    // $result = $statement->execute([$_SESSION['userId']]);
+
+    $result = $statement->execute(array('id' => $_SESSION['userid']));
+}
 $q1 = "";
 $q2 = "";
 $q3 = "";
@@ -127,6 +139,11 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
         $feedback4 = "leider falsch!";
     }
     $feedbackTotal = "Deine erreichte Punktzahl: " . $correct;
+
+
+    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = (correct+$correct)/2");
+    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $correct));
+
 }
 ?>
 <?php
