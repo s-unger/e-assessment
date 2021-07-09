@@ -25,7 +25,6 @@ function newExam(){
     $_SESSION['newQuestions'] = true;
     $_SESSION['isExam'] = true;
     $_SESSION['isSubmittable'] = true;
-    echo "newExam";
 }
 
 function newTest()
@@ -33,7 +32,6 @@ function newTest()
     $_SESSION['newQuestions'] = true;
     $_SESSION['isExam'] = false;
     $_SESSION['isSubmittable'] = true;
-    echo "newTest";
 }
 
 ?>
