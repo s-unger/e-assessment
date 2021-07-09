@@ -170,9 +170,11 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     }  else $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
     $points5 = 0;
     if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
-        $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein <b>Übertrag</b> in die Zehnerstelle statt.";
+        $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein 
+<b>Übertrag</b> in die Zehnerstelle statt.";
     } else if ($q5 == $_SESSION['misc_carry2_numerical_2']) {
-        $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
+        $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. 
+Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
     } else if ($q5 == $_SESSION['misc_operator_numerical_2']){
         $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
     }
@@ -203,12 +205,37 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 6, 'correctness' => $points7));
 
     $feedbackTotal = "Deine erreichte Punktzahl: $correct von $pointsTotal";
-    if ($correct == $pointsTotal-3 || $correct == $pointsTotal-4) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
-    else if ($correct == $pointsTotal-1 || $correct == $pointsTotal-2) $feedbackTotal .= "<br>Sehr gute Leistung. Weiter so!";
-    else if ($correct == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
-    else $feedbackTotal .= "<br>Mach weiter, du schaffst das!";
+    if ($_SESSION['isExam']) $feedbackTotal .= "<br>Deine Note: " . calculateGrade($correct);
+    else {
+        if ($correct == $pointsTotal - 3 || $correct == $pointsTotal - 4) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
+        else if ($correct == $pointsTotal - 1 || $correct == $pointsTotal - 2) $feedbackTotal .= "<br>Sehr gute Leistung. Weiter so!";
+        else if ($correct == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
+        else $feedbackTotal .= "<br>Mach weiter, du schaffst das!";
+    }
 }
 
+/**
+ * Calculate grade from points according to recommended point percentages
+ * @param int $correct  points received for test
+ * @return int  grade
+ */
+function calculateGrade(int $correct){
+    global $pointsTotal;
+    switch (true) {
+        case ($correct > 0.92 * $pointsTotal):
+            return 1;
+        case ($correct > 0.81 * $pointsTotal):
+            return 2;
+        case ($correct > 0.67 * $pointsTotal):
+            return 3;
+        case ($correct > 0.50 * $pointsTotal):
+            return 4;
+        case ($correct > 0.23 * $pointsTotal):
+            return 5;
+        default:
+            return 6;
+    }
+}
 ?>
 <?php
 if ($_POST) {
@@ -216,14 +243,11 @@ if ($_POST) {
         check();
     } elseif (isset($_POST['newTest'])) {
         newTest();
+    } elseif (isset($_POST['newExam'])) {
+        newExam();
+
     }
 }
-
-/*function newTest()
-{
-    $_SESSION['newQuestions'] = true;
-    $_SESSION['isSubmittable'] = true;
-}*/
 
 function check()
 {
@@ -233,9 +257,7 @@ function check()
 ?>
 <div class="content">
     <h1>Mache den Test</h1>
-    <p>Finde hier heraus, wie gut du in Mathe bist. Immer wieder im Schuljahr werden Tests hier benotet.
-        <?php echo $_SESSION['isExam'] ? "IsExam is true" : "IsExam is false"; ?></p>
-
+    <p>Finde hier heraus, wie gut du in Mathe bist. Immer wieder im Schuljahr werden Tests hier benotet.</p>
     <form action="test.php" method="post">
         <span class="feedback"><?php echo $feedbackTotal ?></span>
         <br>
