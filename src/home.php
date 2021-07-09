@@ -54,7 +54,7 @@ while ($row2 = $statement2->fetch()) {
 
 <div class="content">
     <form action="test.php" method="post">
-        <input type="submit" name="newTest" value="Mach den Test"/>
+        <input class="btn" type="submit" name="newTest" value="Mach den Test"/>
     </form>
     <div style="display:flex;">
         <div class="line_chart1">
