@@ -8,9 +8,9 @@ $feedback5 = "";
 $feedback6 = "";
 $feedback7 = "";
 $feedbackTotal = "";
-$pointsTotal = 11;
 $_SESSION['isSubmittable'] = true;
 include('questionGenerator.php');
+include('questionEvaluator.php');
 include "../index.php"; ?>
 <style>
     <?php include '../style.css'; ?>
@@ -98,144 +98,61 @@ if (isset($_POST['ans7'])) {
 }
 
 $correct = 0;
-
-
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "") {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
     $_SESSION['isSubmittable'] = false;
-    ($q1) ? $truefalseGerman = "Wahr" : $truefalseGerman = "Falsch";
-    $feedback1 = "Deine Antwort: \"$truefalseGerman\"<br>";
     $table = $_SESSION['isExam'] ? "exam_answers" : "answers";
     $statement = $pdo->prepare("INSERT INTO $table (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-    if ($q1 == $_SESSION['solution_truefalse_1']) {
-        $points1 = 1;
-        $correct++;
-        $feedback1 .= "<b>Richtig!</b>";
-    } else {
-        $points1 = 0;
-        $feedback1 .= "<b>Leider falsch!</b> <br>" . $_SESSION['feedback_truefalse_1'];
-    }
+
+    /* Evaluate question 1 */
+    $evaluation1 = evaluateQuestion1();
+    $points1 = $evaluation1["points"];
+    $feedback1 = $evaluation1["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => $points1));
 
-    $feedback2 = "Deine Antwort: $q2<br>";
-    if ($q2 == $_SESSION['solution_multiplechoice_1']) {
-        $points2 = 1;
-        $correct++;
-        $feedback2 .= "<b>Richtig!</b>";
-    } else {
-        $points2 = 0;
-        if ($q2 == $_SESSION['solution_multiplechoice_1'] + 1 || $q2 == $_SESSION['solution_multiplechoice_1'] - 1) {
-            $feedback2 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
-        } else {
-            $feedback2 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
-        }
-    }
+    /* Evaluate question 2 */
+    $evaluation2 = evaluateQuestion2();
+    $points2 = $evaluation2["points"];
+    $feedback2 = $evaluation2["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => $points2));
 
-    $feedback3 = "Deine Antwort: $q3<br>";
-    if ($q3 == $_SESSION['solution_numerical_1']) {
-        $points3 = 1;
-        $correct++;
-        $feedback3 .= "<b>Richtig!</b>";
-    } else {
-        $points3 = 0;
-        if ($q3 == $_SESSION['solution_numerical_1'] + 1 || $q3 == $_SESSION['solution_numerical_1'] - 1) {
-            $feedback3 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
-        } else {
-            $feedback3 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
-        }
-    }
+    /* Evaluate question 3 */
+    $evaluation3 = evaluateQuestion3();
+    $points3 = $evaluation3["points"];
+    $feedback3 = $evaluation3["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => $points3));
 
-    $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
-    $points4 = 0;
-    if ($q41 == $_SESSION['solution_matching_1'][0]) $points4++;
-    if ($q42 == $_SESSION['solution_matching_1'][1]) $points4++;
-    if ($q43 == $_SESSION['solution_matching_1'][2]) $points4++;
-    $correct += $points4;
-    $feedback4 .= "<b>" . $points4 . " von 3 richtig!</b>";
-    if ($points4 <3) {
-        $feedback4 .= "<br>Die richtige Reihenfolge ist: <br>" . $_SESSION['solution_matching_1'][0]
-            ."<br>" . $_SESSION['solution_matching_1'][1]
-            ."<br>" . $_SESSION['solution_matching_1'][2];
-    }
+    /* Evaluate question 4 */
+    $evaluation4 = evaluateQuestion4();
+    $points4 = $evaluation4["points"];
+    $feedback4 = $evaluation4["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => $points4));
 
-    $feedback5 = "Deine Antwort: $q5<br>";
-    if ($q5 == $_SESSION['solution_numerical_2']) {
-        $points5 = 2;
-        $correct += $points5;
-        $feedback5 .= "<b>Richtig!</b>";
-    }  else $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
-    $points5 = 0;
-    if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
-        $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein 
-<b>Übertrag</b> in die Zehnerstelle statt.";
-    } else if ($q5 == $_SESSION['misc_carry2_numerical_2']) {
-        $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. 
-Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
-    } else if ($q5 == $_SESSION['misc_operator_numerical_2']){
-        $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
-    }
+    /* Evaluate question 5 */
+    $evaluation5 = evaluateQuestion5();
+    $points5 = $evaluation5["points"];
+    $feedback5 = $evaluation5["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => $points5));
 
-    $feedback6 = "Deine Antwort: $q6<br>";
-    if ($q6 == $_SESSION['solution_multiplechoice_2']) {
-        $points6 = 2;
-        $correct += $points6;
-        $feedback6 .= "<b>Richtig!</b>";
-    }else {
-        $points6 = 0;
-        $feedback6 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_2'] . ".";
-        for ($i = 0; $i < 4; $i++) {
-            if ($q6 == $_SESSION['options_multiplechoice_2'][$i][0]) $feedback6 .= "<br>" . $_SESSION['options_multiplechoice_2'][$i][1];
-        }
-    }
+    /* Evaluate question 6 */
+    $evaluation6 = evaluateQuestion6();
+    $points6 = $evaluation6["points"];
+    $feedback6 = $evaluation6["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 5, 'correctness' => $points6));
 
-    if($q7 == $_SESSION['solution_short_text_1']) {
-        $points7 = 1;
-        $correct++;
-        $feedback7="Richtig!";
-    } else {
-        $points7 = 0;
-        $feedback7 = "Leider falsch!";
-    }
+    /* Evaluate question 7 */
+    $evaluation7 = evaluateQuestion7();
+    $points7 = $evaluation7["points"];
+    $feedback7= $evaluation7["feedback"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 6, 'correctness' => $points7));
 
-    $feedbackTotal = "Deine erreichte Punktzahl: $correct von $pointsTotal";
-    if ($_SESSION['isExam']) $feedbackTotal .= "<br>Deine Note: " . calculateGrade($correct);
-    else {
-        if ($correct == $pointsTotal - 3 || $correct == $pointsTotal - 4) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
-        else if ($correct == $pointsTotal - 1 || $correct == $pointsTotal - 2) $feedbackTotal .= "<br>Sehr gute Leistung. Weiter so!";
-        else if ($correct == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
-        else $feedbackTotal .= "<br>Mach weiter, du schaffst das!";
-    }
+    /* Evaluate Total */
+    $evaluationTotal = evaluateTotal();
+    $pointsTotal = $evaluationTotal["points"];
+    $feedbackTotal= $evaluationTotal["feedback"];
 }
 
-/**
- * Calculate grade from points according to recommended point percentages
- * @param int $correct  points received for test
- * @return int  grade
- */
-function calculateGrade(int $correct){
-    global $pointsTotal;
-    switch (true) {
-        case ($correct > 0.92 * $pointsTotal):
-            return 1;
-        case ($correct > 0.81 * $pointsTotal):
-            return 2;
-        case ($correct > 0.67 * $pointsTotal):
-            return 3;
-        case ($correct > 0.50 * $pointsTotal):
-            return 4;
-        case ($correct > 0.23 * $pointsTotal):
-            return 5;
-        default:
-            return 6;
-    }
-}
 ?>
 <?php
 if ($_POST) {
