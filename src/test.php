@@ -1,4 +1,5 @@
-<?php session_start();
+<?php if(!isset($_SESSION)) session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 $feedback1 = "";
 $feedback2 = "";
 $feedback3 = "";
@@ -8,6 +9,7 @@ $feedback6 = "";
 $feedback7 = "";
 $feedbackTotal = "";
 $pointsTotal = 11;
+$_SESSION['isSubmittable'] = true;
 include('questionGenerator.php');
 include "../index.php"; ?>
 <style>
@@ -101,20 +103,28 @@ $correct = 0;
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "") {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
-    ($q1) ? $truefalseGerman = "Wahr" : $truefalse = "Falsch";
+    $_SESSION['isSubmittable'] = false;
+    ($q1) ? $truefalseGerman = "Wahr" : $truefalseGerman = "Falsch";
     $feedback1 = "Deine Antwort: \"$truefalseGerman\"<br>";
+    $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
     if ($q1 == $_SESSION['solution_truefalse_1']) {
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 1));
         $correct++;
         $feedback1 .= "<b>Richtig!</b>";
     } else {
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 0));
         $feedback1 .= "<b>Leider falsch!</b> <br>" . $_SESSION['feedback_truefalse_1'];
     }
 
     $feedback2 = "Deine Antwort: $q2<br>";
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 1));
         $correct++;
         $feedback2 .= "<b>Richtig!</b>";
     } else {
+        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 0));
         if ($q2 == $_SESSION['solution_multiplechoice_1'] + 1 || $q2 == $_SESSION['solution_multiplechoice_1'] - 1) {
             $feedback2 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
         } else {
@@ -192,10 +202,11 @@ if ($_POST) {
     }
 }
 
-function newTest()
+/*function newTest()
 {
     $_SESSION['newQuestions'] = true;
-}
+    $_SESSION['isSubmittable'] = true;
+}*/
 
 function check()
 {
@@ -205,7 +216,9 @@ function check()
 ?>
 <div class="content">
     <h1>Mache den Test</h1>
-    <p>Finde hier heraus, wie gut du in Mathe bist. Immer wieder im Schuljahr werden Tests hier benotet.</p>
+    <p>Finde hier heraus, wie gut du in Mathe bist. Immer wieder im Schuljahr werden Tests hier benotet.
+        <?php echo $_SESSION['isExam'] ? "IsExam is true" : "IsExam is false"; ?></p>
+
     <form action="test.php" method="post">
         <span class="feedback"><?php echo $feedbackTotal ?></span>
         <br>
@@ -365,10 +378,17 @@ function check()
             <span class="feedback"><?php echo $feedback7 ?></span>
         </div>
         <br>
+        <?php if ($_SESSION['isSubmittable'] == true) : ?>
         <input class="btn abgeben" type="submit" name="check" value="Test abgeben">
+        <?php  endif; ?>
 
     </form>
-    <form action="test.php" method="post">
-        <input class="btn neuer-test" type="submit" name="newTest" value="Neuer Test">
-    </form>
+
+    <?php if ($_SESSION['isExam'] == false) : ?>
+         <form action="test.php" method="post">
+            <input class="btn neuer-test" type="submit" name="newTest" value="Neuer Test">
+         </form>
+    <?php  endif; ?>
+
+
 </div>
