@@ -43,7 +43,8 @@ if (!isset($_SESSION['userid'])) {
     <div class="nav-wrapper">
         <ul>
             <li><a href="home.php"><?php if (isset($user)) {
-                        echo $user["username"];
+                        echo "Hallo, ";
+                        echo $user["username"]; 
                     } ?></a></li>
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
             </li>
@@ -51,4 +52,3 @@ if (!isset($_SESSION['userid'])) {
     </div>
     </body>
     </html>
-
