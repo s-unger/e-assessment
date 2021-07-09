@@ -114,66 +114,54 @@ if (isset($_POST['ans8'])) {
 }
 
 $correct = 0;
+$correctness = 0;
 
 
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "" || $q8 == "" ) {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
-    ($q1) ? $truefalseGerman = "Wahr" : $truefalse = "Falsch";
+    $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+    ($q1 == "true") ? $truefalseGerman = "Wahr" : $truefalseGerman = "Falsch";
     $feedback1 = "Deine Antwort: \"$truefalseGerman\"<br>";
-    if ($q1 == $_SESSION['solution_truefalse_1']) {
-//    if (($q1 == "true") == ($_SESSION['solution_truefalse_1'] == "true")) {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 1));
+    if (($q1 == "true") == $_SESSION['solution_truefalse_1']) {
+        $correctness = 1;
         $correct++;
         $feedback1 .= "<b>Richtig!</b>";
     } else {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => 0));
+        $correctness = 0;
         $feedback1 .= "<b>Leider falsch!</b> <br>" . $_SESSION['feedback_truefalse_1'];
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => $correctness));
 
     $feedback2 = "Deine Antwort: $q2<br>";
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 1));
+        $correctness = 1;
         $correct++;
         $feedback2 .= "<b>Richtig!</b>";
     } else {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => 0));
+        $correctness = 0;
         if ($q2 == $_SESSION['solution_multiplechoice_1'] + 1 || $q2 == $_SESSION['solution_multiplechoice_1'] - 1) {
             $feedback2 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
         } else {
             $feedback2 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
         }
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => $correctness));
 
     $feedback3 = "Deine Antwort: $q3<br>";
     if ($q3 == $_SESSION['solution_numerical_1']) {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 1));
+        $correctness = 1;
         $correct++;
         $feedback3 .= "<b>Richtig!</b>";
-    } else if ($q3 == $_SESSION['solution_numerical_1'] + 1 || $q3 == $_SESSION['solution_numerical_1'] - 1) {
-        $feedback3 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 0));
     } else {
-        $feedback3 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => 0));
+        $correctness = 0;
+        if ($q3 == $_SESSION['solution_numerical_1'] + 1 || $q3 == $_SESSION['solution_numerical_1'] - 1) {
+            $feedback3 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
+        } else {
+            $feedback3 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
+        }
     }
-    if ($q41 == $_SESSION['solution_matching_1'][0] && $q42 == $_SESSION['solution_matching_1'][1] && $q43 == $_SESSION['solution_matching_1'][2]) {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 1));
-        $correct++;
-        $feedback4 = "richtig!";
-    } else {
-        $statement = $pdo->prepare("INSERT INTO answers (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
-        $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => 0));
-        $feedback4 = "leider falsch!";
-    }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => $correctness));
 
     $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
     $correct4 = 0;
@@ -182,52 +170,69 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     if ($q43 == $_SESSION['solution_matching_1'][2]) $correct4++;
     $correct += $correct4;
     $feedback4 .= "<b>" . $correct4 . " von 3 richtig!</b>";
+    $correctness = 1;
     if ($correct4 <3) {
         $feedback4 .= "<br>Die richtige Reihenfolge ist: <br>" . $_SESSION['solution_matching_1'][0]
-            ."<br>" . $_SESSION['solution_matching_1'][1]
-            ."<br>" . $_SESSION['solution_matching_1'][2];
+            . "<br>" . $_SESSION['solution_matching_1'][1]
+            . "<br>" . $_SESSION['solution_matching_1'][2];
+        $correctness = 0;
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => $correctness));
 
     $feedback5 = "Deine Antwort: $q5<br>";
     if ($q5 == $_SESSION['solution_numerical_2']) {
-        $correct = $correct+2;
+        $correctness = 1;
+        $correct = $correct + 2;
         $feedback5 .= "<b>Richtig!</b>";
-    }  else $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
-    if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
-        $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein <b>Übertrag</b> in die Zehnerstelle statt.";
-    } else if ($q5 == $_SESSION['misc_carry2_numerical_2']) {
-        $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
-    } else if ($q5 == $_SESSION['misc_operator_numerical_2']){
-        $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
+    } else {
+        $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
+        $correctness = 0;
+        if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
+            $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerstelle findet ein <b>Übertrag</b> in die Zehnerstelle statt.";
+        } else if ($q5 == $_SESSION['misc_carry2_numerical_2']) {
+            $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
+        } else if ($q5 == $_SESSION['misc_operator_numerical_2']) {
+            $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
+        }
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => $correctness));
 
     $feedback6 = "Deine Antwort: $q6<br>";
     if ($q6 == $_SESSION['solution_multiplechoice_2']) {
-        $correct = $correct+2;
+        $correct = $correct + 2;
+        $correctness = 1;
         $feedback6 .= "<b>Richtig!</b>";
-    }else {
+    } else {
         $feedback6 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_2'] . ".";
+        $correctness = 0;
         for ($i = 0; $i < 4; $i++) {
             if ($q6 == $_SESSION['options_multiplechoice_2'][$i][0]) $feedback6 .= "<br>" . $_SESSION['options_multiplechoice_2'][$i][1];
         }
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 5, 'correctness' => $correctness));
 
     $feedback7 = "Deine Antwort: $q7<br>";
     if ($q7 == $_SESSION['solution_short_text_1']) {
-        $correct = $correct+2;
+        $correct++;
+        $correctness = 1;
         $feedback7 .= "<b>Richtig!</b>";
     }else {
         $feedback7 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
+        $correctness = 0;
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 6, 'correctness' => $correctness));
 
 
     $feedback8 = "Deine Antwort: $q8<br>";
     if ($q8 == $_SESSION['solution_text_to_term']) {
-        $correct = $correct+2;
+        $correct++;
+        $correctness = 1;
         $feedback8 .= "<b>Richtig!</b>";
     }else {
         $feedback8 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_text_to_term'] . ".";
+        $correctness = 0;
     }
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 7, 'correctness' => $correctness));
 
 
     $feedbackTotal = "Deine erreichte Punktzahl: $correct von $pointsTotal";
