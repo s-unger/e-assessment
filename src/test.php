@@ -383,6 +383,7 @@ function check()
 
         <div class="question">
             <p class="q-title"> Aufgabe 8 (1P)</p>
+            <p class="bezeichnung"> Schreibe den mathematischen Term: </p>
             <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
