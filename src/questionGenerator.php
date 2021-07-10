@@ -10,9 +10,9 @@ const actors2 = ["Das Musiknilpferd", "Der Deutschaffe", "Die Kunstmaus"];
  *                      int solution
  */
 function generate_numerical_1(){
-    do {
-        $x = mt_rand(1, number_space - 1);
-        $y = mt_rand(1, (number_space - $x));
+    do {    // Keep the numbers in double digits
+        $x = mt_rand(10, number_space - 10);
+        $y = mt_rand(10, (number_space - $x));
     } while (($x%10 + $y%10) > 9);
 
     $question = "$x + $y =";
@@ -208,7 +208,6 @@ function generate_truefalse_1(){
     $rand_operator = mt_rand(0, 3);
     $x = $operators[$rand_operator];
     $solution = (mt_rand(0,1) == 0);
-    $feedback = "";
     $y = $terms[$rand_operator];
     if ($solution) {
         $feedback = "$y ist der korrekte Begriff für das Ergebnis einer $x Aufgabe.";
