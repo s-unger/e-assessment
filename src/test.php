@@ -175,7 +175,8 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     }
 
     $feedback7 = "Deine Antwort: $q7<br>";
-    if ($q7 == $_SESSION['solution_short_text_1']) {
+    $ans7 = str_replace(' ', '', $q7);
+    if ($ans7 == $_SESSION['solution_short_text_1']) {
         $correct = $correct+2;
         $feedback7 .= "<b>Richtig!</b>";
     }else {
@@ -184,7 +185,8 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 
 
     $feedback8 = "Deine Antwort: $q8<br>";
-    if ($q8 == $_SESSION['solution_text_to_term']) {
+    $ans8 = str_replace(' ', '', $q8);
+    if ($ans8 == $_SESSION['solution_text_to_term']) {
         $correct = $correct+2;
         $feedback8 .= "<b>Richtig!</b>";
     }else {
