@@ -230,7 +230,7 @@ function generate_truefalse_1(){
 function generate_text_to_term() {
 
     $x = mt_rand(0, 50);
-    $y = mt_rand(0, 100);
+    $y = mt_rand(51, 100);
 
     $question = "Ziehe $x von $y ab";
     $solution = "$y - $x";
