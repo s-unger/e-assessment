@@ -103,7 +103,7 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 } else {
     $_SESSION['isSubmittable'] = false;
     $table = $_SESSION['isExam'] ? "exam_answers" : "answers";
-    $statement = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness) VALUES (:userId, :solved_at, :questionId, :correctness)");
+    $statement = $pdo->prepare("INSERT INTO " . $table . " (userId, solved_at, questionId, correctness) VALUES (:userId, :solved_at, :questionId, :correctness)");
 
     /* Evaluate question 1 */
     $evaluation1 = evaluateQuestion1();
@@ -140,7 +140,7 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     $correctness5 = $evaluation5["fullPoints"];
     $misconception = $evaluation5["misconception"]; // prototype misconception type
     if ($_SESSION['isExam']){
-        $statement5 = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness)");
+        $statement5 = $pdo->prepare("INSERT INTO exam_answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness)");
         $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5));
     } else {
         $statement5 = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness, :misconception)");
