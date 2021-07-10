@@ -101,8 +101,8 @@ img {
     color: #f0571b;
 }
 
-.question {
-    background: rgba(255,210,160,1);
+.question, .charts, .chartsBackground {
+    background: rgba(255, 210, 160, 1);
     padding: 20px;
     /* border: 3px solid white; */
     border-radius: 20px;
@@ -171,4 +171,32 @@ img {
 
 .headline {
     margin: 0 50px 0 50px;
+}
+
+#traffic-light {
+    height: 550px;
+    width: 200px;
+    background-color: #333;
+    float: left;
+    border-radius: 40px;
+    margin: 30px 0;
+    padding: 20px;
+}
+
+.bulb {
+    height: 150px;
+    width: 150px;
+    background-color: #111;
+    border-radius: 50%;
+    margin: 25px auto;
+}
+
+.charts {
+    box-shadow: none;
+}
+
+.chartsBackground {
+    background-color: #D4842c;
+    display: block;
+    margin: 0;
 }

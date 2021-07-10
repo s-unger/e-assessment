@@ -197,7 +197,7 @@ function calculateAbility($data, $abilityName)
 }
 
 // return percentage of other abilities which only have 1 exercise
-function getAbilityValue($data, $index)
+function getPercentageValueCorrect($data, $index)
 {
     foreach (array_filter($data, function ($var) use ($index) {
         return ($var['questionId'] == $index);
@@ -209,11 +209,24 @@ function getAbilityValue($data, $index)
 
 // create new array for abilities
 $ability = calculateAbility($notation, "Notation & Terminologie");
-$ability[] = array('axis' => "Subtraktion", 'value' => getAbilityValue($percentLast5, 1));
-$ability[] = array('axis' => "Addition", 'value' => getAbilityValue($percentLast5, 2));
-$ability[] = array('axis' => "Multiplikation", 'value' => getAbilityValue($percentLast5, 3));
-$ability[] = array('axis' => "Subtraktion mit Zehnerübergang", 'value' => getAbilityValue($percentLast5, 4));
-$ability[] = array('axis' => "Addition mit Zehnerübergang", 'value' => getAbilityValue($percentLast5, 5));
+$ability[] = array('axis' => "Subtraktion", 'value' => getPercentageValueCorrect($percentLast5, 1));
+$ability[] = array('axis' => "Addition", 'value' => getPercentageValueCorrect($percentLast5, 2));
+$ability[] = array('axis' => "Multiplikation", 'value' => getPercentageValueCorrect($percentLast5, 3));
+$ability[] = array('axis' => "Subtraktion mit Zehnerübergang", 'value' => getPercentageValueCorrect($percentLast5, 4));
+$ability[] = array('axis' => "Addition mit Zehnerübergang", 'value' => getPercentageValueCorrect($percentLast5, 5));
+
+
+//calculate traffic light
+function trafficLight($values, $data)
+{
+    foreach ($values as $value) {
+        $result += getPercentageValueCorrect($data, $value);
+    }
+    return $result / count($values);
+}
+
+$trafficLight = trafficLight($values, $percentLast5);
+
 
 ?>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -227,37 +240,49 @@ $ability[] = array('axis' => "Addition mit Zehnerübergang", 'value' => getAbili
     <form action="test.php" method="post">
         <input class="btn" type="submit" name="newTest" value="Mach den Test"/>
     </form>
-    <div style="display:flex; justify-content: space-evenly;">
-        <div>
-            <select id="selectButton"></select>
-            <button id="buttonLine" onclick="updateLines()">Alle Aufgaben</button>
-        </div>
-        <div>
-            <button id="button1" onclick="update(tests, '#f9c596', testsAll, '#ec9a42')">Wie viele Tests pro Tag
-            </button>
-            <button id="button2" onclick="update(correct, '#197fa7', correctAll, '#129a48')">Wie viele Aufgaben im
-                Schnitt richtig
-            </button>
-        </div>
-        <div>
-            <span>Alle Tests:</span>
-            <select id="selectButtonPie"></select>
-            </br>
-            <span>Letzten 5 Tests:</span>
-            <select id="selectButtonPie5"></select>
-        </div>
-    </div>
-    <div style="display:flex; align-items: flex-end; flex-wrap: wrap;">
-        <div class="line_chart">
-            <p class="headline">Hier siehst du alle deine Versuche aus dem Testmodus. (Verbesserung/Verschlechterung
-                über Zeit)</p>
-            <p class="headline">Falsch beantwortete Fragen wurden von der Anzahl richtig beantworteter Fragen
-                abgezogen.</p>
 
+    <div class="chartsBackground">
+        <div id="traffic-light">
+            <div id="redLight" class="bulb"></div>
+            <div id="yellowLight" class="bulb"></div>
+            <div id="greenLight" class="bulb"></div>
         </div>
-        <div class="bar_chart"></div>
-        <div id="pie_chart"></div>
-        <div class="radar_chart"></div>
+        <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+            <div class="line_chart charts">
+                <!--            <p class="headline">Hier siehst du alle deine Versuche aus dem Testmodus. (Verbesserung/Verschlechterung-->
+                <!--                über Zeit)</p>-->
+                <!--            <p class="headline">Falsch beantwortete Fragen wurden von der Anzahl richtig beantworteter Fragen-->
+                <!--                abgezogen.</p>-->
+                <div>
+                    <select id="selectButton"></select>
+                    <button id="buttonLine" onclick="updateLines()">Alle Aufgaben</button>
+                </div>
+
+            </div>
+            <div class="bar_chart charts">
+                <div>
+                    <button id="button1" onclick="update(tests, '#ec9a42', testsAll, '#6c0074')">Wie viele Tests pro Tag
+                    </button>
+                    <button id="button2" onclick="update(correct, '#197fa7', correctAll, '#129a48')">Wie viele Aufgaben
+                        im
+                        Schnitt richtig
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+            <div class="pie_chart charts">
+                <div>
+                    <span>Alle Tests:</span>
+                    <select id="selectButtonPie"></select>
+                    </br>
+                    <span>Letzten 5 Tests:</span>
+                    <select id="selectButtonPie5"></select>
+                </div>
+            </div>
+            <div class="radar_chart charts"></div>
+        </div>
+
     </div>
 </div>
 
@@ -286,16 +311,16 @@ $ability[] = array('axis' => "Addition mit Zehnerübergang", 'value' => getAbili
     // pie chart
     var dataPercent = <?php echo json_encode($percent);?>;
     var dataPercentLast5 = <?php echo json_encode($percentLast5);?>;
-    let svg_pie = PieChart("#pie_chart", dataPercent, dataPercentLast5, allGroup);
+    let svg_pie = PieChart(".pie_chart", dataPercent, dataPercentLast5, allGroup);
 
 
     // spider chart
     var ability = <?php echo json_encode($ability);?>;
 
     var radarChartOptions = {
-        w: 340,
-        h: 400,
-        margin: {top: 30, right: 60, bottom: 60, left: 60},
+        w: 405,
+        h: 500,
+        margin: {top: 30, right: 70, bottom: 60, left: 70},
         levels: 5,
         maxValue: 100,
         roundStrokes: true,
@@ -306,5 +331,27 @@ $ability[] = array('axis' => "Addition mit Zehnerübergang", 'value' => getAbili
     var data2 = [{name: "Du", axes: ability}];
     let svg_radar1 = RadarChart(".radar_chart", data2, radarChartOptions);
 
+    //traffic light
+    // inspiration: https://medium.com/@kikichan513/javascript-interview-create-a-traffic-light-15d4b634067f
+    var traffic = <?php echo json_encode($trafficLight) ?>;
+    console.log(traffic);
+
+    function makeRed() {
+        document.getElementById('redLight').style.backgroundColor = 'red'
+    }
+
+    function makeYellow() {
+        document.getElementById('yellowLight').style.backgroundColor = 'yellow'
+    }
+
+    function makeGreen() {
+        document.getElementById('greenLight').style.backgroundColor = 'green'
+    }
+
+    if (traffic >= 80) {
+        makeGreen();
+    } else if (traffic < 80 && traffic >= 60) {
+        makeYellow();
+    } else makeRed();
 
 </script>
