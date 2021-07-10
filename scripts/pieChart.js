@@ -7,19 +7,19 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
     console.log("dataPercentLast5:");
     console.log(dataPercentLast5);
     // width, height and margin
-    var width2 = 450
-    height2 = 450
-    margin2 = 40
+    var widthPie = 550
+    heightPie = 500
+    marginPie = 40
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-    var radius = Math.min(width2, height2) / 2 - margin2
+    var radius = Math.min(widthPie, heightPie) / 2 - marginPie
 
     // append the svg object to the div
     var svg = d3.select(selector)
         .append("svg")
-        .attr("width", width2)
-        .attr("height", height2)
+        .attr("width", widthPie)
+        .attr("height", heightPie)
         .append("g")
-        .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
+        .attr("transform", "translate(" + widthPie / 2 + "," + heightPie / 2 + ")");
 
 
     var index = {a: 0, b: 1}
@@ -100,6 +100,11 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
             .style("text-anchor", "middle")
             .style("font-size", 17)
             .style("fill", 'white')
+            .style("opacity", function (d) {
+                if (d.data.value.percent == 0) {
+                    return 0;
+                }
+            })
 
 // remove the group that is not present anymore
         u
