@@ -103,49 +103,63 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 } else {
     $_SESSION['isSubmittable'] = false;
     $table = $_SESSION['isExam'] ? "exam_answers" : "answers";
-    $statement = $pdo->prepare("INSERT INTO $table (userId, questionId, correctness) VALUES (:userId, :questionId, :correctness)");
+    $statement = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness) VALUES (:userId, :solved_at, :questionId, :correctness)");
 
     /* Evaluate question 1 */
     $evaluation1 = evaluateQuestion1();
     $points1 = $evaluation1["points"];
     $feedback1 = $evaluation1["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 0, 'correctness' => $points1));
+    $correctness1 = $evaluation1["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 0, 'correctness' => $correctness1));
 
     /* Evaluate question 2 */
     $evaluation2 = evaluateQuestion2();
     $points2 = $evaluation2["points"];
     $feedback2 = $evaluation2["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 1, 'correctness' => $points2));
+    $correctness2 = $evaluation2["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 1, 'correctness' => $correctness2));
 
     /* Evaluate question 3 */
     $evaluation3 = evaluateQuestion3();
     $points3 = $evaluation3["points"];
     $feedback3 = $evaluation3["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 2, 'correctness' => $points3));
+    $correctness3 = $evaluation3["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 2, 'correctness' => $correctness3));
 
     /* Evaluate question 4 */
     $evaluation4 = evaluateQuestion4();
     $points4 = $evaluation4["points"];
     $feedback4 = $evaluation4["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 3, 'correctness' => $points4));
+    $correctness4 = $evaluation4["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 3, 'correctness' => $correctness4));
 
     /* Evaluate question 5 */
     $evaluation5 = evaluateQuestion5();
     $points5 = $evaluation5["points"];
     $feedback5 = $evaluation5["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 4, 'correctness' => $points5));
+    $correctness5 = $evaluation5["fullPoints"];
+    $misconception = $evaluation5["misconception"]; // prototype misconception type
+    if ($_SESSION['isExam']){
+        $statement5 = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness)");
+        $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5));
+    } else {
+        $statement5 = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness, :misconception)");
+        $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5, 'misconception'=> $misconception));
+    }
 
     /* Evaluate question 6 */
     $evaluation6 = evaluateQuestion6();
     $points6 = $evaluation6["points"];
     $feedback6 = $evaluation6["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 5, 'correctness' => $points6));
+    $correctness6 = $evaluation6["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 5, 'correctness' => $correctness6));
 
     /* Evaluate question 7 */
     $evaluation7 = evaluateQuestion7();
     $points7 = $evaluation7["points"];
     $feedback7= $evaluation7["feedback"];
-    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'questionId' => 6, 'correctness' => $points7));
+    $correctness7 = $evaluation7["fullPoints"];
+    $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 6, 'correctness' => $correctness7));
 
     /* Evaluate Total */
     $evaluationTotal = evaluateTotal();
@@ -162,7 +176,6 @@ if ($_POST) {
         newTest();
     } elseif (isset($_POST['newExam'])) {
         newExam();
-
     }
 }
 
@@ -280,7 +293,7 @@ function check()
         </div>
 
         <div class="question">
-            <p class="q-title"> Aufgabe 5 (2P)</p>
+            <p class="q-title"> Aufgabe 5 (1P)</p>
             <p class="q1">
             <?php
             if ($_SESSION['newQuestions'] == true) {
@@ -296,7 +309,7 @@ function check()
         </div>
 
         <div class="question">
-            <p class="q-title">  Aufgabe 6 (2P)</p>
+            <p class="q-title">  Aufgabe 6 (1P)</p>
             <p class="q1">
                 <?php
             if ($_SESSION['newQuestions'] == true) {
