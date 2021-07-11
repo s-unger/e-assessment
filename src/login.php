@@ -27,7 +27,7 @@ if (isset($_GET['login'])) {
 
 }
 
-include "../index.php"; ?>
+include "include-header.php"; ?>
 <style>
     <?php include '../style.css'; ?>
 </style>

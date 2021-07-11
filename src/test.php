@@ -12,7 +12,7 @@ $feedbackTotal = "";
 $_SESSION['isSubmittable'] = true;
 include('questionGenerator.php');
 include('questionEvaluator.php');
-include "../index.php"; ?>
+include "include-header.php"; ?>
 <style>
     <?php include '../style.css'; ?>
 </style>
