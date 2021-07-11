@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php if(!isset($_SESSION)) session_start();
 $login = "";
 $loginSrc = "";
 $url = "";
@@ -20,6 +19,19 @@ if (!isset($_SESSION['userid'])) {
     } else {
         $loginSrc = "src/logout";
     }
+}
+
+function newExam(){
+    $_SESSION['newQuestions'] = true;
+    $_SESSION['isExam'] = true;
+    $_SESSION['isSubmittable'] = true;
+}
+
+function newTest()
+{
+    $_SESSION['newQuestions'] = true;
+    $_SESSION['isExam'] = false;
+    $_SESSION['isSubmittable'] = true;
 }
 
 ?>

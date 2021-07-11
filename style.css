@@ -83,7 +83,7 @@ img {
 }
 
 .dropBase {
-    width: 370px;
+    width: 470px;
     justify-content: space-evenly;
     background-color: #D4842c;
 }
@@ -167,6 +167,11 @@ img {
 .input-ans {
     border-radius: 5px;
     border: none;
+}
+
+.bezeichnung {
+    font-size: 12px;
+    margin-bottom: 3;
 }
 
 .headline {
