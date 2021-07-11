@@ -165,6 +165,41 @@ $new = null;
 
 $dataCorrectMean = getMean($dataCorrectAll);
 
+// get all dates from your data and the groups data without duplicates for x-axis of bar chart
+function getDates($data)
+{
+    foreach ($data as $array) {
+        $values = array_values($array);
+        $dates[] = $values[0];
+    }
+    return $dates;
+}
+
+$dates1 = getDates($dataTests);
+$dates2 = getDates($dataTestsMean);
+$datesTotal = array_unique(array_merge($dates1, $dates2));
+
+// update data arrays -> add 0 if date doesn't exist yet
+function addDataForMissingDates($dates, $data)
+{
+    $i = 0;
+    foreach ($dates as $val) {
+
+        if (array_search($val, array_column($data, 'date')) === false) {
+            array_splice($data, $i, 0, array(['date' => $val, 'y' => 0]));
+            $i++;
+        } else {
+            $i++;
+        }
+    }
+    return $data;
+}
+
+$dataTests = addDataForMissingDates($datesTotal, $dataTests);
+$dataTestsMean = addDataForMissingDates($datesTotal, $dataTestsMean);
+$dataCorrect = addDataForMissingDates($datesTotal, $dataCorrect);
+$dataCorrectMean = addDataForMissingDates($datesTotal, $dataTestsMean);
+
 // calculate abilities
 
 // get all exercises to Notation & Terminologie
@@ -318,7 +353,7 @@ $trafficLight = trafficLight($values, $percentLast5);
     var correct = <?php echo json_encode($dataCorrect);?>;
     var testsAll = <?php echo json_encode($dataTestsMean);?>;
     var correctAll = <?php echo json_encode($dataCorrectMean);?>;
-    let svg_bar = BarChart(".bar_chart", tests, correct, testsAll, correctAll);
+    let svg_bar = BarChart(".bar_chart", tests, testsAll);
 
     // pie chart
     var dataPercent = <?php echo json_encode($percent);?>;
