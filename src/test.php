@@ -1,5 +1,5 @@
 <?php if(!isset($_SESSION)) session_start();
-$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+include "include.php";
 $feedback1 = "";
 $feedback2 = "";
 $feedback3 = "";
