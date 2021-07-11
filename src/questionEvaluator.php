@@ -173,14 +173,16 @@ function evaluateQuestion6(){
 function evaluateQuestion7(){
     global $q7;
     global $pointsTotal7;
-    if($q7 == $_SESSION['solution_short_text_1']) {
+    $feedback7 = "Deine Antwort: $q7<br>";
+    $ans7 = str_replace(' ', '', $q7);
+    if($ans7  == $_SESSION['solution_short_text_1']) {
         $fullPoints = 1;
         $points7 = $pointsTotal7;
-        $feedback7="Richtig!";
+        $feedback7 .= "Richtig!";
     } else {
         $fullPoints = 0;
         $points7 = 0;
-        $feedback7 = "Leider falsch!";
+        $feedback7 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
     }
     return array("points"=>$points7, "feedback"=>$feedback7, "fullPoints"=>$fullPoints);
 }
