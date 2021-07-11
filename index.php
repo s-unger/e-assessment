@@ -3,7 +3,7 @@ $login = "";
 $loginSrc = "";
 $url = "";
 $newQuestions = true;
-$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+include "src/include.php";
 if (!isset($_SESSION['userid'])) {
     $login = "Login";
     $loginSrc = "src/login";
