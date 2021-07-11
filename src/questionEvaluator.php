@@ -185,6 +185,29 @@ function evaluateQuestion7(){
     return array("points"=>$points7, "feedback"=>$feedback7, "fullPoints"=>$fullPoints);
 }
 
+
+/** Evaluates question 8
+ * fullPoints is 0 if the question did not receive full points, and 1 if it did.
+ * @return array int points, String feedback and int fullPoints
+ */
+function evaluateQuestion8(){
+    global $q8;
+    global $pointsTotal8;
+    $feedback8 = "Deine Antwort: $q8<br>";
+    $ans8 = str_replace(' ', '', $q8);
+    if ($ans8 == $_SESSION['solution_text_to_term']) {
+        $fullPoints = 1;
+        $points8 = $pointsTotal8;
+        $feedback8 .= "<b>Richtig!</b>";
+    }else {
+        $fullPoints = 0;
+        $points8 = 0;
+        $feedback8 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_text_to_term'] . ".";
+    }
+    return array("points"=>$points8, "feedback"=>$feedback8, "fullPoints"=>$fullPoints);
+}
+
+
 /**
  * Evaluates the total points for an exam and calculates the grade
  * @return array int points and String feedback

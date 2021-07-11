@@ -168,3 +168,8 @@ img {
     border-radius: 5px;
     border: none;
 }
+
+.bezeichnung {
+    font-size: 12px;
+    margin-bottom: 3;
+}

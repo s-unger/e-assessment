@@ -226,16 +226,31 @@ function generate_truefalse_1(){
  * generates Short Text item
  * @return string question
  */
+function generate_text_to_term() {
+
+    $x = mt_rand(0, 50);
+    $y = mt_rand(51, 100);
+
+    $question = "Ziehe $x von $y ab";
+    $solution = "$y - $x";
+    $_SESSION['question_text_to_term'] = $question;
+    $_SESSION['solution_text_to_term'] = $solution;
+    return $question;
+}
+
+/**
+ * generates Short Text item
+ * @return string question
+ */
 
 function generate_short_text() {
-    $operators =  ["Plus", "Minus", "Mal", "Geteilt"]; 
-    $terms =  ["Summe", "Differenz", "Produkt", "Quotient"];
-
+    $operators =  ["Multiplikation", "Addition"];
+    $terms =  ["Faktoren", "Summanden"];
     $rand_operator = mt_rand(0, 3); 
     $x = $operators[$rand_operator];
     $y = $terms[$rand_operator];
 
-    $question = "Das Ergebnis einer $x Aufgabe heißt ...";
+    $question = "Die beiden Zahlen bei einer $x heißen ...";
     $solution = $y;
     $_SESSION['question_short_text_1'] = $question;
     $_SESSION['solution_short_text_1'] = $solution;
