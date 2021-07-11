@@ -7,6 +7,13 @@ $pointsTotal5 = 1;
 $pointsTotal6 = 1;
 $pointsTotal7 = 1;
 $pointsTotal8 = 1;
+$points1 = 0;
+$points2 = 0;
+$points3 = 0;
+$points4 = 0;
+$points5 = 0;
+$points6 = 0;
+$points7 = 0;
 $pointsTotal = $pointsTotal1 + $pointsTotal2 + $pointsTotal3 + $pointsTotal4 + $pointsTotal5 + $pointsTotal6 +
     $pointsTotal7 + $pointsTotal8;
 /**
@@ -17,19 +24,19 @@ $pointsTotal = $pointsTotal1 + $pointsTotal2 + $pointsTotal3 + $pointsTotal4 + $
 function evaluateQuestion1(){
     global $q1;
     global $pointsTotal1;
+    global $points1;
     $q1bool = $q1 == "true";
     ($q1bool) ? $truefalseGerman = "Wahr" : $truefalseGerman = "Falsch";
     $feedback1 = "Deine Antwort: \"$truefalseGerman\"<br>";
     if ($q1bool == $_SESSION['solution_truefalse_1']) {
-        $points = $pointsTotal1;
+        $points1 = $pointsTotal1;
         $fullPoints = 1;
         $feedback1 .= "<b>Richtig!</b>";
     } else {
-        $points = 0;
         $feedback1 .= "<b>Leider falsch!</b> <br>" . $_SESSION['feedback_truefalse_1'];
         $fullPoints = 0;
     }
-    return array("points"=>$points, "feedback"=>$feedback1, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback1, "fullPoints"=>$fullPoints);
 }
 
 /**
@@ -40,21 +47,21 @@ function evaluateQuestion1(){
 function evaluateQuestion2(){
     global $q2;
     global $pointsTotal2;
+    global $points2;
     $feedback = "Deine Antwort: $q2<br>";
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
         $fullPoints = 1;
-        $points = $pointsTotal2;
+        $points2 = $pointsTotal2;
         $feedback .= "<b>Richtig!</b>";
     } else {
         $fullPoints = 0;
-        $points = 0;
         if ($q2 == $_SESSION['solution_multiplechoice_1'] + 1 || $q2 == $_SESSION['solution_multiplechoice_1'] - 1) {
             $feedback .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
         } else {
             $feedback .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_1'] . ".";
         }
     }
-    return array("points"=>$points, "feedback"=>$feedback, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback, "fullPoints"=>$fullPoints);
 }
 
 /**
@@ -65,6 +72,7 @@ function evaluateQuestion2(){
 function evaluateQuestion3(){
     global $q3;
     global $pointsTotal3;
+    global $points3;
     $feedback3 = "Deine Antwort: $q3<br>";
     if ($q3 == $_SESSION['solution_numerical_1']) {
         $fullPoints = 1;
@@ -72,14 +80,13 @@ function evaluateQuestion3(){
         $feedback3 .= "<b>Richtig!</b>";
     } else {
         $fullPoints = 0;
-        $points3 = 0;
         if ($q3 == $_SESSION['solution_numerical_1'] + 1 || $q3 == $_SESSION['solution_numerical_1'] - 1) {
             $feedback3 .= "<b>Fast richtig!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
         } else {
             $feedback3 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_numerical_1'] . ".";
         }
     }
-    return array("points"=>$points3, "feedback"=>$feedback3, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback3, "fullPoints"=>$fullPoints);
 }
 
 /**
@@ -89,8 +96,8 @@ function evaluateQuestion3(){
  */
 function evaluateQuestion4(){
     global $q41; global $q42; global $q43;
+    global $points4;
     $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
-    $points4 = 0;
     if ($q41 == $_SESSION['solution_matching_1'][0]) $points4++;
     if ($q42 == $_SESSION['solution_matching_1'][1]) $points4++;
     if ($q43 == $_SESSION['solution_matching_1'][2]) $points4++;
@@ -101,7 +108,7 @@ function evaluateQuestion4(){
             ."<br>" . $_SESSION['solution_matching_1'][1]
             ."<br>" . $_SESSION['solution_matching_1'][2];
     } else $fullPoints = 1;
-    return array("points"=>$points4, "feedback"=>$feedback4, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback4, "fullPoints"=>$fullPoints);
 }
 
 /**
@@ -112,6 +119,7 @@ function evaluateQuestion4(){
 function evaluateQuestion5(){
     global $q5;
     global $pointsTotal5;
+    global $points5;
     $feedback5 = "Deine Antwort: $q5<br>";
     if ($q5 == $_SESSION['solution_numerical_2']) {
         $fullPoints = 1;
@@ -120,7 +128,6 @@ function evaluateQuestion5(){
     }  else {
         $fullPoints = 0;
         $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
-        $points5 = 0;
     }
     $misconception = null;
     if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
@@ -138,7 +145,7 @@ Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zeh
         $misconception = 2;
         $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
     }
-    return array("points"=>$points5, "feedback"=>$feedback5, "fullPoints"=>$fullPoints, "misconception"=>$misconception);
+    return array("feedback"=>$feedback5, "fullPoints"=>$fullPoints, "misconception"=>$misconception);
 }
 
 /**
@@ -149,6 +156,7 @@ Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zeh
 function evaluateQuestion6(){
     global $q6;
     global $pointsTotal6;
+    global $points6;
     $feedback6 = "Deine Antwort: $q6<br>";
     if ($q6 == $_SESSION['solution_multiplechoice_2']) {
         $fullPoints = 1;
@@ -156,13 +164,12 @@ function evaluateQuestion6(){
         $feedback6 .= "<b>Richtig!</b>";
     }else {
         $fullPoints = 0;
-        $points6 = 0;
         $feedback6 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_multiplechoice_2'] . ".";
         for ($i = 0; $i < 4; $i++) {
             if ($q6 == $_SESSION['options_multiplechoice_2'][$i][0]) $feedback6 .= "<br>" . $_SESSION['options_multiplechoice_2'][$i][1];
         }
     }
-    return array("points"=>$points6, "feedback"=>$feedback6, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback6, "fullPoints"=>$fullPoints);
 }
 
 /**
@@ -173,6 +180,7 @@ function evaluateQuestion6(){
 function evaluateQuestion7(){
     global $q7;
     global $pointsTotal7;
+    global $points7;
     $feedback7 = "Deine Antwort: $q7<br>";
     $ans7 = str_replace(' ', '', $q7);
     if($ans7  == $_SESSION['solution_short_text_1']) {
@@ -181,10 +189,9 @@ function evaluateQuestion7(){
         $feedback7 .= "Richtig!";
     } else {
         $fullPoints = 0;
-        $points7 = 0;
         $feedback7 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
     }
-    return array("points"=>$points7, "feedback"=>$feedback7, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback7, "fullPoints"=>$fullPoints);
 }
 
 
@@ -195,6 +202,7 @@ function evaluateQuestion7(){
 function evaluateQuestion8(){
     global $q8;
     global $pointsTotal8;
+    global $points8;
     $feedback8 = "Deine Antwort: $q8<br>";
     $ans8 = str_replace(' ', '', $q8);
     if ($ans8 == $_SESSION['solution_text_to_term']) {
@@ -203,10 +211,9 @@ function evaluateQuestion8(){
         $feedback8 .= "<b>Richtig!</b>";
     }else {
         $fullPoints = 0;
-        $points8 = 0;
         $feedback8 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_text_to_term'] . ".";
     }
-    return array("points"=>$points8, "feedback"=>$feedback8, "fullPoints"=>$fullPoints);
+    return array("feedback"=>$feedback8, "fullPoints"=>$fullPoints);
 }
 
 
