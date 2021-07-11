@@ -4,11 +4,10 @@
 const LineChart = function LineChart(selector, data, allGroup) {
     var svg = d3.select(selector)
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-50 -20 550 400")
+        .classed("svg-content", true)
+        .append("g");
 
     var myColor = d3.scaleOrdinal()
         .domain(allGroup)

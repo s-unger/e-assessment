@@ -102,13 +102,13 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 
     //Initiate the radar chart SVG
     let svg = parent.append("svg")
-        .attr("width", cfg.w + cfg.margin.left + cfg.margin.right)
-        .attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-300 -300 600 600")
+        .classed("svg-content", true)
         .attr("class", "radar");
 
     //Append a g element
-    let g = svg.append("g")
-        .attr("transform", "translate(" + (cfg.w / 2 + cfg.margin.left) + "," + (cfg.h / 2 + cfg.margin.top) + ")");
+    let g = svg.append("g");
 
     /////////////////////////////////////////////////////////
     ////////// Glow filter for some extra pizzazz ///////////

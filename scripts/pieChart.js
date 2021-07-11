@@ -16,10 +16,10 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
     // append the svg object to the div
     var svg = d3.select(selector)
         .append("svg")
-        .attr("width", widthPie)
-        .attr("height", heightPie)
-        .append("g")
-        .attr("transform", "translate(" + widthPie / 2 + "," + heightPie / 2 + ")");
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-275 -250 550 500")
+        .classed("svg-content", true)
+        .append("g");
 
 
     var index = {a: 0, b: 1}

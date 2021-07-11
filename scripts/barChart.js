@@ -10,11 +10,10 @@ const BarChart = function BarChart(selector, tests, correct, testsAll, correctAl
 // append the svg object to the body of the page
     svg = d3.select(selector)
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-35 -20 500 400")
+        .classed("svg-content", true)
+        .append("g");
 
 // Initialize the X axis
     xScl = d3.scaleBand()
