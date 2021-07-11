@@ -72,7 +72,7 @@ function newTest()
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
             </li>
         </ul>
-        <?php echo $_SESSION['vr']; ?>
+        <?php if ($_SESSION['vr']) echo "TRUE"; ?>
     </div>
     </body>
     </html>
