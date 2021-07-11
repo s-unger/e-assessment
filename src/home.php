@@ -247,20 +247,20 @@ $trafficLight = trafficLight($values, $percentLast5);
             <div id="yellowLight" class="bulb"></div>
             <div id="greenLight" class="bulb"></div>
         </div>
-        <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
-            <div class="line_chart charts">
+        <div class="charts">
+            <div class="line_chart svg-container">
                 <!--            <p class="headline">Hier siehst du alle deine Versuche aus dem Testmodus. (Verbesserung/Verschlechterung-->
                 <!--                über Zeit)</p>-->
                 <!--            <p class="headline">Falsch beantwortete Fragen wurden von der Anzahl richtig beantworteter Fragen-->
                 <!--                abgezogen.</p>-->
-                <div>
+                <div class="vizButtons">
                     <select id="selectButton"></select>
                     <button id="buttonLine" onclick="updateLines()">Alle Aufgaben</button>
                 </div>
 
             </div>
-            <div class="bar_chart charts">
-                <div>
+            <div class="bar_chart svg-container ">
+                <div class="vizButtons">
                     <button id="button1" onclick="update(tests, '#ec9a42', testsAll, '#6c0074')">Wie viele Tests pro Tag
                     </button>
                     <button id="button2" onclick="update(correct, '#197fa7', correctAll, '#129a48')">Wie viele Aufgaben
@@ -270,17 +270,20 @@ $trafficLight = trafficLight($values, $percentLast5);
                 </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
-            <div class="pie_chart charts">
-                <div>
-                    <span>Alle Tests:</span>
-                    <select id="selectButtonPie"></select>
-                    </br>
-                    <span>Letzten 5 Tests:</span>
-                    <select id="selectButtonPie5"></select>
+        <div class="charts">
+            <div class="pie_chart svg-container">
+                <div style="display: flex; justify-content: space-between; margin: 5% 0 0 0;">
+                    <div style="margin-left: 10%;">
+                        <span>Alle Tests:</span>
+                        <select id="selectButtonPie"></select>
+                    </div>
+                    <div style="margin-right: 10%;">
+                        <span>Letzten 5 Tests:</span>
+                        <select id="selectButtonPie5"></select>
+                    </div>
                 </div>
             </div>
-            <div class="radar_chart charts"></div>
+            <div class="radar_chart svg-container" style="padding-bottom: 0;"></div>
         </div>
 
     </div>
