@@ -259,12 +259,17 @@ function check()
             </p>
 
             <div class="dropBase">
+
                 <input type="text" class="drag" id="drag1" draggable="true"
                        value="<?= $_SESSION['options_matching_1'][1][0] ?>" readonly></input>
                 <input type="text" class="drag" id="drag2" draggable="true"
                        value="<?= $_SESSION['options_matching_1'][1][1] ?>" readonly></input>
                 <input type="text" class="drag" id="drag3" draggable="true"
                        value="<?= $_SESSION['options_matching_1'][1][2] ?>" readonly></input>
+                <input type="text" class="drag" id="drag4" draggable="true"
+                       value="<?= $_SESSION['options_matching_1'][1][3] ?>" readonly></input>
+                <input type="text" class="drag" id="drag5" draggable="true"
+                       value="<?= $_SESSION['options_matching_1'][1][4] ?>" readonly></input>
             </div>
 
 
