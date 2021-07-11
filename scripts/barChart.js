@@ -4,7 +4,7 @@ var xScl;
 var xAxis
 var yScl;
 var yAxis
-const BarChart = function BarChart(selector, tests, correct, testsAll, correctAll) {
+const BarChart = function BarChart(selector, tests, testsAll) {
 
 
 // append the svg object to the body of the page
@@ -18,7 +18,7 @@ const BarChart = function BarChart(selector, tests, correct, testsAll, correctAl
 // Initialize the X axis
     xScl = d3.scaleBand()
         .range([0, width])
-        .padding(0.2);
+        .padding(0.2)
     xAxis = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
 
@@ -42,15 +42,9 @@ function update(data, color, dataGroup, colorGroup) {
 
 
     // Update the X axis
-    if (data.length > dataGroup.length) {
-        xScl.domain(data.map(function (d) {
-            return d.date;
-        }))
-    } else {
-        xScl.domain(dataGroup.map(function (d) {
-            return d.date;
-        }))
-    }
+    xScl.domain(data.map(function (d) {
+        return d.date;
+    }))
     xAxis.call(d3.axisBottom(xScl))
 
     // Update the Y axis
@@ -101,7 +95,7 @@ function update(data, color, dataGroup, colorGroup) {
         .transition() // and apply changes to all of them
         .duration(1000)
         .attr("x", function (d) {
-            return xScl(d.date) + 40;
+            return xScl(d.date) + 32;
         })
         .attr("y", function (d) {
             return yScl(d.y);
