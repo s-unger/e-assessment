@@ -1,4 +1,11 @@
 <?php if(!isset($_SESSION)) session_start();
+error_reporting(-1);
+ini_set('display_errors', 'On');
+if (isset($_GET['vr'])) {
+  if ($_GET['vr'] == "true") {
+    $_SESSION['vr'] = true;
+  }
+}
 $login = "";
 $loginSrc = "";
 $url = "";
@@ -61,6 +68,7 @@ function newTest()
             <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
             </li>
         </ul>
+        <?php echo $_SESSION['vr']; ?>
     </div>
     </body>
     </html>
