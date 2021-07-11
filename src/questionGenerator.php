@@ -271,12 +271,40 @@ function generate_matching_1()
         }
     }
     $solution = $terms2;
-    shuffle($terms2);
-    $options = array($terms1, $terms2);
+    $_SESSION['solution_matching_1'] = $solution;
+
+    //generate distractor terms
+    $distractorTerms = generate_matching_1_distractor($result_numbers);
+    $secondColumn = array_merge($terms2, $distractorTerms);
+
+    shuffle($secondColumn);
+    $options = array($terms1, $secondColumn);
 
     $_SESSION['question_matching_1'] = $question;
     $_SESSION['options_matching_1'] = $options;
-    $_SESSION['solution_matching_1'] = $solution;
+
+}
+
+/**
+ * Generates a distractor term that does not result in a number that the left column terms result in.
+ * Used to make guessing the correct matches more difficult.
+ * @param $result_numbers array with the already used correct product results
+ * @return array 2 distractor terms
+ */
+function generate_matching_1_distractor(array $result_numbers): array {
+    $distractorTerms = array();
+    while (count($distractorTerms) < 2){
+        $x = mt_rand(18, 100);
+        if (!in_array($x, $result_numbers)) {
+            $factor1 = mt_rand(2, 9);
+            $factor2 = floor($x / $factor1);
+            if (mt_rand(0, 1) == 0) {
+                $distractor = "$factor1 x $factor2";
+            } else $distractor = "$factor2 x $factor1";
+            $distractorTerms[] = $distractor;
+        }
+    }
+    return $distractorTerms;
 }
 
 /**
