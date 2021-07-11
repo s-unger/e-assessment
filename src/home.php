@@ -29,7 +29,9 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
     <form action="test.php" method="post">
         <input class="btn" type="submit" name="newTest" value="Übungsmodus"/>
     </form>
-    <form action="test.php" method="post">
-        <input class="btn" type="submit" name="newExam" value="Prüfungsmodus"/>
-    </form>
+    <?php 
+      if ($_SESSION['vr']) {
+        echo '<form action="test.php" method="post"><input class="btn" type="submit" name="newExam" value="Prüfungsmodus"/></form>';
+      } 
+    ?>
 </div>
