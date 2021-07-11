@@ -4,7 +4,11 @@ ini_set('display_errors', 'On');
 if (isset($_GET['vr'])) {
   if ($_GET['vr'] == "true") {
     $_SESSION['vr'] = true;
+  } else {
+    $_SESSION['vr'] = false;
   }
+} else {
+  $_SESSION['vr'] = false;
 }
 $login = "";
 $loginSrc = "";
