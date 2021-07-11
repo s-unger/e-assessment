@@ -112,35 +112,30 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 
     /* Evaluate question 1 */
     $evaluation1 = evaluateQuestion1();
-    $points1 = $evaluation1["points"];
     $feedback1 = $evaluation1["feedback"];
     $correctness1 = $evaluation1["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 0, 'correctness' => $correctness1));
 
     /* Evaluate question 2 */
     $evaluation2 = evaluateQuestion2();
-    $points2 = $evaluation2["points"];
     $feedback2 = $evaluation2["feedback"];
     $correctness2 = $evaluation2["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 1, 'correctness' => $correctness2));
 
     /* Evaluate question 3 */
     $evaluation3 = evaluateQuestion3();
-    $points3 = $evaluation3["points"];
     $feedback3 = $evaluation3["feedback"];
     $correctness3 = $evaluation3["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 2, 'correctness' => $correctness3));
 
     /* Evaluate question 4 */
     $evaluation4 = evaluateQuestion4();
-    $points4 = $evaluation4["points"];
     $feedback4 = $evaluation4["feedback"];
     $correctness4 = $evaluation4["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 3, 'correctness' => $correctness4));
 
     /* Evaluate question 5 */
     $evaluation5 = evaluateQuestion5();
-    $points5 = $evaluation5["points"];
     $feedback5 = $evaluation5["feedback"];
     $correctness5 = $evaluation5["fullPoints"];
     $misconception = $evaluation5["misconception"]; // prototype misconception type
@@ -154,20 +149,17 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 
     /* Evaluate question 6 */
     $evaluation6 = evaluateQuestion6();
-    $points6 = $evaluation6["points"];
     $feedback6 = $evaluation6["feedback"];
     $correctness6 = $evaluation6["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 5, 'correctness' => $correctness6));
 
     /* Evaluate question 7 */
     $evaluation7 = evaluateQuestion7();
-    $points7 = $evaluation7["points"];
     $feedback7= $evaluation7["feedback"];
     $correctness7 = $evaluation7["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 6, 'correctness' => $correctness7));
 
     $evaluation8 = evaluateQuestion8();
-    $points8 = $evaluation8["points"];
     $feedback8= $evaluation8["feedback"];
     $correctness8 = $evaluation8["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 7, 'correctness' => $correctness8));
