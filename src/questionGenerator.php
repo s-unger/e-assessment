@@ -1,6 +1,6 @@
 <?php
 const number_space = 100;
-const actors = [["Der Mathetiger", "er"], ["Das Mathezebra", "es"], ["Die Mathekatze", "sie"]];
+const actors = [["Der Mathematiger", "er"], ["Das Mathezebra", "es"], ["Die Mathekatze", "sie"]];
 const actors2 = ["Das Musiknilpferd", "Der Deutschaffe", "Die Kunstmaus"];
 
 /**
