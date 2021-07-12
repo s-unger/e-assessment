@@ -1,4 +1,5 @@
 <?php
+include('questionStrings.php');
 $pointsTotal1 = 1;
 $pointsTotal2 = 1;
 $pointsTotal3 = 1;
@@ -175,21 +176,40 @@ function evaluateQuestion6(){
 /**
  * Evaluates question 7
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
+ * Ignores whitespace, upper/lower case
+ * Accepts correct answer with spelling mistakes, gives feedback.
+ * Gives feedback if an incorrect but existing term is entered.
  * @return array int points, String feedback and int fullPoints
  */
 function evaluateQuestion7(){
     global $q7;
     global $pointsTotal7;
     global $points7;
+    global $questionTerms7;
+    global $solutionTerms7;
+    global $configTerms7;
+    //$percent = 0;
+    $lowercaseSolutions = array_map('strtolower', $solutionTerms7);
+    $lowercaseCorrectSolution = strtolower($_SESSION['solution_short_text_1']);
     $feedback7 = "Deine Antwort: $q7<br>";
     $ans7 = str_replace(' ', '', $q7);
-    if($ans7  == $_SESSION['solution_short_text_1']) {
+    $lowercaseAns7 = strtolower($ans7);
+    $similar = similar_text($lowercaseAns7, $lowercaseCorrectSolution, $percent);
+    if($ans7 == $lowercaseCorrectSolution) {
         $fullPoints = 1;
         $points7 = $pointsTotal7;
         $feedback7 .= "Richtig!";
+    } else if($percent > 80) {
+        $fullPoints = 1;
+        $points7 = $pointsTotal7;
+        $feedback7 .= "<b>Richtig!</b> <br>Beachte die korrekte Schreibweise von \"" . $_SESSION['solution_short_text_1'] . "\".";
     } else {
         $fullPoints = 0;
-        $feedback7 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
+        $feedback7 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
+        if (in_array(strtolower($ans7), $lowercaseSolutions)) {
+            $i = array_search (strtolower($ans7), $lowercaseSolutions);
+            $feedback7 .= "<br>$solutionTerms7 ist Fachbegriff für die $configTerms7[$i] bei einer $questionTerms7[i]";
+        }
     }
     return array("feedback"=>$feedback7, "fullPoints"=>$fullPoints);
 }

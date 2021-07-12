@@ -1,7 +1,6 @@
 <?php
 const number_space = 100;
-const actors = [["Der Mathetiger", "er"], ["Das Mathezebra", "es"], ["Die Mathekatze", "sie"]];
-const actors2 = ["Das Musiknilpferd", "Der Deutschaffe", "Die Kunstmaus"];
+include('questionStrings.php');
 
 /**
  * generates NUMERICAL item
@@ -31,6 +30,8 @@ function generate_numerical_1(){
  *                      int misc_operator, wrong answer from common misconception (wrong operator chosen from text)
  */
 function generate_numerical_2(){
+    global $actors;
+    global $actors2;
     // Generate subtraction with decimal carry, with x in [21, 98], y in [12, 89], solution in [9, 79].
     // Keep minuend in double digit to keep the digit carry misconception realistic, i.e. smaller than the original subtrahend.
     do {
@@ -39,8 +40,8 @@ function generate_numerical_2(){
     } while ($x%10 >= $y%10 || $x%10 == 0);
     //echo "x modulo 10 " . $x%10;
     //echo "y modulo 10 " . $y%10;
-    $actor1 = actors[mt_rand(0,count(actors)-1)][0];
-    $actor2 = actors2[mt_rand(0,count(actors)-1)];
+    $actor1 = $actors[mt_rand(0,count($actors)-1)][0];
+    $actor2 = $actors2[mt_rand(0,count($actors)-1)];
     $question = "$actor1 hat $x Bücher zuhause. $actor2 leiht sich $y Bücher aus. Wie viele Bücher hat " . lcfirst($actor1) . " noch zuhause?";
     $solution = $x - $y;
     $misc_carry = $solution + 10;
@@ -131,12 +132,14 @@ function generate_distractors_1($x, $y){
  *                      array options: 3 options made of tuples: int answer option and String feedback to be given if option is chosen
  */
 function generate_multiplechoice_2(){
+    global $actors;
+    global $actors2;
     do {
         $x = mt_rand(10, number_space - 10);
         $y = mt_rand(10, (number_space - $x));
     } while  (($x%10 + $y%10) < 11);     //generate addition with digit carry
-    $actor = mt_rand(0,count(actors)-1);
-    $question = actors[$actor][0] . " hat $x Streifen am Kopf und $y Streifen am Körper. Wie viele Streifen hat " . actors[$actor][1] . " insgesamt?";
+    $actor = mt_rand(0,count($actors)-1);
+    $question = $actors[$actor][0] . " hat $x Streifen am Kopf und $y Streifen am Körper. Wie viele Streifen hat " . $actors[$actor][1] . " insgesamt?";
     $solution = $x + $y;
     $_SESSION['question_multiplechoice_2'] = $question;
     $_SESSION['solution_multiplechoice_2'] = $solution;
@@ -232,7 +235,7 @@ function generate_text_to_term() {
     $y = mt_rand(51, 100);
 
     $question = "Ziehe $x von $y ab";
-    $solution = "$y - $x";
+    $solution = "$y-$x";
     $_SESSION['question_text_to_term'] = $question;
     $_SESSION['solution_text_to_term'] = $solution;
     return $question;
@@ -240,21 +243,21 @@ function generate_text_to_term() {
 
 /**
  * generates Short Text item
- * @return string question
+ * Topic: Terminology
+ * Saves to session:    String question
+ *                      String solution
  */
-
 function generate_short_text() {
-    $operators =  ["Multiplikation", "Addition"];
-    $terms =  ["Faktoren", "Summanden"];
-    $rand_operator = mt_rand(0, 3); 
-    $x = $operators[$rand_operator];
-    $y = $terms[$rand_operator];
-
-    $question = "Die beiden Zahlen bei einer $x heißen ...";
-    $solution = $y;
+    global $questionTerms7;
+    global $solutionTerms7;
+    global $configTerms7;
+    $rand = mt_rand(0, count($questionTerms7)-1);
+    $x = $questionTerms7[$rand];
+    $z = $configTerms7[$rand];
+    $solution = $solutionTerms7[$rand];
+    $question = "Nenne den Fachbegriff für die $z bei einer $x.";
     $_SESSION['question_short_text_1'] = $question;
     $_SESSION['solution_short_text_1'] = $solution;
-    return $question;
 }
 
 /**
