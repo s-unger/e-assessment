@@ -1,19 +1,19 @@
 // https://www.d3-graph-gallery.com/graph/pie_changeData.html
 
-const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allGroup) {
+/**
+ * draw pie chart
+ */
+const PieChart = function PieChart(selector) {
 
-    console.log("dataPercent:");
-    console.log(dataPercent);
-    console.log("dataPercentLast5:");
-    console.log(dataPercentLast5);
     // width, height and margin
-    var widthPie = 550
-    heightPie = 500
-    marginPie = 40
-    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-    var radius = Math.min(widthPie, heightPie) / 2 - marginPie
+    var widthPie = 550;
+    heightPie = 500;
+    marginPie = 40;
 
-    // append the svg object to the div
+    // The radius of the pieplot is half the width or half the height (smallest one). subtract a bit of margin.
+    var radius = Math.min(widthPie, heightPie) / 2 - marginPie;
+
+    // append the svg object; viewbox & aspect ratio used to make svg responsive
     var svg = d3.select(selector)
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -21,15 +21,14 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
         .classed("svg-content", true)
         .append("g");
 
-
     var index = {a: 0, b: 1}
 
-// set the color scale
+    // set the color scale
     var colorPie = d3.scaleOrdinal()
         .domain(["a", "b"])
         .range(["#129a48", "#d23059"]);
 
-    // A function that creates/updates the plot for a given variable:
+    // A function that updates the pie plot
     function updatePie(selectedGroup, data) {
 
         // delete old annotations
@@ -47,8 +46,8 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
             .sort(function (a, b) {
                 console.log(a);
                 return d3.ascending(a.key, b.key);
-            }) // This make sure that group order remains the same in the pie chart
-        var data_ready = pie(d3.entries(dataFilter))
+            }) // This makes sure that group order remains the same in the pie chart
+        var data_ready = pie(d3.entries(dataFilter));
 
         var arc = d3.arc()
             .innerRadius(0)
@@ -57,7 +56,7 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
         console.log((data_ready));
         // map to data
         var u = svg.selectAll("path")
-            .data(data_ready)
+            .data(data_ready);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         u
@@ -82,11 +81,12 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
                     return arc(d);
                 }
             })
-            .attr("class", "slice")
+            .attr("class", "slice");
 
         // add annotations to pie slices
         var v = svg.selectAll("path.text")
-            .data(data_ready)
+            .data(data_ready);
+
         v
             .enter()
             .append('text')
@@ -104,15 +104,15 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
                 if (d.data.value.percent == 0) {
                     return 0;
                 }
-            })
+            });
 
-// remove the group that is not present anymore
+        // remove the slices that are not present anymore
         u
             .exit()
-            .remove()
+            .remove();
     }
 
-// Initialize the plot with the first dataset
+    // Initialize the plot with the first dataset
     updatePie(0, dataPercent)
 
     d3.select("#selectButtonPie")
@@ -122,18 +122,18 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
         .append('option')
         .text(function (d) {
             return "Aufgabe " + (parseInt(d) + 1);
-        }) // text showed in the menu
+        }) // text shown in the menu
         .attr("value", function (d) {
             return d;
-        }) // corresponding value returned by the button
+        }); // corresponding value returned by the button
 
-// When the button is changed, run the updateChart function
+    // When the button is changed, run the updatePie function
     d3.select("#selectButtonPie").on("change", function (d) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value");
-        // run the updateChart function with this selected option
+        // run the updatePie function with this selected option
         updatePie(selectedOption, dataPercent);
-    })
+    });
 
     d3.select("#selectButtonPie5")
         .selectAll('myOptions')
@@ -142,17 +142,18 @@ const PieChart = function PieChart(selector, dataPercent, dataPercentLast5, allG
         .append('option')
         .text(function (d) {
             return "Aufgabe " + (parseInt(d) + 1);
-        }) // text showed in the menu
+        }) // text shown in the menu
         .attr("value", function (d) {
             return d;
-        }) // corresponding value returned by the button
+        }); // corresponding value returned by the button
 
-// When the button is changed, run the updateChart function
+    // When the button is changed, run the updatePie function
     d3.select("#selectButtonPie5").on("change", function (d) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value");
-        // run the updateChart function with this selected option
+        // run the updatePie function with this selected option
         updatePie(selectedOption, dataPercentLast5);
-    })
+    });
+
     return svg;
 }

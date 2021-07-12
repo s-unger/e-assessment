@@ -1,40 +1,44 @@
-//https://www.d3-graph-gallery.com/graph/line_basic.html
-// append the svg object
+// https://www.d3-graph-gallery.com/graph/line_basic.html
+// https://www.d3-graph-gallery.com/graph/line_filter.html
 
-const LineChart = function LineChart(selector, data, allGroup) {
-    var svg = d3.select(selector)
+/**
+ * draw line chart
+ */
+const LineChart = function LineChart(selector) {
+
+    // append the svg object; viewbox & aspect ratio used to make svg responsive
+    const svg = d3.select(selector)
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "-50 -20 550 400")
         .classed("svg-content", true)
         .append("g");
 
-    var myColor = d3.scaleOrdinal()
+    // add colors
+    const myColor = d3.scaleOrdinal()
         .domain(allGroup)
         .range(["#197fa7", "#f9c596", "#d23059", "#130903",
             "#129a48", "#6c0074", "#ec9a42", "#8a3d0e"]);
 
-    console.log(data);
-
     const xScale = d3.scaleTime().rangeRound([0, width]);
     const yScale = d3.scaleLinear().rangeRound([height, 0]);
-    xScale.domain(d3.extent(data, function (d) {
+    xScale.domain(d3.extent(lineData, function (d) {
         return new Date(d.solved_at)
     }));
-    yScale.domain([0, d3.max(data, function (d) {
+    yScale.domain([0, d3.max(lineData, function (d) {
         return d.correctness
     })]);
-    const yaxis = d3.axisLeft().scale(yScale)
-    const xaxis = d3.axisBottom().scale(xScale)
+    const yAxis = d3.axisLeft().scale(yScale);
+    const xAxis = d3.axisBottom().scale(xScale)
         .ticks(
             d3.timeDay.every(1))
         .tickFormat(d3.timeFormat('%d. %m. %Y'));
 
-//add x and y axis
+    //add x and y axis
     svg
         .append('g')
         .attr("transform", "translate(0," + height + ")")
-        .call(xaxis)
+        .call(xAxis)
         .selectAll(".tick text")
         .attr("y", 10)
         .attr("x", -20)
@@ -42,104 +46,25 @@ const LineChart = function LineChart(selector, data, allGroup) {
 
     svg
         .append('g')
-        .call(yaxis);
+        .call(yAxis);
 
-// add the options to the button
-    d3.select("#selectButton")
-        .selectAll('myOptions')
-        .data(allGroup)
-        .enter()
-        .append('option')
-        .text(function (d) {
-            return "Aufgabe " + (parseInt(d) + 1);
-        }) // text showed in the menu
-        .attr("value", function (d) {
-            return d;
-        }) // corresponding value returned by the button
-
-    var line =
-        svg.append("path")
-            .datum(data.filter(function (d) {
-                return d.questionId == allGroup[0]
-            }))
-            .attr("fill", "none")
-            .attr("stroke", function (d) {
-                return myColor(data.questionId)
-            })
-            .attr("stroke-width", 1.5)
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return xScale(new Date(d.solved_at))
-                })
-                .y(function (d) {
-                    return yScale(d.correctness)
-                })
-            )
-            .style('opacity', 0);
-
-    var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+    // get data for updateLines()
+    const sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
         .key(function (d) {
             return d.questionId;
         })
-        .entries(data);
-    console.log(sumstat);
+        .entries(lineData);
 
-    var lines = svg.selectAll(".line")
-        .data(sumstat)
-        .enter()
-        .append("path")
-        .attr("fill", "none")
-        .attr("stroke", function (d) {
-            return myColor(d.key)
-        })
-        .attr("stroke-width", 1.5)
-        .attr("d", function (d) {
-            return d3.line()
-                .x(function (d) {
-                    return xScale(new Date(d.solved_at));
-                })
-                .y(function (d) {
-                    return yScale(d.correctness);
-                })
-                (d.values)
-        })
+    let lines = null;
 
-// A function that updates the chart
-    function updateLine(selectedGroup) {
-        lines.remove();
-
-        // Create new data with the selection
-
-        var dataFilter = data.filter(function (d) {
-            return d.questionId === selectedGroup
-        });
-
-
-        // Give these new data to update line
-        line
-            .datum(dataFilter)
-            .transition()
-            .duration(1000)
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return xScale(new Date(d.solved_at))
-                })
-                .y(function (d) {
-                    return yScale(d.correctness)
-                })
-            )
-            .attr("stroke", function (d) {
-                return myColor(selectedGroup)
-            })
-            .style('opacity', 100);
-
-    }
-
-    var lines;
-
-// group the data: Draw one line per group
+    /**
+     * Draw one line per group
+     */
     function updateLines() {
-        lines.remove();
+        // remove old lines
+        if (lines != null) {
+            lines.remove();
+        }
         lines = svg.selectAll(".line")
             .data(sumstat)
             .enter()
@@ -158,20 +83,92 @@ const LineChart = function LineChart(selector, data, allGroup) {
                         return yScale(d.correctness);
                     })
                     (d.values)
-            })
+            });
     }
 
-// When the button is changed, run the updateChart function
+    // draw invisible single line -> needed for single line update function
+    const line =
+        svg.append("path")
+            .datum(lineData.filter(function (d) {
+                return d.questionId == allGroup[0]
+            }))
+            .attr("fill", "none")
+            .attr("stroke", function (d) {
+                return myColor(lineData.questionId)
+            })
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return xScale(new Date(d.solved_at))
+                })
+                .y(function (d) {
+                    return yScale(d.correctness)
+                })
+            )
+            .style('opacity', 0);
+
+    /**
+     *  updates single line of plot
+     *  @param selectedGroup exercise number
+     */
+    function updateLine(selectedGroup) {
+        // remove old lines
+        lines.remove();
+
+        // Create new data with the selection
+        const dataFilter = lineData.filter(function (d) {
+            return d.questionId === selectedGroup
+        });
+
+        // Give these new data to update line
+        line
+            .datum(dataFilter)
+            .transition()
+            .duration(1000)
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return xScale(new Date(d.solved_at))
+                })
+                .y(function (d) {
+                    return yScale(d.correctness)
+                })
+            )
+            .attr("stroke", function (d) {
+                return myColor(selectedGroup)
+            })
+            .style('opacity', 100);
+    }
+
+    // add the options to the select button
+    d3.select("#selectButton")
+        .selectAll('myOptions')
+        .data(allGroup)
+        .enter()
+        .append('option')
+        .text(function (d) {
+            return "Aufgabe " + (parseInt(d) + 1);
+        }) // text shown in the menu
+        .attr("value", function (d) {
+            return d;
+        }); // corresponding value returned by the button
+
+    // When the select button is changed, run the updateLine function
     d3.select("#selectButton").on("change", function (d) {
         // recover the option that has been chosen
-        var selectedOption = d3.select(this).property("value");
-        // run the updateChart function with this selected option
+        const selectedOption = d3.select(this).property("value");
+        // run the updateLine function with this selected option
         updateLine(selectedOption);
     })
 
-// add legend
-    var x = 10;
-    var y = 350;
+    // When the select button is changed, run the updateLine function
+    d3.select("#buttonLine").on("click", function (d) {
+        // run the updateLine function with this selected option
+        updateLines();
+    })
+
+    // add legend
+    let x = 10;
+    let y = 350;
     for (i = 0; i < allGroup.length; i++) {
         if (i == allGroup.length / 2) {
             x = 10;
@@ -181,5 +178,9 @@ const LineChart = function LineChart(selector, data, allGroup) {
         svg.append("text").attr("x", x + 15).attr("y", y).text("Aufgabe " + (parseInt(allGroup[i]) + 1)).style("font-size", "15px").attr("alignment-baseline", "middle");
         x += 120;
     }
+
+    // initialize plot -> draw lines
+    updateLines();
+
     return svg;
 }
