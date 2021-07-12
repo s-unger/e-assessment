@@ -22,8 +22,8 @@ $resultTestsUser = $statementTestsUser->execute(array($_SESSION['userid']));
 $dataTests = [];
 $dataCorrect = [];
 while ($row = $statementTestsUser->fetch()) {
-    $dataTests[] = array('date' => $row['date'], 'y' => $row['amount']);
-    $dataCorrect[] = array('date' => $row['date'], 'y' => $row['correct']);
+    $dataTests[] = array('date' => $row['date'], 'y' => intval($row['amount']));
+    $dataCorrect[] = array('date' => $row['date'], 'y' => intval($row['correct']));
 }
 
 // data for group
@@ -32,8 +32,8 @@ $resultTestsGroup = $statementTestsGroup->execute(array($_SESSION['userid']));
 $dataTestsAll = [];
 $dataCorrectAll = [];
 while ($row = $statementTestsGroup->fetch()) {
-    $dataTestsAll[] = array('date' => $row['date'], 'y' => $row['amount']);
-    $dataCorrectAll[] = array('date' => $row['date'], 'y' => $row['correct']);
+    $dataTestsAll[] = array('date' => $row['date'], 'y' => intval($row['amount']));
+    $dataCorrectAll[] = array('date' => $row['date'], 'y' => intval($row['correct']));
 }
 
 /**
@@ -55,15 +55,17 @@ function calculateCorrectnessOverTime(array $values, array $data): array
         }));
         $j = 0;
         $length = count($new);
-        $y = isset($new[0]['correctness']);
+        if (!empty($new)) {
+            $y = $new[0]['correctness'];
+        }
         for ($i = 0; $i < $length; $i++) {
             if ($i > 0) {
-                if ($new[$i]['correctness'] == 0 && $y != 0) {
+                if ($new[$i]['correctness'] === 0 && $y != 0) {
                     $y--;
-                } else if ($new[$i]['correctness'] == 1) {
+                } else if ($new[$i]['correctness'] === 1) {
                     $y++;
                 }
-                if ($new[$i]['solved_at'] == $new[$j]['solved_at']) {
+                if ($new[$i]['solved_at'] === $new[$j]['solved_at']) {
                     $new[$j]['correctness'] = $y;
                     unset($new[$i]);
                 } else {
