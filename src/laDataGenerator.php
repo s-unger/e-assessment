@@ -259,9 +259,9 @@ function calculateAbilityNotation(array $data, string $abilityName): array
  *
  * @param array $data dataset with percentage correct/wrong
  * @param int $index index of exercise
- * @return int percentage correct of exercise
+ * @return int|null percentage correct of exercise
  */
-function getPercentageValueCorrect(array $data, int $index): int
+function getPercentageValueCorrect(array $data, int $index): ?int
 {
     foreach (array_filter($data, function ($var) use ($index) {
         return ($var['questionId'] == $index);
@@ -269,6 +269,7 @@ function getPercentageValueCorrect(array $data, int $index): int
         $values = array_values($array);
         return $values[1];
     }
+    return null;
 }
 
 /**
