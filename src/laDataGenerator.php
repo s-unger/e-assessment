@@ -11,7 +11,7 @@ $resultAnswers = $statementAnswers->execute(array(
 ));
 $dataAnswers = [];
 while ($row = $statementAnswers->fetch()) {
-    $dataAnswers[] = array('questionId' => $row ['questionId'], 'solved_at' => $row['solved_at'], 'correctness' => intval($row['correctness']), 'misconception' => intval($row['misconception']));
+    $dataAnswers[] = array('questionId' => $row ['questionId'], 'solved_at' => $row['solved_at'], 'correctness' => intval($row['correctness']), 'misconception' => $row['misconception']);
 }
 
 // get data about how many tests were done and mean of how much exercises were correct (user and comparison to group) for bar chart
@@ -305,7 +305,7 @@ function calculateMisconceptions(array $data, $value): array
     }));
     foreach ($data as $array) {
         $values = array_values($array);
-        if ($values[3] != 0) {
+        if ($values[3] != null) {
             $combined[$values[3]] = $values[3];
             if (isset($abc[$values[3]])) // prevent index warning
             {
@@ -326,16 +326,16 @@ function calculateMisconceptions(array $data, $value): array
 /**
  * get the most common misconception which happened at least 3 times
  * @param array $data dataset of answers
- * @return int index of misconception
+ * @return int|null index of misconception
  */
-function getMostCommonMisconception(array $data): int
+function getMostCommonMisconception(array $data): ?int
 {
     $max = max(array_column($data, 'value'));
     if ($max >= 3) {
         $key = array_search($max, array_column($data, 'value'));
         return $data[$key]['misconception'];
     }
-    return 0;
+    return null;
 }
 
 /** line chart */
