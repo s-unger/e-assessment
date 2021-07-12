@@ -330,7 +330,7 @@ function calculateMisconceptions(array $data, $value): array
  */
 function getMostCommonMisconception(array $data): ?int
 {
-    if (isset($data)) {
+    if (!empty($data)) {
         $max = max(array_column($data, 'value'));
         if ($max >= 3) {
             $key = array_search($max, array_column($data, 'value'));
