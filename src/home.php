@@ -1,4 +1,4 @@
-<?php if(!isset($_SESSION)) session_start();
+<?php if (!isset($_SESSION)) session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
 //redirect to basepage if not logged in
 if (!isset($_SESSION['userid'])) {
@@ -6,6 +6,23 @@ if (!isset($_SESSION['userid'])) {
 }
 include "../index.php";
 include 'laDataGenerator.php';
+
+/**
+ * Most common misconception reminder to be added to the LA if a certain misconception has been repeated at least 3 times.
+ * Reminders for misconception 1, 2 and 3.
+ * Prototype only for question 5.
+ * Links are mock links (should link to help sites for the specific problem).
+ */
+$misconceptionReminder5_1 = "Fehlertyp: <b>Keine Überträge</b> 
+<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerziffer des Minuenden findet ein <b>Übertrag</b> zur Zehnerziffer statt. 
+<br><a href=home.php>Lern mehr!</a>";
+$misconceptionReminder5_2 = "Fehlertyp: <b>Spaltenweise Unterschiedsbildung</b>
+<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. 
+Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.
+<br><a href=home.php>Lern mehr!</a>";
+$misconceptionReminder5_3 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
+<br>Lies dir genau die Aufgabentexte durch. Um welche Rechentypen handelt es sich?
+<br><a href=home.php>Lern mehr!</a>";
 ?>
 <style>
     <?php include '../style.css'; ?>
@@ -67,6 +84,16 @@ include 'laDataGenerator.php';
                         <select id="selectButtonPie5"></select>
                     </div>
                 </div>
+                <span id="misconceptionAll"
+                      style="visibility: hidden;"><?php if ($_SESSION['misconceptionAll'] == 1) echo $misconceptionReminder5_1;
+                    elseif ($_SESSION['misconceptionAll'] == 2) echo $misconceptionReminder5_2;
+                    elseif ($_SESSION['misconceptionAll'] == 3) echo $misconceptionReminder5_3;
+                    ?></span>
+                <span id="misconception5"
+                      style="visibility: hidden;"><?php if ($_SESSION['misconception5'] == 1) echo $misconceptionReminder5_1;
+                    elseif ($_SESSION['misconception5'] == 2) echo $misconceptionReminder5_2;
+                    elseif ($_SESSION['misconception5'] == 3) echo $misconceptionReminder5_3;
+                    ?></span>
             </div>
             <div class="radar_chart svg-container" style="padding-bottom: 0;"></div>
         </div>
