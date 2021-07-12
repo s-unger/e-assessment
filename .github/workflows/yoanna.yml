@@ -17,3 +17,6 @@ jobs:
         username: ${{ secrets.USER }}
         password: ${{ secrets.PASSWORD }}
         server-dir: "./www/yoanna/"
+        exclude:
+          - **/.git*
+          - **/VRBrowser*/**
