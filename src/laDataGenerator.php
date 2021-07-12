@@ -55,7 +55,7 @@ function calculateCorrectnessOverTime(array $values, array $data): array
         }));
         $j = 0;
         $length = count($new);
-        $y = $new[0]['correctness'];
+        $y = isset($new[0]['correctness']);
         for ($i = 0; $i < $length; $i++) {
             if ($i > 0) {
                 if ($new[$i]['correctness'] == 0 && $y != 0) {
@@ -330,10 +330,12 @@ function calculateMisconceptions(array $data, $value): array
  */
 function getMostCommonMisconception(array $data): ?int
 {
-    $max = max(array_column($data, 'value'));
-    if ($max >= 3) {
-        $key = array_search($max, array_column($data, 'value'));
-        return $data[$key]['misconception'];
+    if (isset($data)) {
+        $max = max(array_column($data, 'value'));
+        if ($max >= 3) {
+            $key = array_search($max, array_column($data, 'value'));
+            return $data[$key]['misconception'];
+        }
     }
     return null;
 }
