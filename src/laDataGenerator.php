@@ -22,13 +22,13 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
 <br><a href=home.php>Lern mehr!</a>";
 
 // get data about answers from database
-$statementAnswers = $pdo->prepare("SELECT questionId, correctness, solved_at FROM answers WHERE userId = ? ORDER BY questionId, solved_at, id ASC ");
+$statementAnswers = $pdo->prepare("SELECT questionId, correctness, solved_at, misconception FROM answers WHERE userId = ? ORDER BY questionId, solved_at, id ASC ");
 $resultAnswers = $statementAnswers->execute(array(
     $_SESSION['userid']
 ));
 $dataAnswers = [];
 while ($row = $statementAnswers->fetch()) {
-    $dataAnswers[] = array('questionId' => $row ['questionId'], 'solved_at' => $row['solved_at'], 'correctness' => intval($row['correctness']));
+    $dataAnswers[] = array('questionId' => $row ['questionId'], 'solved_at' => $row['solved_at'], 'correctness' => intval($row['correctness']), 'misconception' => intval($row['misconception']));
 }
 
 // get data about how many tests were done and mean of how much exercises were correct (user and comparison to group) for bar chart
@@ -309,14 +309,6 @@ function trafficLight(array $values, array $data): int
 $_SESSION['lineChart'] = calculateCorrectnessOverTime($index, $dataAnswers);
 
 
-/** pie chart */
-// calculate how many times exercise x was solved correctly in percent all tries and save in session
-$_SESSION['dataPieChartAllTests'] = getPercentage($index, $dataAnswers);
-
-// calculate how many times exercise x was solved correctly in percent last 5 tries and save in session
-$_SESSION['dataPieChartLast5Tests'] = $percentLast5Tests = getPercentage($index, getEntriesOfLast5Tests($index, $dataAnswers));
-
-
 /** bar chart */
 // calculate mean of how many tests were done per day by group
 $dataTestsMean = getMean($dataTestsAll);
@@ -332,6 +324,16 @@ $_SESSION['dataTests'] = addDataForMissingDates($datesTotal, $dataTests);
 $_SESSION['dataTestsMean'] = addDataForMissingDates($datesTotal, $dataTestsMean);
 $_SESSION['dataCorrect'] = addDataForMissingDates($datesTotal, $dataCorrect);
 $_SESSION['dataCorrectMean'] = addDataForMissingDates($datesTotal, $dataTestsMean);
+
+
+/** pie chart */
+// calculate how many times exercise x was solved correctly in percent all tries and save in session
+$_SESSION['dataPieChartAllTests'] = getPercentage($index, $dataAnswers);
+
+// calculate how many times exercise x was solved correctly in percent last 5 tries and save in session
+$_SESSION['dataPieChartLast5Tests'] = $percentLast5Tests = getPercentage($index, getEntriesOfLast5Tests($index, $dataAnswers));
+
+$_SESSION['misconception'];
 
 
 /** abilities */
