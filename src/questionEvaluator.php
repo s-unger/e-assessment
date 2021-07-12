@@ -199,7 +199,7 @@ function evaluateQuestion7(){
         $fullPoints = 1;
         $points7 = $pointsTotal7;
         $feedback7 .= "Richtig!";
-    } else if($percent > 80) {
+    } else if($percent > 79) {
         $fullPoints = 1;
         $points7 = $pointsTotal7;
         $feedback7 .= "<b>Richtig!</b> <br>Beachte die korrekte Schreibweise von \"" . $_SESSION['solution_short_text_1'] . "\".";
