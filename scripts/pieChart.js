@@ -134,11 +134,11 @@ const PieChart = function PieChart(selector) {
 
         // only show misconception for exercise 5
         if (selectedOption == 4) {
-            document.getElementById("misconceptionAll").style.visibility = "visible";
-            document.getElementById("misconception5").style.visibility = "hidden";
+            document.getElementById("misconceptionAll").style.display = "block";
+            document.getElementById("misconception5").style.display = "none";
         } else {
-            document.getElementById("misconceptionAll").style.visibility = "hidden";
-            document.getElementById("misconception5").style.visibility = "hidden";
+            document.getElementById("misconceptionAll").style.display = "none";
+            document.getElementById("misconception5").style.display = "none";
         }
 
         // run the updatePie function with this selected option
@@ -164,11 +164,11 @@ const PieChart = function PieChart(selector) {
 
         // only show misconception for exercise 5
         if (selectedOption == 4) {
-            document.getElementById("misconception5").style.visibility = "visible";
-            document.getElementById("misconceptionAll").style.visibility = "hidden";
+            document.getElementById("misconception5").style.display = "block";
+            document.getElementById("misconceptionAll").style.display = "none";
         } else {
-            document.getElementById("misconception5").style.visibility = "hidden";
-            document.getElementById("misconceptionAll").style.visibility = "hidden";
+            document.getElementById("misconception5").style.display = "none";
+            document.getElementById("misconceptionAll").style.display = "none";
         }
 
         // run the updatePie function with this selected option
