@@ -17,7 +17,7 @@ const LineChart = function LineChart(selector) {
     // add colors
     const myColor = d3.scaleOrdinal()
         .domain(allGroup)
-        .range(["#197fa7", "#f9c596", "#d23059", "#130903",
+        .range(["#197fa7", "#ffffff", "#d23059", "#130903",
             "#129a48", "#6c0074", "#ec9a42", "#8a3d0e"]);
 
     const xScale = d3.scaleTime().rangeRound([0, width]);
