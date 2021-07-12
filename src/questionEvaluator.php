@@ -129,20 +129,20 @@ function evaluateQuestion5(){
         $fullPoints = 0;
         $feedback5 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_numerical_2'] . ".";
     }
-    $misconception = 0;
+    $misconception = null;
     if ($q5 == $_SESSION['misc_carry1_numerical_2']) {
         /* Kein Übertrag: erweitert die Einerziffer des Minuenden korrekt, macht aber nicht den nötigen Übertrag zur Zehnerziffer des Subtrahenden.*/
         $feedback5 .= "<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerziffer des Minuenden findet 
 ein <b>Übertrag</b> zur Zehnerziffer statt.";
-        $misconception = 1;
+        $misconception = 0;
     } else if ($q5 == $_SESSION['misc_carry2_numerical_2']) {
         /* Spaltenweise Unterschiedsbildung: Es wird immer die kleinere von der größeren Ziffer abgezogen */
         $feedback5 .= "<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. 
 Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.";
-        $misconception = 2;
+        $misconception = 1;
     } else if ($q5 == $_SESSION['misc_operator_numerical_2']){
         /* Fehlendes Textverständnis: Addition statt Subtraktion */
-        $misconception = 3;
+        $misconception = 2;
         $feedback5 .= "<br>Lies noch einmal genau den Aufgabentext! Es werden Bücher <b>weggenommen</b>.";
     }
     return array("feedback"=>$feedback5, "fullPoints"=>$fullPoints, "misconception"=>$misconception);
