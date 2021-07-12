@@ -4,23 +4,6 @@ $pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user
 // index of exercises
 $index = [0, 1, 2, 3, 4, 5, 6, 7];
 
-/**
- * Misconception reminders to be added to the LA if a certain misconception has been repeated multiple times in a row.
- * Reminders for misconception 0, 1 and 2.
- * Prototype only for question 5.
- * Links are mock links (should link to help sites for the specific problem).
- */
-$misconceptionReminder5_0 = "Fehlertyp: <b>Keine Überträge</b> 
-<br>Beachte den <b>Zehnerübergang</b>! Nach der Erweiterung der Einerziffer des Minuenden findet ein <b>Übertrag</b> zur Zehnerziffer statt. 
-<br><a href=home.php>Lern mehr!</a>";
-$misconceptionReminder5_1 = "Fehlertyp: <b>Spaltenweise Unterschiedsbildung</b>
-<br>An der Einerstelle kann nicht einfach die kleinere von der größeren Ziffer abgezogen werden. 
-Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zehnerstelle.
-<br><a href=home.php>Lern mehr!</a>";
-$misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
-<br>Lies dir genau die Aufgabentexte durch. Um welche Rechentypen handelt es sich?
-<br><a href=home.php>Lern mehr!</a>";
-
 // get data about answers from database
 $statementAnswers = $pdo->prepare("SELECT questionId, correctness, solved_at, misconception FROM answers WHERE userId = ? ORDER BY questionId, solved_at, id ASC ");
 $resultAnswers = $statementAnswers->execute(array(
@@ -131,7 +114,7 @@ function getPercentage(array $values, array $data): array
 }
 
 /**
- *  calculate how many times exercise x was solved correctly in percent last 5 tests
+ *  get exercise entries from last 5 tests
  *
  * @param array $values indexes of exercsises
  * @param array $data dataset of exercises
@@ -304,6 +287,57 @@ function trafficLight(array $values, array $data): int
     return $result / count($values);
 }
 
+/**
+ * calculate how often which misconception happened
+ * foreach loop base from https://stackoverflow.com/questions/15542808/finding-average-of-same-key-values-of-an-associate-array
+ *
+ * @param array $data dataset of answers
+ * @param int $value index of exercise
+ * @return array dataset containing how often which misconception happened for the specific exercise
+ */
+function calculateMisconceptions(array $data, $value): array
+{
+    $abc = [];
+    $combined = [];
+    $result = [];
+    $data = array_values(array_filter($data, function ($var) use ($value) {
+        return ($var['questionId'] == $value);
+    }));
+    foreach ($data as $array) {
+        $values = array_values($array);
+        if ($values[3] != 0) {
+            $combined[$values[3]] = $values[3];
+            if (isset($abc[$values[3]])) // prevent index warning
+            {
+                $abc[$values[3]] += 1;
+            } else {
+                $abc[$values[3]] = 1;
+            }
+        }
+    }
+    ksort($abc);
+    ksort($combined);
+    foreach ($combined as $val => $values) {
+        $result[] = array('questionId' => $value, 'misconception' => $val, 'value' => $abc[$val]);
+    }
+    return $result;
+}
+
+/**
+ * get the most common misconception which happened at least 3 times
+ * @param array $data dataset of answers
+ * @return int index of misconception
+ */
+function getMostCommonMisconception(array $data): int
+{
+    $max = max(array_column($data, 'value'));
+    if ($max >= 3) {
+        $key = array_search($max, array_column($data, 'value'));
+        return $data[$key]['misconception'];
+    }
+    return 0;
+}
+
 /** line chart */
 // calculate correctness of exercises over time and save in session
 $_SESSION['lineChart'] = calculateCorrectnessOverTime($index, $dataAnswers);
@@ -333,7 +367,11 @@ $_SESSION['dataPieChartAllTests'] = getPercentage($index, $dataAnswers);
 // calculate how many times exercise x was solved correctly in percent last 5 tries and save in session
 $_SESSION['dataPieChartLast5Tests'] = $percentLast5Tests = getPercentage($index, getEntriesOfLast5Tests($index, $dataAnswers));
 
-$_SESSION['misconception'];
+// get most common misconception for all tests and save in session
+$_SESSION['misconceptionAll'] = getMostCommonMisconception(calculateMisconceptions($dataAnswers, 4));
+
+// get most common misconception for last 5 tests and save in session
+$_SESSION['misconception5'] = getMostCommonMisconception(calculateMisconceptions(getEntriesOfLast5Tests($index, $dataAnswers), 4));
 
 
 /** abilities */

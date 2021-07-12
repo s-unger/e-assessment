@@ -131,6 +131,16 @@ const PieChart = function PieChart(selector) {
     d3.select("#selectButtonPie").on("change", function (d) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value");
+
+        // only show misconception for exercise 5
+        if (selectedOption == 4) {
+            document.getElementById("misconceptionAll").style.visibility = "visible";
+            document.getElementById("misconception5").style.visibility = "hidden";
+        } else {
+            document.getElementById("misconceptionAll").style.visibility = "hidden";
+            document.getElementById("misconception5").style.visibility = "hidden";
+        }
+
         // run the updatePie function with this selected option
         updatePie(selectedOption, dataPercent);
     });
@@ -151,6 +161,16 @@ const PieChart = function PieChart(selector) {
     d3.select("#selectButtonPie5").on("change", function (d) {
         // recover the option that has been chosen
         var selectedOption = d3.select(this).property("value");
+
+        // only show misconception for exercise 5
+        if (selectedOption == 4) {
+            document.getElementById("misconception5").style.visibility = "visible";
+            document.getElementById("misconceptionAll").style.visibility = "hidden";
+        } else {
+            document.getElementById("misconception5").style.visibility = "hidden";
+            document.getElementById("misconceptionAll").style.visibility = "hidden";
+        }
+
         // run the updatePie function with this selected option
         updatePie(selectedOption, dataPercentLast5);
     });
