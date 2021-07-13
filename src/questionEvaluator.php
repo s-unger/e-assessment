@@ -195,7 +195,7 @@ function evaluateQuestion7() : array{
     $ans7 = str_replace(' ', '', $q7);
     $lowercaseAns7 = strtolower($ans7);
     $similar = similar_text($lowercaseAns7, $lowercaseCorrectSolution, $percent);
-    if($ans7 == $lowercaseCorrectSolution) {
+    if($lowercaseAns7 == $lowercaseCorrectSolution) {
         $fullPoints = 1;
         $points7 = $pointsTotal7;
         $feedback7 .= "Richtig!";
@@ -285,4 +285,3 @@ function calculateGrade(int $correct): int{
             return 6;
     }
 }
-
