@@ -32,10 +32,10 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
 </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="/scripts/radarChart.js"></script>
-<script src="/scripts/lineChart.js"></script>
-<script src="/scripts/barChart.js"></script>
-<script src="/scripts/pieChart.js"></script>
+<script src="http://e-assessment.bplaced.net/main/scripts/radarChart.js"></script>
+<script src="http://e-assessment.bplaced.net/main/scripts/lineChart.js"></script>
+<script src="http://e-assessment.bplaced.net/main/scripts/barChart.js"></script>
+<script src="http://e-assessment.bplaced.net/main/scripts/pieChart.js"></script>
 
 <div class="content">
     <form action="test.php" method="post">

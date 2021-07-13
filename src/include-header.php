@@ -45,7 +45,7 @@ function newTest()
     <div class="header">
         <h1 style="flex: 1;">Werde zum Mathematiger!</h1>
         <!--            source: https://www.pngwing.com/de/free-png-blxte/download & https://www.pngwing.com/de/free-png-vegxa/download-->
-        <img src="/images/tiger.png"/>
+        <img src="http://e-assessment.bplaced.net/main/images/tiger.png"/>
     </div>
 </div>
 <div class="nav-wrapper">
