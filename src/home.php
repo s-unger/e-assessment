@@ -119,17 +119,15 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
                 </div>
                 <div id="misconceptionAll"
                      style="display: none; margin: 5% 5% 0 5%;">
-                    <p>Du machst häufig diesen Fehler:</p>
-                    <?php if ($_SESSION['misconceptionAll'] === 0) echo $misconceptionReminder5_0;
-                    elseif ($_SESSION['misconceptionAll'] === 1) echo $misconceptionReminder5_1;
-                    elseif ($_SESSION['misconceptionAll'] === 2) echo $misconceptionReminder5_2;
+                    <?php if ($_SESSION['misconceptionAll'] === 0) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_0 </p>";
+                    elseif ($_SESSION['misconceptionAll'] === 1) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_1</p>";
+                    elseif ($_SESSION['misconceptionAll'] === 2) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_2</p>";
                     ?></div>
                 <div id="misconception5"
                      style="display: none; margin: 5% 5% 0 5%;">
-                    <p>Du machst häufig diesen Fehler:</p>
-                    <?php if ($_SESSION['misconception5'] === 0) echo $misconceptionReminder5_0;
-                    elseif ($_SESSION['misconception5'] === 1) echo $misconceptionReminder5_1;
-                    elseif ($_SESSION['misconception5'] === 2) echo $misconceptionReminder5_2;
+                    <?php if ($_SESSION['misconception5'] === 0) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_0 </p>";
+                    elseif ($_SESSION['misconception5'] === 1) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_1</p>";
+                    elseif ($_SESSION['misconception5'] === 2) echo "<p>Du machst häufig diesen Fehler: $misconceptionReminder5_2</p>";
                     ?></div>
                 <div class="overlay" id="overlay3">
                     <div class="text">Hier kannst du sehen wie viel Prozent der einzelnen Aufgaben du richtig bzw.
