@@ -240,11 +240,10 @@ function evaluateQuestion8(): array{
  * @return array int points and String feedback
  */
 function evaluateTotal(): array{
-    global $points1; global $points2; global $points3; global $points4; global $points5; global $points6; global $points7;
     global $pointsTotal;
     global $pointsTotalPerQuestion;
     global $points;
-    $pointsTotalAchieved = $points1 + $points2 + $points3 + $points4 + $points5 + $points6 + $points7;
+    $pointsTotalAchieved = array_sum($points);
     $feedbackTotal = "Deine erreichte Punktzahl: $pointsTotalAchieved von $pointsTotal";
     $grade = calculateGrade($pointsTotalAchieved);
     if ($_SESSION['isExam']) $feedbackTotal .= "<br>Deine Note: <b>$grade</b>";
