@@ -367,7 +367,7 @@ $dataTestsMean = getMean($dataTestsAllCorrect);
 $dataCorrectMean = getMean(getMeanOfCorrectTestPerDay($dataTestsAllCorrect));
 
 // get all possible dates from the user's and the group's datasets
-$datesTotal = array_unique(array_merge(getDates($dataTestsAllCorrect), getDates($dataTestsMean)));
+$datesTotal = array_unique(array_merge(getDates($dataTestsCorrect), getDates($dataTestsMean)));
 
 // update bar chart data arrays and save in session
 $_SESSION['dataTests'] = addDataForMissingDates($datesTotal, $dataTestsCorrect);
