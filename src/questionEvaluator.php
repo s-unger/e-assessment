@@ -259,7 +259,7 @@ function evaluateTotal(): array{
         elseif ($grade == 2) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
         else $feedbackTotal .= "<br>Mach weiter, du schaffst das!";
     }
-    return array("points"=>$pointsTotal, "feedback"=>$feedbackTotal);
+    return array("points" => $pointsTotal, "feedback" => $feedbackTotal, "correct" => $correct);
 }
 
 /**

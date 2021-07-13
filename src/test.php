@@ -170,9 +170,10 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     $evaluationTotal = evaluateTotal();
     $pointsTotal = $evaluationTotal["points"];
     $feedbackTotal = $evaluationTotal["feedback"];
+    $correctTotal = $evaluationTotal["correct"];
 
-    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = (correct+$pointsTotal)");
-    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $pointsTotal));
+    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = correct+$correctTotal");
+    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $correctTotal));
 }
 
 ?>
