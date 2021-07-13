@@ -103,7 +103,6 @@ if (isset($_POST['ans8'])) {
     $q8 = $_POST['ans8'];
 }
 
-$correct = 0;
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "" || $q8 == "" ) {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
@@ -168,11 +167,11 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 
     /* Evaluate Total */
     $evaluationTotal = evaluateTotal();
-    $pointsTotal = $evaluationTotal["points"];
     $feedbackTotal = $evaluationTotal["feedback"];
+    $fullPointsTotal = $evaluationTotal["fullPoints"]; // Number of questions that got full points
 
-    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = (correct+$correct)");
-    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $pointsTotal));
+    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = correct+$fullPointsTotal");
+    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $fullPointsTotal));
 }
 
 ?>
