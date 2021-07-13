@@ -19,21 +19,17 @@ while ($row = $statementAnswers->fetch()) {
 // data for user
 $statementTestsUser = $pdo->prepare("SELECT date, amount, correct FROM tests WHERE userId = ? ORDER BY date ASC");
 $resultTestsUser = $statementTestsUser->execute(array($_SESSION['userid']));
-$dataTests = [];
-$dataCorrect = [];
+$dataTestsCorrect = [];
 while ($row = $statementTestsUser->fetch()) {
-    $dataTests[] = array('date' => $row['date'], 'y' => intval($row['amount']));
-    $dataCorrect[] = array('date' => $row['date'], 'y' => intval($row['correct']));
+    $dataTestsCorrect[] = array('date' => $row['date'], 'y' => intval($row['amount']), 'correct' => intval($row['correct']));
 }
 
 // data for group
 $statementTestsGroup = $pdo->prepare("SELECT date, amount, correct FROM tests WHERE userId <> ? ORDER BY date ASC");
 $resultTestsGroup = $statementTestsGroup->execute(array($_SESSION['userid']));
-$dataTestsAll = [];
-$dataCorrectAll = [];
+$dataTestsAllCorrect = [];
 while ($row = $statementTestsGroup->fetch()) {
-    $dataTestsAll[] = array('date' => $row['date'], 'y' => intval($row['amount']));
-    $dataCorrectAll[] = array('date' => $row['date'], 'y' => intval($row['correct']));
+    $dataTestsAllCorrect[] = array('date' => $row['date'], 'y' => intval($row['amount']), 'correct' => intval($row['correct']));
 }
 
 /**
@@ -139,10 +135,8 @@ function getEntriesOfLast5Tests(array $values, array $data): array
  *  calculate mean of y
  *  foreach loop base from https://stackoverflow.com/questions/15542808/finding-average-of-same-key-values-of-an-associate-array
  *
- * @param array $data dataset with date and y being
- *                    amount of tests done per user per day or
- *                    average amount of correct solved exercises per user per day
- * @return array mean value of y of whole group for each date
+ * @param array $data dataset with date and amount of tests done per user per day and/or average amount of correct solved exercises per user per day
+ * @return array mean value of y (amount of tests or average amount of correctly solved exercises) of whole group for each date
  */
 function getMean(array $data): array
 {
@@ -161,6 +155,23 @@ function getMean(array $data): array
     }
     foreach ($eachDay as $day => $values) {
         $mean[] = array('date' => $day, 'y' => $abc[$day] / count($values));
+    }
+    return $mean;
+}
+
+
+/**  calculate mean of correctly answered exercises per day per user
+ *  foreach loop base from https://stackoverflow.com/questions/15542808/finding-average-of-same-key-values-of-an-associate-array
+ *
+ * @param array $data dataset with date, amount of tests done per user per day and total number of correct solved exercises per user per day
+ * @return array mean value of correct for each user of group for each date
+ */
+function getMeanOfCorrectTestPerDay(array $data): array
+{
+    $mean = [];
+    foreach ($data as $array) {
+        $values = array_values($array);
+        $mean[] = array('date' => $values[0], 'y' => $values[2] / $values[1]);
     }
     return $mean;
 }
@@ -350,19 +361,19 @@ $_SESSION['lineChart'] = calculateCorrectnessOverTime($index, $dataAnswers);
 
 /** bar chart */
 // calculate mean of how many tests were done per day by group
-$dataTestsMean = getMean($dataTestsAll);
+$dataTestsMean = getMean($dataTestsAllCorrect);
 
 // calculate mean of how many exercises were done correctly per day by group
-$dataCorrectMean = getMean($dataCorrectAll);
+$dataCorrectMean = getMean(getMeanOfCorrectTestPerDay($dataTestsAllCorrect));
 
 // get all possible dates from the user's and the group's datasets
-$datesTotal = array_unique(array_merge(getDates($dataTests), getDates($dataTestsMean)));
+$datesTotal = array_unique(array_merge(getDates($dataTestsAllCorrect), getDates($dataTestsMean)));
 
 // update bar chart data arrays and save in session
-$_SESSION['dataTests'] = addDataForMissingDates($datesTotal, $dataTests);
+$_SESSION['dataTests'] = addDataForMissingDates($datesTotal, $dataTestsCorrect);
 $_SESSION['dataTestsMean'] = addDataForMissingDates($datesTotal, $dataTestsMean);
-$_SESSION['dataCorrect'] = addDataForMissingDates($datesTotal, $dataCorrect);
-$_SESSION['dataCorrectMean'] = addDataForMissingDates($datesTotal, $dataTestsMean);
+$_SESSION['dataCorrect'] = addDataForMissingDates($datesTotal, getMeanOfCorrectTestPerDay($dataTestsCorrect));
+$_SESSION['dataCorrectMean'] = addDataForMissingDates($datesTotal, $dataCorrectMean);
 
 
 /** pie chart */
