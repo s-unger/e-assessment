@@ -241,39 +241,26 @@ function generate_text_to_term(){
 
 
 /**
- * Generates distractors for multiplechoice_1. Randomly picked from a larger pool of distractors
- * in order to mitigate test-wiseness.
+ * Generates distractors for multiplechoice_1.
+ * Distractors and solution are 4 consecutive numbers, and any number can be the solution, i.e. it is not possible to
+ * analyze the options with testwiseness.
  * @param $x int the minuend
  * @param $y int the subtrahend
  * @return array of 3 distractors
  */
 function generate_distractors_1(int $x, int $y): array{
-    // Generate distractors. 1. Close to the solution 2. Swapped digits
-    // Remove obviously wrong options: number > 100 and (< 10 ?)
-    // Save 3 random ones and the solution (shuffled) in the options array
     $solution = $x - $y;
-    $distractor_1 = $solution + 1;
-    $distractor_2 = $solution - 1;
-    $distractor_3 = $solution - 2;
-    $distractor_4 = $solution + 2;
-    $distractor_5 = $solution - 3;
-    $distractor_6 = $solution + 3;
-    $distractors_close = array ($distractor_1, $distractor_2, $distractor_3, $distractor_4, $distractor_5, $distractor_6);
-
-    // Create distractors from close distractors by swapping digits
-    $distractors_swapped = array();
-    foreach ($distractors_close as $dis){
-            $distractors_swapped[] = swap_digits($dis);
-    }
-    $distractors = array_unique(array_merge($distractors_close, $distractors_swapped), SORT_REGULAR);
-    $distractors = array_values(array_filter($distractors, "filter_distractors"));
-    return array_rand(array_flip($distractors), 3);
-    /*
-     * shuffle($distractors);
-    $options = array_slice($distractors, 0, 3);
-    }*/
+    $distractor_1 = $solution -3;
+    $distractor_2 = $solution -2;
+    $distractor_3 = $solution -1;
+    $distractor_4 = $solution +1;
+    $distractor_5 = $solution +2;
+    $distractor_6 = $solution +3;
+    $distractors = array ($distractor_1, $distractor_2, $distractor_3, $distractor_4, $distractor_5, $distractor_6);
+    $rand = mt_rand(0, 3);
+    $distractors_slices = array_slice($distractors, $rand, 3);
+    return $distractors_slices;
 }
-
 
 /**
  * Generates three distractors for the MC question 2, including feedback to be given if the distractor is chosen.
@@ -299,32 +286,6 @@ function generate_distractors_2(int $x, int $y): array{
     $distractors = array(array($distractor_1, $feedback_1), array($distractor_2, $feedback_2), array($distractor_3, $feedback_3));
     return $distractors;
 }
-
-
-/**
- * Callback function for distractor fitering. Filters distractors that are null, > 100, or the solution.
- * @param $dis array with all distractors
- * @return bool true if successful
- */
-function filter_distractors($dis) : bool{
-        if ($dis == null || $dis > 100 || $dis == $_SESSION['solution_multiplechoice_1']) {
-            return false;
-        } else return true;
-}
-
-
-/**
- * Swaps digits for a two digit number. Used to create distractors.
- * @param $n int the original number
- * @return int|null the number with swapped digits or null if the number is not 2 digits, the two digits are the same or the second digit is zero
- */
-function swap_digits(int $n){
-    if ($n < 10 || $n > 99 || $n%10 == 0 || (int)($n/10) == $n%10) return null;
-    $first = (int)($n/10);
-    $second = $n%10;
-    return $second*10+$first;
-}
-
 
 /**
  * Generates a distractor term that does not result in a number that the left column terms result in.
