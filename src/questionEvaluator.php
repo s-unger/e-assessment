@@ -22,7 +22,7 @@ $pointsTotal = $pointsTotal1 + $pointsTotal2 + $pointsTotal3 + $pointsTotal4 + $
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion1(){
+function evaluateQuestion1(): array{
     global $q1;
     global $pointsTotal1;
     global $points1;
@@ -45,7 +45,7 @@ function evaluateQuestion1(){
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion2(){
+function evaluateQuestion2(): array{
     global $q2;
     global $pointsTotal2;
     global $points2;
@@ -70,7 +70,7 @@ function evaluateQuestion2(){
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion3(){
+function evaluateQuestion3(): array{
     global $q3;
     global $pointsTotal3;
     global $points3;
@@ -95,7 +95,7 @@ function evaluateQuestion3(){
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion4(){
+function evaluateQuestion4(): array{
     global $q41; global $q42; global $q43;
     global $points4;
     $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
@@ -117,7 +117,7 @@ function evaluateQuestion4(){
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback, int fullPoints, int misconception
  */
-function evaluateQuestion5(){
+function evaluateQuestion5(): array{
     global $q5;
     global $pointsTotal5;
     global $points5;
@@ -154,7 +154,7 @@ Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zeh
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion6(){
+function evaluateQuestion6(): array{
     global $q6;
     global $pointsTotal6;
     global $points6;
@@ -181,7 +181,7 @@ function evaluateQuestion6(){
  * Gives feedback if an incorrect but existing term is entered.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion7(){
+function evaluateQuestion7() : array{
     global $q7;
     global $pointsTotal7;
     global $points7;
@@ -208,7 +208,7 @@ function evaluateQuestion7(){
         $feedback7 .= "<b>Leider falsch!</b> Die richtige Antwort ist " . $_SESSION['solution_short_text_1'] . ".";
         if (in_array(strtolower($ans7), $lowercaseSolutions)) {
             $i = array_search (strtolower($ans7), $lowercaseSolutions);
-            $feedback7 .= "<br>$solutionTerms7 ist Fachbegriff für die $configTerms7[$i] bei einer $questionTerms7[i]";
+            $feedback7 .= "<br>$solutionTerms7[$i] ist der Fachbegriff für $configTerms7[$i] bei einer $questionTerms7[$i].";
         }
     }
     return array("feedback"=>$feedback7, "fullPoints"=>$fullPoints);
@@ -219,7 +219,7 @@ function evaluateQuestion7(){
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
  * @return array int points, String feedback and int fullPoints
  */
-function evaluateQuestion8(){
+function evaluateQuestion8(): array{
     global $q8;
     global $pointsTotal8;
     global $points8;
@@ -232,6 +232,11 @@ function evaluateQuestion8(){
     }else {
         $fullPoints = 0;
         $feedback8 .= "<b>Leider falsch!</b>  Die richtige Antwort ist " . $_SESSION['solution_text_to_term'] . ".";
+        if ($ans8 == $_SESSION['misc1_text_to_term']){
+            $feedback8 .= "<br>Beachte die Reihenfolge der Zahlen im Term. Welche Zahl wird als erstes geschrieben?";
+        } else if(in_array($ans8, $_SESSION['misc2_text_to_term'] )){
+            $feedback8 .= "<br>Überlege, welchen Operator du für diesen Term benötigst.";
+        }
     }
     return array("feedback"=>$feedback8, "fullPoints"=>$fullPoints);
 }
@@ -241,7 +246,7 @@ function evaluateQuestion8(){
  * Evaluates the total points for an exam and calculates the grade
  * @return array int points and String feedback
  */
-function evaluateTotal(){
+function evaluateTotal(): array{
     global $points1; global $points2; global $points3; global $points4; global $points5; global $points6; global $points7;
     global $pointsTotal;
     $correct = $points1 + $points2 + $points3 + $points4 + $points5 + $points6 + $points7;
@@ -261,9 +266,9 @@ function evaluateTotal(){
  * Calculate grade from points according to recommended point percentages.
  * Rounded down threshold, because the math tiger is a generous feline.
  * @param int $correct  points received for test
- * @return int  grade
+ * @return int grade
  */
-function calculateGrade(int $correct){
+function calculateGrade(int $correct): int{
     global $pointsTotal;
     switch (true) {
         case ($correct >= floor(0.92 * $pointsTotal)):
