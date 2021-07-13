@@ -81,7 +81,7 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
                         </button>
                         <button id="buttonBar2">Wie viele Aufgaben
                             im
-                            Schnitt richtig
+                            Schnitt pro Tag richtig
                         </button>
                     </div>
                     <div class="icon" id="icon2">
