@@ -62,17 +62,6 @@ include "../index.php"; ?>
 </script>
 <?php
 
-//if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//if(isset($_POST["check"])){
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['check'])) {
-
-
-    $statement = $pdo->prepare("UPDATE users SET amount_of_tests = amount_of_tests+1 WHERE id = :id ");
-    //$statement->bindParam('i', $_SESSION['userId']);
-    // $result = $statement->execute([$_SESSION['userId']]);
-
-    $result = $statement->execute(array('id' => $_SESSION['userid']));
-}
 $q1 = "";
 $q2 = "";
 $q3 = "";

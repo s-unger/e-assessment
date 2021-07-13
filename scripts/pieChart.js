@@ -44,7 +44,6 @@ const PieChart = function PieChart(selector) {
                 return d.value.percent;
             })
             .sort(function (a, b) {
-                console.log(a);
                 return d3.ascending(a.key, b.key);
             }) // This makes sure that group order remains the same in the pie chart
         var data_ready = pie(d3.entries(dataFilter));
@@ -53,7 +52,6 @@ const PieChart = function PieChart(selector) {
             .innerRadius(0)
             .outerRadius(radius);
 
-        console.log((data_ready));
         // map to data
         var u = svg.selectAll("path")
             .data(data_ready);
