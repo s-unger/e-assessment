@@ -1,22 +1,16 @@
 <?php
-include('questionStrings.php');
-$pointsTotal1 = 1;
-$pointsTotal2 = 1;
-$pointsTotal3 = 1;
-$pointsTotal4 = 3;
-$pointsTotal5 = 1;
-$pointsTotal6 = 1;
-$pointsTotal7 = 1;
-$pointsTotal8 = 1;
-$points1 = 0;
-$points2 = 0;
-$points3 = 0;
-$points4 = 0;
-$points5 = 0;
-$points6 = 0;
-$points7 = 0;
-$pointsTotal = $pointsTotal1 + $pointsTotal2 + $pointsTotal3 + $pointsTotal4 + $pointsTotal5 + $pointsTotal6 +
-    $pointsTotal7 + $pointsTotal8;
+/**
+ * Full points achievable for each question
+ */
+
+$pointsTotalPerQuestion = array(1,1,1,3,1,1,1,1);
+$pointsTotal = array_sum($pointsTotalPerQuestion);
+
+/**
+ * Achieved points for each question. Set during evaluation.
+ */
+$points = array(0,0,0,0,0,0,0,0);
+
 /**
  * Evaluates question 1
  * fullPoints is 0 if the question did not receive full points, and 1 if it did.
@@ -24,13 +18,13 @@ $pointsTotal = $pointsTotal1 + $pointsTotal2 + $pointsTotal3 + $pointsTotal4 + $
  */
 function evaluateQuestion1(): array{
     global $q1;
-    global $pointsTotal1;
-    global $points1;
+    global $pointsTotalPerQuestion;
+    global $points;
     $q1bool = $q1 == "true";
     ($q1bool) ? $truefalseGerman = "Wahr" : $truefalseGerman = "Falsch";
     $feedback1 = "Deine Antwort: \"$truefalseGerman\"<br>";
     if ($q1bool == $_SESSION['solution_truefalse_1']) {
-        $points1 = $pointsTotal1;
+        $points[0] = $pointsTotalPerQuestion[0];
         $fullPoints = 1;
         $feedback1 .= "<b>Richtig!</b>";
     } else {
@@ -47,12 +41,12 @@ function evaluateQuestion1(): array{
  */
 function evaluateQuestion2(): array{
     global $q2;
-    global $pointsTotal2;
-    global $points2;
+    global $pointsTotalPerQuestion;
+    global $points;
     $feedback = "Deine Antwort: $q2<br>";
     if ($q2 == $_SESSION['solution_multiplechoice_1']) {
         $fullPoints = 1;
-        $points2 = $pointsTotal2;
+        $points[1] = $pointsTotalPerQuestion[1];
         $feedback .= "<b>Richtig!</b>";
     } else {
         $fullPoints = 0;
@@ -72,12 +66,12 @@ function evaluateQuestion2(): array{
  */
 function evaluateQuestion3(): array{
     global $q3;
-    global $pointsTotal3;
-    global $points3;
+    global $pointsTotalPerQuestion;
+    global $points;
     $feedback3 = "Deine Antwort: $q3<br>";
     if ($q3 == $_SESSION['solution_numerical_1']) {
         $fullPoints = 1;
-        $points3 = $pointsTotal3;
+        $points[2] = $pointsTotalPerQuestion[2];
         $feedback3 .= "<b>Richtig!</b>";
     } else {
         $fullPoints = 0;
@@ -97,13 +91,13 @@ function evaluateQuestion3(): array{
  */
 function evaluateQuestion4(): array{
     global $q41; global $q42; global $q43;
-    global $points4;
+    global $points;
     $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
-    if ($q41 == $_SESSION['solution_matching_1'][0]) $points4++;
-    if ($q42 == $_SESSION['solution_matching_1'][1]) $points4++;
-    if ($q43 == $_SESSION['solution_matching_1'][2]) $points4++;
-    $feedback4 .= "<b>" . $points4 . " von 3 richtig!</b>";
-    if ($points4 <3) {
+    if ($q41 == $_SESSION['solution_matching_1'][0]) $points[4]++;
+    if ($q42 == $_SESSION['solution_matching_1'][1]) $points[4]++;
+    if ($q43 == $_SESSION['solution_matching_1'][2]) $points[4]++;
+    $feedback4 .= "<b>" . $points[4] . " von 3 richtig!</b>";
+    if ($points[4] <3) {
         $fullPoints = 0;
         $feedback4 .= "<br>Die richtige Reihenfolge ist: <br>" . $_SESSION['solution_matching_1'][0]
             ."<br>" . $_SESSION['solution_matching_1'][1]
@@ -119,12 +113,12 @@ function evaluateQuestion4(): array{
  */
 function evaluateQuestion5(): array{
     global $q5;
-    global $pointsTotal5;
-    global $points5;
+    global $pointsTotalPerQuestion;
+    global $points;
     $feedback5 = "Deine Antwort: $q5<br>";
     if ($q5 == $_SESSION['solution_numerical_2']) {
         $fullPoints = 1;
-        $points5 = $pointsTotal5;
+        $points[4] = $pointsTotalPerQuestion[4];
         $feedback5 .= "<b>Richtig!</b>";
     }  else {
         $fullPoints = 0;
@@ -156,12 +150,12 @@ Um an der Einerstelle Minus zu rechnen, benötigst du einen Übertrag in die Zeh
  */
 function evaluateQuestion6(): array{
     global $q6;
-    global $pointsTotal6;
-    global $points6;
+    global $pointsTotalPerQuestion;
+    global $points;
     $feedback6 = "Deine Antwort: $q6<br>";
     if ($q6 == $_SESSION['solution_multiplechoice_2']) {
         $fullPoints = 1;
-        $points6 = $pointsTotal6;
+        $points[5] = $pointsTotalPerQuestion[5];
         $feedback6 .= "<b>Richtig!</b>";
     }else {
         $fullPoints = 0;
@@ -183,12 +177,11 @@ function evaluateQuestion6(): array{
  */
 function evaluateQuestion7() : array{
     global $q7;
-    global $pointsTotal7;
-    global $points7;
+    global $pointsTotalPerQuestion;
+    global $points;
     global $questionTerms7;
     global $solutionTerms7;
     global $configTerms7;
-    //$percent = 0;
     $lowercaseSolutions = array_map('strtolower', $solutionTerms7);
     $lowercaseCorrectSolution = strtolower($_SESSION['solution_short_text_1']);
     $feedback7 = "Deine Antwort: $q7<br>";
@@ -197,11 +190,11 @@ function evaluateQuestion7() : array{
     $similar = similar_text($lowercaseAns7, $lowercaseCorrectSolution, $percent);
     if($lowercaseAns7 == $lowercaseCorrectSolution) {
         $fullPoints = 1;
-        $points7 = $pointsTotal7;
-        $feedback7 .= "Richtig!";
+        $points[6] = $pointsTotalPerQuestion[6];
+        $feedback7 .= "<b>Richtig!</b>";
     } else if($percent > 79) {
         $fullPoints = 1;
-        $points7 = $pointsTotal7;
+        $points[6] = $pointsTotalPerQuestion[6];
         $feedback7 .= "<b>Richtig!</b> <br>Beachte die korrekte Schreibweise von \"" . $_SESSION['solution_short_text_1'] . "\".";
     } else {
         $fullPoints = 0;
@@ -221,13 +214,13 @@ function evaluateQuestion7() : array{
  */
 function evaluateQuestion8(): array{
     global $q8;
-    global $pointsTotal8;
-    global $points8;
+    global $pointsTotalPerQuestion;
+    global $points;
     $feedback8 = "Deine Antwort: $q8<br>";
     $ans8 = str_replace(' ', '', $q8);
     if ($ans8 == $_SESSION['solution_text_to_term']) {
         $fullPoints = 1;
-        $points8 = $pointsTotal8;
+        $points[7] = $pointsTotalPerQuestion[7];
         $feedback8 .= "<b>Richtig!</b>";
     }else {
         $fullPoints = 0;
@@ -247,19 +240,24 @@ function evaluateQuestion8(): array{
  * @return array int points and String feedback
  */
 function evaluateTotal(): array{
-    global $points1; global $points2; global $points3; global $points4; global $points5; global $points6; global $points7;
     global $pointsTotal;
-    $correct = $points1 + $points2 + $points3 + $points4 + $points5 + $points6 + $points7;
-    $feedbackTotal = "Deine erreichte Punktzahl: $correct von $pointsTotal";
-    $grade = calculateGrade($correct);
+    global $pointsTotalPerQuestion;
+    global $points;
+    $pointsTotalAchieved = array_sum($points);
+    $feedbackTotal = "Deine erreichte Punktzahl: $pointsTotalAchieved von $pointsTotal";
+    $grade = calculateGrade($pointsTotalAchieved);
     if ($_SESSION['isExam']) $feedbackTotal .= "<br>Deine Note: <b>$grade</b>";
     else {
-        if ($correct == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
+        if ($pointsTotalAchieved == $pointsTotal) $feedbackTotal .= "<br>Perfekte Leistung. Weiter so!";
         elseif ($grade == 1) $feedbackTotal .= "<br>Sehr gute Leistung. Weiter so!";
         elseif ($grade == 2) $feedbackTotal .= "<br>Gute Leistung. Weiter so!";
         else $feedbackTotal .= "<br>Mach weiter, du schaffst das!";
     }
-    return array("points"=>$pointsTotal, "feedback"=>$feedbackTotal);
+    $fullPointsTotal = 0; //number of questions that received full points
+    for($i=0; $i<count($points); $i++){
+        if($points[$i] == $pointsTotalPerQuestion[$i]) $fullPointsTotal++;
+    }
+    return array("feedback"=>$feedbackTotal, "fullPoints"=>$fullPointsTotal);
 }
 
 /**

@@ -61,6 +61,7 @@ include "include-header.php"; ?>
     });
 </script>
 <?php
+
 $q1 = "";
 $q2 = "";
 $q3 = "";
@@ -102,7 +103,6 @@ if (isset($_POST['ans8'])) {
     $q8 = $_POST['ans8'];
 }
 
-$correct = 0;
 if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "" || $q5 == "" || $q6 == "" || $q7 == "" || $q8 == "" ) {
     $feedbackTotal = "Bitte alle Fragen beantworten.";
 } else {
@@ -139,12 +139,12 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
     $feedback5 = $evaluation5["feedback"];
     $correctness5 = $evaluation5["fullPoints"];
     $misconception = $evaluation5["misconception"]; // prototype misconception type
-    if ($_SESSION['isExam']){
+    if ($_SESSION['isExam']) {
         $statement5 = $pdo->prepare("INSERT INTO exam_answers (userId, solved_at, questionId, correctness) VALUES (:userId, :solved_at, :questionId, :correctness)");
         $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5));
     } else {
         $statement5 = $pdo->prepare("INSERT INTO answers (userId, solved_at, questionId, correctness, misconception) VALUES (:userId, :solved_at, :questionId, :correctness, :misconception)");
-        $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5, 'misconception'=> $misconception));
+        $result = $statement5->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 4, 'correctness' => $correctness5, 'misconception' => $misconception));
     }
 
     /* Evaluate question 6 */
@@ -155,19 +155,23 @@ if ($q1 == "" || $q2 == "" || $q3 == "" || $q41 == "" || $q42 == "" || $q43 == "
 
     /* Evaluate question 7 */
     $evaluation7 = evaluateQuestion7();
-    $feedback7= $evaluation7["feedback"];
+    $feedback7 = $evaluation7["feedback"];
     $correctness7 = $evaluation7["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 6, 'correctness' => $correctness7));
 
     $evaluation8 = evaluateQuestion8();
-    $feedback8= $evaluation8["feedback"];
+    $feedback8 = $evaluation8["feedback"];
     $correctness8 = $evaluation8["fullPoints"];
     $result = $statement->execute(array('userId' => $_SESSION['userid'], 'solved_at' => date("Y/m/d"), 'questionId' => 7, 'correctness' => $correctness8));
 
+
     /* Evaluate Total */
     $evaluationTotal = evaluateTotal();
-    $pointsTotal = $evaluationTotal["points"];
-    $feedbackTotal= $evaluationTotal["feedback"];
+    $feedbackTotal = $evaluationTotal["feedback"];
+    $fullPointsTotal = $evaluationTotal["fullPoints"]; // Number of questions that got full points
+
+    $statement2 = $pdo->prepare("INSERT INTO tests (userId, date, amount, correct) VALUES (:userId, :date, :amount, :correct) ON DUPLICATE KEY UPDATE amount = amount+1, correct = correct+$fullPointsTotal");
+    $result2 = $statement2->execute(array('userId' => $_SESSION['userid'], 'date' => date("Y/m/d"), 'amount' => 1, 'correct' => $fullPointsTotal));
 }
 
 ?>

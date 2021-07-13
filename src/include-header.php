@@ -1,5 +1,5 @@
 <?php
-  $login = "";
+$login = "";
 $loginSrc = "";
 $url = "";
 $newQuestions = true;
@@ -32,35 +32,29 @@ function newTest()
     $_SESSION['isExam'] = false;
     $_SESSION['isSubmittable'] = true;
 }
+
 ?>
 
 <head>
-        <title>Mathe-Tiger</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    </head>
-    <body>
-    <div class="headerWrapper">
-        <div class="header">
-            <h1 style="flex: 1;">Werde zum Mathetiger!</h1>
-            <!--            source: https://www.pngwing.com/de/free-png-blxte/download & https://www.pngwing.com/de/free-png-vegxa/download-->
-            <img src="/images/tiger.png"/>
-        </div>
+    <title>Mathematiger</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+<div class="headerWrapper">
+    <div class="header">
+        <h1 style="flex: 1;">Werde zum Mathematiger!</h1>
+        <!--            source: https://www.pngwing.com/de/free-png-blxte/download & https://www.pngwing.com/de/free-png-vegxa/download-->
+        <img src="/images/tiger.png"/>
     </div>
-    <div class="nav-wrapper">
-        <ul>
-            <li><a href="home.php"><?php if (isset($user)) {
-                        echo "Hallo, ";
-                        echo $user["username"]; 
-                    } ?></a></li>
-            <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
-            </li>
-        </ul>
-        <?php
-          if ($_SESSION['vr']) {
-            echo "VR is on";
-          } else {
-            echo "VR is off";
-          }
-        ?>
-    </div>
+</div>
+<div class="nav-wrapper">
+    <ul>
+        <li><a href="home.php"><?php if (isset($user)) {
+                    echo "Hallo, ";
+                    echo $user["username"];
+                } ?></a></li>
+        <li style="float: right;"><a id="login" href="<?php echo $loginSrc ?>.php"><?php echo $login ?></a>
+        </li>
+    </ul>
+</div>
