@@ -3,7 +3,7 @@ session_start();
 
 //base from https://www.php-einfach.de/experte/php-codebeispiele/loginscript/
 
-$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+include "include.php";
 //redirect to homepage if already logged in
 if (isset($_SESSION['userid'])) {
     header("Location: home.php");
@@ -27,7 +27,7 @@ if (isset($_GET['login'])) {
 
 }
 
-include "../index.php"; ?>
+include "include-header.php"; ?>
 <style>
     <?php include '../style.css'; ?>
 </style>

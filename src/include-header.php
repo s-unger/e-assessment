@@ -20,8 +20,7 @@ if (!isset($_SESSION['userid'])) {
     }
 }
 
-function newExam()
-{
+function newExam(){
     $_SESSION['newQuestions'] = true;
     $_SESSION['isExam'] = true;
     $_SESSION['isSubmittable'] = true;

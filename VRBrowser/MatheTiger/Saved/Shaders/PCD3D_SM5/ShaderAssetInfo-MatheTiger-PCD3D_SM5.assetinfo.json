@@ -1,0 +1,731 @@
+{
+	"AssetInfoVersion": 1,
+	"ShaderCodeToAssets": [
+		{
+			"ShaderMapHash": "3D0A18621C88AC9283E0B72CCCBDB11BED0989FE",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/PhAT_JointLimitMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "65EAFD3B180854994BD4443EAD45135FE482FC94",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/GizmoMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "792D13EB545AE3F3EB26E0131ADE5684F28BE582",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/M_InvalidLightmapSettings.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "250A8A780D0A63E70DE7E6F97876AF475120E78F",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/EmissiveMeshMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "17ABCF392FF113675132E4D7FEE21E0813067860",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/DebugMeshMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "301C0DF98962D8F14A04BAA57EBDC224C037D502",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/RemoveSurfaceMaterial.uasset",
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Blueprints/Assets/M_LightStage_Skybox_Master.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "52F832E845B39EC5640AF82DB5314F624596EE39",
+			"Assets": [
+				"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/OculusMR_OpaqueColoredMaterial.uasset",
+				"../../../Engine/Content/ArtTools/RenderToTexture/Materials/Debug/M_Emissive_Color.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "833A20D6EF9D4DA522403D44E73D9D38DF7965E0",
+			"Assets": [
+				"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/OculusMR_ChromaKey.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8829BB82E85B9303BB957776B51A4C6A0A4B1B02",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/M_VolumeRenderSphereTracePP.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "94A15E0AD684621772F96F21181F8449DF3A73CC",
+			"Assets": [
+				"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeBillboardMaster.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "E7207803F579D403B68FB245D85E17317774AE5B",
+			"Assets": [
+				"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeMaster.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "534BD5A177A3319166874733843355CB7194F010",
+			"Assets": [
+				"../../Plugins/Runtime/WebBrowserWidget/Content/WebTexture_TM.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "939F988C20098805FEC22591A01C4CF373493F71",
+			"Assets": [
+				"../../Plugins/Runtime/WebBrowserWidget/Content/WebTexture_M.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "C8E793D978621755688D2DDFCA7A64FC52A477CE",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/WireframeMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "3A3A212642AFC3EA2C56E2BEFE5EED418FA990FA",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/VertexColorMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "159DFBD9E76D48589024FF6C388EFCD8B0B6D72C",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/DefaultMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8F1C65FBB1550B59396B7D25C92CAAA263E9E654",
+			"Assets": [
+				"../../Plugins/2D/Paper2D/Content/OpaqueUnlitSpriteMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "C399BBC60DF51F36592AF698C9740AF7DCF71BD5",
+			"Assets": [
+				"../../Plugins/2D/Paper2D/Content/DefaultSpriteMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "CE15E1E22458C26494CF583D7E22296CCF3B9E7C",
+			"Assets": [
+				"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/PokeAHoleMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "7A207F025258DE7F5F63CCDF11311DD116B543E9",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/M_SimpleUnlitTranslucent.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "0557AFB39637656CE13E1D905BE2F26333BDB484",
+			"Assets": [
+				"../../../Engine/Content/EditorMaterials/Camera/CineMat.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "7F8D1EE38ADAA1ADE7D942014E41453D3A06461B",
+			"Assets": [
+				"../../../Engine/Content/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "F61BE153802EF36EE5C5EF0BE4C2F7E36B397DCE",
+			"Assets": [
+				"../../../Engine/Content/VREditor/TransformGizmo/TransformGizmoMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "BCAA7884504B1DD9EC84EC60A594596F89A8254F",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Masked_OneSided.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "81E1299521876ACFF3FD7756BBCBDC6F7AA1ED0E",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Masked.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "DB985BBF6070ABE9FC754EDA9AC0B9C229E016E9",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Opaque_OneSided.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "86ACE01A9BE3BD765C785AC68A5DC36C14F39D73",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Opaque.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "4AE2101DF7F00CFAA473D9D0EF8A56AC65E38FA2",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Translucent_OneSided.uasset",
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "E44290CC7CD98E2C8F87865FB0421BCCC6F1072A",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Translucent.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "1A92D1455D877CA77E9B2516FFFD734A0203F96D",
+			"Assets": [
+				"../../../Engine/Content/VREditor/TransformGizmo/Xray.uasset",
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/IngameBrowser/Material.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "095065E27B4BE5DF5D85764A0403B85247DCE938",
+			"Assets": [
+				"../../../Engine/Content/VREditor/TransformGizmo/Main.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "BDB1B0A4B60B72A79E8420FC040D7CFC18EB64C4",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/BaseFlattenMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "4E92C81C24DBB8F58D977825C2990DA9D1E24B23",
+			"Assets": [
+				"../../../Engine/Content/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "3699843535C13E0C39FDCA413221332FD66D8721",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/DefaultPostProcessMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B7DE831B2B5F4852FF676DFCDCF354BD2EE2E81B",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/DefaultLightFunctionMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "7E909882190DF4EB0E1E20BBE33F8F0FEFC01127",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/DefaultDeferredDecalMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "AA1896D1E2F0DA2F8A4CA7090A8811935E159D0E",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/WorldGridMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "4941E2BC2DCA5F3768C128325E8738E872B6381E",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/DefaultTextMaterialOpaque.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "78B8FF10C827705F04ED2F6DEA0F04500FE62421",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Materials/M_BaseMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B09143253AAC4730F35DA873071B9C118A005E36",
+			"Assets": [
+				"../../../Engine/Content/EditorMaterials/PreviewShadowIndicatorMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "95F5736F370A80B246235BC77394D3ED5C8CE629",
+			"Assets": [
+				"../../../Engine/Content/EngineDebugMaterials/DebugEditorMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "7EE0F23C49703B7690AA9D0C8F9ACE6737C5139E",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Materials/GenericHMDMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "3FFFEEEFE0B8A0244C2BF81FA04A5C711F18D7BB",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Materials/M_ArcEndpoint.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "FD155C99811EF4EB803A28B708DCDEA636D1B02F",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Materials/M_TeleportPreviews.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "A4078537D82F30A0AC387DC27E592CE0A49927F0",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Mannequin/Character/Materials/M_HandMat.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "CB5D57A2D0360DE4A71F53C2FCE2EE036BD86939",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/VirtualReality/Materials/M_SplineArcMat.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "F3D7143AECD189340B1F35C4F32998292E46E2E5",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/Geometry/Meshes/CubeMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "25D0A8007802F66AF62B01646AE532EC39D7FCA4",
+			"Assets": [
+				"../../../Engine/Content/EngineSky/M_Sky_Panning_Clouds2.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "BFE95DCCB4490DE910B04C9931010D6ABBF3FF4B",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Basic_Wall.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "F8ACE294F7370594C670223DD37B14C8EB905B66",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Frame.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "0DA2A5E83A37A7083D4C0F830D4FC4C462AEEBE9",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Glass.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "2818B56FDA7ADDC23DD0830B645912814DBAD36F",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Dust_Particle.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "91C0904F7C840C634583592B320D2A976278143A",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Wood_Walnut.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "719459F6DD083F3871CDA3F59B1E105671FF03BA",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Wood_Pine.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8712D0A1D77F6A77B1FA0129225EAA1025CADD07",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Wood_Oak.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8ED4F3502B1C7B65DE8359F64051ADA6A8324DBA",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Wood_Floor_Walnut_Worn.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B1EC3184847B3A289226A115427DB69ABE917568",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Wood_Floor_Walnut_Polished.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "777A6377B220A12258630262C605FA8CA2089B8A",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Water_Ocean.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "DA61A46CF6B2BB2094CB2C24BA3FA45121866A94",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Water_Lake.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "81DBFBF9DB1B190924888340D60437A032DA2308",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Tech_Panel.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "C72CAA942E6EACC08400D8EED9F02FF2731A35FC",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Tech_Hex_Tile_Pulse.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "A500A8962006AF707F9EA75EECD5CFE0F691E10F",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Tech_Hex_Tile.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "39F29BF4A66A3DA985F59E43170AC7F997A86614",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Tech_Checker_Dot.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "29E9DC80BE71F8141A3C16D12B47239EA00A0D15",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Rock_Sandstone.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "79541D97E65E59F3693A091007EF622EA21277F8",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Rock_Marble_Polished.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "C3EE7AC92591D128ABEB4F5484798C31942FC5DD",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Rock_Basalt.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "7DBEC4BED0C088A5392B412915DEBFF4C4EDD1E2",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Steel.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "1FEAF99EFB599CAB61ED26512DFC7931478F4828",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Rust.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8C27441CDC46180F40D15FCD13FCAD775BF3F3FA",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Gold.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "DC7C969642B38BF7349390DFCC910FD3F69A5BFE",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Chrome.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "4E788D6534057B4E5C42DBBEB6FD0310E25338A7",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Ground_Moss.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "1DB6882BF4409DDC8D52A82B3F8358BBF11BDFBD",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Ground_Gravel.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "6E56FE5D9F862E37311637836E6070B490D4E8D4",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Ground_Grass.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "A8A9F73FDADDC0C0471E6223D789F92B9C2DF105",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Concrete_Tiles.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "907E15D0365F9849C8500324158860D2B1307C0C",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Concrete_Panels.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8628A15645706211C7396B262EEEA93FA296E009",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Concrete_Grime.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "E29E975BBF5F2DBE7A2CEE1FF0398378F5AA620E",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_CobbleStone_Smooth.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "2F0B167BFCC74BA9FBEF5B174090531DC630BDA0",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_CobbleStone_Rough.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "6DC86522F7C63E165502EA7E77545AF15C2E06F7",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_CobbleStone_Pebble.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "0CD99499C918D2BD6FBB5096EE62EF456FE03B48",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Ceramic_Tile_Checker.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "E454C3003BEDC61982CD20F8F5D2DB16459C8941",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Brick_Hewn_Stone.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B71DCCE46BD247680A0A0D5C4180EE7D9BF592BD",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Brick_Cut_Stone.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B7E78600E68C712C8F2D2B374A8CB3009DAD66B1",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Brick_Clay_Old.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "2621C1D359BC293F1E236BAA04D207DCAE182B27",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Brick_Clay_New.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "869D90810CB49E32BD8437571E6C449D8FB7B999",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Brick_Clay_Beveled.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "4B030DC360F14BF9E0C1BB4CB8EAE1B35D9A09FF",
+			"Assets": [
+				"../../../Engine/Content/EngineMaterials/AntiAliasedTextMaterialTranslucent.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "2766DB3AEDDAA40247EB02C8775DE847694D78F1",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Concrete_Poured.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "F152749B9F3B37B0D1172A167B400205D54DA7B6",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_TableRound.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "DA2228D2ECD16CE229EE94CF84E8C3D1B435C3ED",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Statue.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "55ABC4B28C9B6D9164ED8155EB84F622591ABE9D",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_StatueGlass.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "9F83B95A8EB8B0C8A1FA28C26FAF6F7091047021",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Chair.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "92DF29AF0AD9E1C92B8B000880ABE546C8A76637",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Copper.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "A1252285333C1423C1DC6790A01A0567B0400E82",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Burnished_Steel.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "6B0D36297F60CC9CB067F590A7CB17C4ADE0471B",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Metal_Brushed_Nickel.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "653EE2C4D394D9BDC7731EE9AC252B5AFFCB173C",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Lamp.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "873791827AC8570773D4FA2F7374B6EB5E24997F",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_smoke_subUV.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "03872576EF22CD399344EDB8773C3EA6F385554A",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Spark.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "1325B6BC314B7E65E4A4CD16FAF61E10693AC8E3",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Radial_Gradient.uasset",
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_radial_ramp.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "8C2EE74C4FAD461FD7D3EC9F43486CD280E69BC8",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Heat_Distortion.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "3E5ED545D597C773750AE421355CE4ED9294ADF4",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Fire_SubUV.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "B4F1EC8E1544B26DAB941F90D3A227D877B049B0",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Basic_Floor.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "51C7FCB7274A265B92FE8D28DD457713C4EC3D21",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_Rock_Slate.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "037EC727623658487EA1DED58BFC25E2E022CE34",
+			"Assets": [
+				"../../../Engine/Content/EditorMeshes/ColorCalibrator/M_GreyBall.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "BEAB70B6F478F2346B98E0E3BA61EAD52FD1979A",
+			"Assets": [
+				"../../../Engine/Content/EditorMeshes/ColorCalibrator/M_ColorGrid.uasset",
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_ColorGrid_LowSpec.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "DB00960A495B8C8AC198210CD3570EBE59EDC3F1",
+			"Assets": [
+				"../../../Engine/Content/EditorMeshes/ColorCalibrator/M_ClearCoatBlack.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "9CA3491FD9DFBD21F5AD7BD01A16ECD642717ED9",
+			"Assets": [
+				"../../../Engine/Content/EditorMeshes/ColorCalibrator/M_ClearCoat.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "972F2137ACDDDFF1AD9B1EEC03F8823FBE9AAF79",
+			"Assets": [
+				"../../../Engine/Content/EditorMeshes/ColorCalibrator/M_ChromeBall.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "62B92D16AC6C8C388E790DFB279892E4C29CCE78",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Blueprints/Assets/M_LightStage_Skybox_HDRI.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "5C5776EA17AEDABA7E234651CD0D9A6BB27893C3",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Blueprints/Assets/M_LightStage_Arrows.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "D2E18361FD5356A9678BEDF8374EDC75CDC2949B",
+			"Assets": [
+				"../../../Engine/Content/EditorMaterials/Thumbnails/SkySphereMaterial.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "1DF637845CDB60882B0A18EBD5F2118D9F235C55",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Materials/M_AssetPlatform.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "87C3A377D4952B1FB6BF2040D534A8C24F83F411",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Shelf.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "A35238AC90E2FB658F7010AEA52F6892861D851C",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Rock.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "98EC06940674B2297D46E78DD90926102D1D1EF2",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_MaterialSphere_Plain.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "AC85704709550DBAB9D4217636F8C06A539E9B1D",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_MaterialSphere.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "18AD00E61299BEF426CDDAAC32315DAC34EA9C6B",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Door.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "9D00C76AEF8D87A004F0F1DD28E562EEF145C36C",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Props/Materials/M_Bush.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "79EC9394F7395935FB7A15ECF8358BCCB16B586F",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/m_flare_01.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "FFE120A0298A9522A4EA663C068FDEB0B7D5C9C9",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_explosion_subUV.uasset"
+			]
+		},
+		{
+			"ShaderMapHash": "FC800E9D0F43072666B54BB7E8D44D76ADE8B1E6",
+			"Assets": [
+				"../../../../../../Data/Projekte/VRBrowser/MatheTiger/Content/StarterContent/Particles/Materials/M_Burst.uasset"
+			]
+		}
+	]
+}

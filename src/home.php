@@ -1,10 +1,13 @@
-<?php if (!isset($_SESSION)) session_start();
-$pdo = new PDO('mysql:host=localhost;dbname=e-assessment_db', 'e-assessment_user', 'topsecretdbpass');
+<?php if(!isset($_SESSION)) session_start();
+error_reporting(-1);
+ini_set('display_errors', 'On');
 //redirect to basepage if not logged in
 if (!isset($_SESSION['userid'])) {
     header("Location: ../index.php");
 }
-include "../index.php";
+
+include "include.php";
+include "include-header.php";
 include 'laDataGenerator.php';
 
 /**
