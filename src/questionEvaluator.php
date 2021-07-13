@@ -191,7 +191,7 @@ function evaluateQuestion7() : array{
     if($lowercaseAns7 == $lowercaseCorrectSolution) {
         $fullPoints = 1;
         $points[6] = $pointsTotalPerQuestion[6];
-        $feedback7 .= "Richtig!";
+        $feedback7 .= "<b>Richtig!</b>";
     } else if($percent > 79) {
         $fullPoints = 1;
         $points[6] = $pointsTotalPerQuestion[6];
