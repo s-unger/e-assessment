@@ -1,9 +1,12 @@
 <?php if(!isset($_SESSION)) session_start();
+error_reporting(-1);
+ini_set('display_errors', 'On');
 //redirect to basepage if not logged in
 if (!isset($_SESSION['userid'])) {
     header("Location: ../index.php");
 }
-include "../index.php";
+include "include.php";
+include "include-header.php";
 /**
  * Misconception reminders to be added to the LA if a certain misconception has been repeated multiple times in a row.
  * Reminders for misconception 0, 1 and 2.
@@ -29,7 +32,10 @@ $misconceptionReminder5_2 = "Fehlertyp: <b>Probleme mit dem Textverständnis</b>
     <form action="test.php" method="post">
         <input class="btn" type="submit" name="newTest" value="Übungsmodus"/>
     </form>
-    <form action="test.php" method="post">
-        <input class="btn" type="submit" name="newExam" value="Prüfungsmodus"/>
-    </form>
+    <?php
+      if ($_SESSION['vr']) {
+        echo '<form action="test.php" method="post"><input class="btn" type="submit" name="newExam" value="Prüfungsmodus"/></form>';
+      }
+    ?>
+    
 </div>
