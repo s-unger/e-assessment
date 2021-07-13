@@ -348,10 +348,10 @@ function check()
             echo $_SESSION['question_short_text_1'] . "<br>";
             ?>
             </p>
-            <input class="input-ans" type="text" name="ans7">
+            <input class="input-ans" type="text" name="ans7" pattern="^[A-Za-z ]+">
 
             <br>
-            <span class="feedback"><?php echo $feedback7 ?></span>
+            <span class="feedback"><?php echo $feedback7 ?>
         </div>
 
         <div class="question">
