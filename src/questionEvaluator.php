@@ -90,20 +90,22 @@ function evaluateQuestion3(): array{
  * @return array int points, String feedback and int fullPoints
  */
 function evaluateQuestion4(): array{
-    global $q41; global $q42; global $q43;
+    global $q41;
+    global $q42;
+    global $q43;
     global $points;
     $feedback4 = "Deine Antwort: <br>$q41<br>$q42<br>$q43<br>";
-    if ($q41 == $_SESSION['solution_matching_1'][0]) $points[4]++;
-    if ($q42 == $_SESSION['solution_matching_1'][1]) $points[4]++;
-    if ($q43 == $_SESSION['solution_matching_1'][2]) $points[4]++;
-    $feedback4 .= "<b>" . $points[4] . " von 3 richtig!</b>";
-    if ($points[4] <3) {
+    if ($q41 == $_SESSION['solution_matching_1'][0]) $points[3]++;
+    if ($q42 == $_SESSION['solution_matching_1'][1]) $points[3]++;
+    if ($q43 == $_SESSION['solution_matching_1'][2]) $points[3]++;
+    $feedback4 .= "<b>" . $points[3] . " von 3 richtig!</b>";
+    if ($points[3] < 3) {
         $fullPoints = 0;
         $feedback4 .= "<br>Die richtige Reihenfolge ist: <br>" . $_SESSION['solution_matching_1'][0]
-            ."<br>" . $_SESSION['solution_matching_1'][1]
-            ."<br>" . $_SESSION['solution_matching_1'][2];
+            . "<br>" . $_SESSION['solution_matching_1'][1]
+            . "<br>" . $_SESSION['solution_matching_1'][2];
     } else $fullPoints = 1;
-    return array("feedback"=>$feedback4, "fullPoints"=>$fullPoints);
+    return array("feedback" => $feedback4, "fullPoints" => $fullPoints);
 }
 
 /**
