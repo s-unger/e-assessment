@@ -37,5 +37,3 @@ We used continuous integration for this project. When pushing to any branch, the
   * http://e-assessment.bplaced.net/sophia/ for Branch sophia
   * http://e-assessment.bplaced.net/stefanie/ for Branch stefanie
   * http://e-assessment.bplaced.net/yoanna/ for Branch yoanna
-
-Have fun developing!
