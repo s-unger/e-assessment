@@ -93,7 +93,7 @@ const BarChart = function BarChart(selector) {
             .transition() // and apply changes to all of them
             .duration(1000)
             .attr("x", function (d) {
-                return xScale(d.date) + 32;
+                return xScale(d.date) + (xScale.bandwidth() / 2 + 2.5);
             })
             .attr("y", function (d) {
                 return yScale(d.y);
